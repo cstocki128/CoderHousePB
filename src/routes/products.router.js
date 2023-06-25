@@ -36,16 +36,46 @@ productsRouter.get('/:pid', async(req,res) => {
     }
 }) //http://localhost:8080/products/1
 
-productsRouter.post('/:pid', async(req,res) => {
-
+productsRouter.post('/', async(req,res) => {
+    try{
+        let error = await productList.addProduct(req.body)
+        if (error === null) {
+            res.status(200).json({message: 'Product added successfully'})
+        }else{
+            res.status(400).send({error: error})
+        }
+    }catch(err){
+        console.log(err);
+        res.status(500).send({error:err});
+    }
 })
 
 productsRouter.put('/:pid', async(req,res) => {
-    
+    try{
+        let error = await productList.updateProducts(parseInt(req.params.pid), req.body)
+        if (error === null) {
+            res.status(200).json({message: 'Product updated successfully'})
+        }else{
+            res.status(400).send({error: error})
+        }
+    }catch(err){
+        console.log(err);
+        res.status(500).send({error:err});
+    }
 })
 
 productsRouter.delete('/:pid', async(req,res) => {
-    
+    try{
+        let error = await productList.deleteProduct(parseInt(req.params.pid))
+        if (error === null) {
+            res.status(200).json({message: 'Product removed successfully'})
+        }else{
+            res.status(400).send({error: error})
+        }
+    }catch(err){
+        console.log(err);
+        res.status(500).send({error:err});
+    }
 })
 
 export default productsRouter;

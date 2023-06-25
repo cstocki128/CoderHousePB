@@ -30,7 +30,8 @@ class ProductManager {
     }
 
     async addProduct(product) {
-        if (product.code !== null && product.code !== undefined  && product) {
+        if (product.code !== null && product.code !== undefined &&
+            product.title !== undefined && product.description !== undefined && product.price !== undefined && product.stock !== undefined && product.status !== undefined && product.category !== undefined) {
             
             const getNewId = () => {
                 let maxId = 0;
@@ -44,21 +45,21 @@ class ProductManager {
                 return this._products.some(prod => prod.code === product.code)
             }
 
-            
-
             if (!uniqueCode()) {
                 const newProduct = {
                     id: getNewId() + 1,
                     code: product.code,
-                    title: product.title ?? "",
-                    description: product.description ?? "",
-                    price: product.price ?? 0,
-                    thumbnail: product.thumbnail ?? "",
-                    stock: product.stock ?? 0
+                    title: product.title                ?? "",
+                    description: product.description    ?? "",
+                    price: product.price                ?? 0,
+                    thumbnail: product.thumbnail        ?? [],
+                    stock: product.stock                ?? 0,
+                    status: product.status              ?? true,
+                    category: product.category          ?? ''
                 } 
                 this._products.push(newProduct);
                 await this.#_updProductFile();
-                return `Added product: ${product.code}`
+                return null; //`Added product: ${product.code}`
             }else{
                 return `Product with code ${product.code} already exists.`      
             }
@@ -82,8 +83,10 @@ class ProductManager {
 
     async updateProducts(id, updProduct){
         if (updProduct && id){
-            let foundId;
+            let foundId=false
+            // console.log(this._products)
             this._products.map((prod) => {
+                
                 if (prod.id === id) {
                     foundId = true;
                     prod.title          = updProduct.title       ?? prod.title;
@@ -91,18 +94,23 @@ class ProductManager {
                     prod.price          = updProduct.price       ?? prod.price;
                     prod.thumbnail      = updProduct.thumbnail   ?? prod.thumbnail;
                     prod.stock          = updProduct.stock       ?? prod.stock;
+                    prod.status         = updProduct.status      ?? prod.status;
+                    prod.category       = updProduct.category    ?? prod.category;
                 }
+                
             })
-
+    
             if (foundId) {
-                await this.#_updProductFile()
-                return `Product with id ${id} updated.`
+                
+                await this.#_updProductFile();
+                return null; //`Product with id ${id} updated.` 
             }else{
-                return `Product with id ${id} not found.`
+
+                return `Product with id ${id} not found.`;
             }
 
         }else{
-            return 'all parameters must be provided'
+            return 'all parameters must be provided';
         }
     }
 
@@ -112,12 +120,12 @@ class ProductManager {
                 if (index!== -1) {
                     this._products.splice(index, 1);
                     await this.#_updProductFile();
-                    return `Product with id ${id} deleted.`
+                    return null;//`Product with id ${id} deleted.`
                 }else{
-                    return `Product with id ${id} not found.`
+                    return `Product with id ${id} not found.`;
                 }
         } else{
-            return 'Id must be provided'
+            return 'Id must be provided';
         }
     }
 
