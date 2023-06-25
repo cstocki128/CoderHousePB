@@ -1,6 +1,6 @@
 
 import productsRouter from './routes/products.router.js';
-// import cartsRouter from './routes/carts.router.js';
+import cartsRouter from './routes/carts.router.js';
 import express from 'express';
 
 const app = express();
@@ -10,4 +10,4 @@ const server = app.listen(8080, () => {console.log('Servidor arriba en el puerto
 
 
 app.use('/api/products/',productsRouter);
-// app.use('/api/carts/',cartsRouter);
+app.use('/api/carts/',cartsRouter);

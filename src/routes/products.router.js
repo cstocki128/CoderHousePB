@@ -2,13 +2,12 @@ import {Router} from 'express';
 import ProductManager from '../managers/ProductManager.js';
 
 const productsRouter = Router();
-const productList = new ProductManager("./src/files/productManager.json")
+const productList = new ProductManager("./src/files/products.json")
 
 productsRouter.get('/', async(req,res) => {
     try{
         let limit = parseInt(req.query.limit)
         let jsonProducts = await productList.getProducts()
-        console.log(jsonProducts)
         if( !limit || limit == 0 || !Number.isInteger(limit)) { return res.status(200).json(jsonProducts)}
         else {
             let jsonProductsFilter = jsonProducts.filter((product) => {
