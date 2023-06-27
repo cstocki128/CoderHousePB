@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import ProductManager from '../managers/ProductManager.js';
+import ProductManager from "../managers/product.manager.js"
 
 const productsRouter = Router();
 const productList = new ProductManager("./src/files/products.json")
@@ -17,7 +17,7 @@ productsRouter.get('/', async(req,res) => {
         }
     }catch(err){
         console.log(err)
-        res.status(500).send({error:err})
+        res.status(500).send({error: String(err)})
     }
 }) //http://localhost:8080/products?limit=1
 
@@ -31,7 +31,7 @@ productsRouter.get('/:pid', async(req,res) => {
         }
     }catch(err){
         console.log(err)
-        res.status(500).send({error:err})
+        res.status(500).send({error: String(err)})
     }
 }) //http://localhost:8080/products/1
 
@@ -41,11 +41,11 @@ productsRouter.post('/', async(req,res) => {
         if (error === null) {
             res.status(200).json({message: 'Product added successfully'})
         }else{
-            res.status(400).send({error: error})
+            res.status(400).send({error: String(error)})
         }
     }catch(err){
         console.log(err);
-        res.status(500).send({error:err});
+        res.status(500).send({error: String(err)});
     }
 })
 
@@ -55,11 +55,11 @@ productsRouter.put('/:pid', async(req,res) => {
         if (error === null) {
             res.status(200).json({message: 'Product updated successfully'})
         }else{
-            res.status(400).send({error: error})
+            res.status(400).send({error: String(error)})
         }
     }catch(err){
         console.log(err);
-        res.status(500).send({error:err});
+        res.status(500).send({error: String(err)});
     }
 })
 
@@ -69,11 +69,11 @@ productsRouter.delete('/:pid', async(req,res) => {
         if (error === null) {
             res.status(200).json({message: 'Product removed successfully'})
         }else{
-            res.status(400).send({error: error})
+            res.status(400).send({error: String(error)})
         }
     }catch(err){
         console.log(err);
-        res.status(500).send({error:err});
+        res.status(500).send({error: String(err)});
     }
 })
 
