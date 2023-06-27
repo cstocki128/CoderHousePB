@@ -9,10 +9,13 @@ class ProductManager {
                 if (fs.existsSync(path)) {
                     return JSON.parse(fs.readFileSync(path,'utf-8'));
                 }else {
+                    //console.log(`Could not find the specified path: ${path}`)
                     return [];
                 }
-            }catch(err) {
-                console.log("getProductsFile Error: ",err)
+            }
+            catch(err) {
+                console.log("getProductsFile Error: ", err)
+                return []
             }
         }
 

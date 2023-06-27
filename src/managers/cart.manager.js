@@ -11,7 +11,7 @@ class CartManager {
                 if (fs.existsSync(path)) {
                     return JSON.parse(fs.readFileSync(path, 'utf8'))
                 }else{
-                    console.log(`Could not find the specified path: ${path}`)
+                    //console.log(`Could not find the specified path: ${path}`)
                     return []
                 }
             }catch(err) {
