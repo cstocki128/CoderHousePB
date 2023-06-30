@@ -1,5 +1,5 @@
 import fs from 'fs';
-import ProductManager from "../managers/product.manager.js"
+import ProductManager from "../managers/product.manager.js";
 const productManager = new ProductManager("./src/files/products.json")
 const productList = productManager.getProducts()
 
