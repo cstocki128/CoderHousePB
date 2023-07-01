@@ -1,0 +1,26 @@
+<div>
+    <form>
+        <label>code</label><br> <input type="number" name="pcode"> <br>
+        <label>title</label><br><input type="text" name="ptitle"> <br>
+        <label>description</label><br> <input type="text" name="pdescription"> <br>
+        <label>price</label><br> <input type="number" name="pprice"> <br>
+        <label>stock</label> <br><input type="number" name="pstock"> <br>
+        <label>status</label> <br><input type="checkbox" name="pstatus" checked> <br>
+        <label>category</label><br> <input type="text" name="pcategory"> <br>
+        <br>
+        <button  name="pbutton">Add</button>
+    </form>
+</div>
+________________________________________________________________
+<div>
+    <h1>Product list:</h1>
+    <ul>
+        {{#each producList}}
+        <li>
+            <p>Product:{{this.id}} - {{this.code}} - {{this.title}}</p>
+        </li>
+        {{/each}}
+    </ul>
+</div>
+<script src="/socket.io/socket.io.js"></script> 
+<script src="/js/index.js"></script>
