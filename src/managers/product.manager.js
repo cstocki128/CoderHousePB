@@ -34,7 +34,8 @@ class ProductManager {
 
     async addProduct(product) {
         if (product.code !== null && product.code !== undefined &&
-            product.title !== undefined && product.description !== undefined && product.price !== undefined && product.stock !== undefined && product.status !== undefined && product.category !== undefined) {
+            product.title !== undefined && product.description !== undefined && product.price !== undefined && product.stock !== undefined && product.status !== undefined && product.category !== undefined
+            && product.title && product.description && product.price && product.stock && product.status && product.category) {
             
             const getNewId = () => {
                 let maxId = 0;

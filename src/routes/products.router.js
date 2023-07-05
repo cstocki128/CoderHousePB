@@ -41,7 +41,7 @@ productsRouter.post('/', async(req,res) => {
         if (error === null) {
             res.status(200).json({message: 'Product added successfully'})
         }else{
-            res.status(400).send({error: String(error)})
+            res.status(400).json({error: String(error)})
         }
     }catch(err){
         console.log(err);
