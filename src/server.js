@@ -5,7 +5,7 @@ import handlebars from 'express-handlebars';
 import {Server} from 'socket.io';
 import express from 'express';
 import __dirname from './utils.js';
-import ProductManager from "./managers/product.manager.js"
+import ProductManager from "./daos/filesystem/product.dao.js"
 
 const app = express();
 app.use(express.json())
