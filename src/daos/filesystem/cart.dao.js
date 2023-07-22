@@ -46,6 +46,8 @@ class CartManager {
     }
 
     async addCart(products) {
+        console.log('dao',products)
+        console.log('dao',productList)
         try{
             const productsError = () => {
                 return  products.some((product) => (product.id == undefined || product.id == 0 || product.quantity == undefined || !productList.some(productL => productL.id == product.id)))

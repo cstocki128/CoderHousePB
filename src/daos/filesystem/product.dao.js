@@ -10,11 +10,11 @@ class ProductManager {
                     return JSON.parse(fs.readFileSync(path,'utf-8'));
                 }else {
                     //console.log(`Could not find the specified path: ${path}`)
-                    return [];
+                    return []
                 }
             }
             catch(err) {
-                console.log("getProductsFile Error: ", err)
+                console.log(`getProductsFile Error: ${err.message}`) 
                 return []
             }
         }
@@ -28,7 +28,7 @@ class ProductManager {
             let productsJson = JSON.stringify(this._products,'utf-8')
             await fs.promises.writeFile(this._path,productsJson)
         }catch(err) {
-            console.log("updProductFile Error: ",err)
+            console.log(`updProductFile Error: ${err.message}`)
         }
     }
 
@@ -81,11 +81,10 @@ class ProductManager {
                                 return prod.id === id
                             })
 
-        return SelectedProd[0] ?? 'Not found'
-       
+         return SelectedProd[0] ?? `Product id ${id} not found.`
     }
 
-    async updateProducts(id, updProduct){
+    async updateProduct(id, updProduct){
         if (updProduct && id){
             let foundId=false
             // console.log(this._products)
@@ -114,7 +113,7 @@ class ProductManager {
             }
 
         }else{
-            return 'all parameters must be provided';
+            return 'all parameters must be provided.';
         }
     }
 
@@ -129,7 +128,7 @@ class ProductManager {
                     return `Product with id ${id} not found.`;
                 }
         } else{
-            return 'Id must be provided';
+            return 'Id must be provided.';
         }
     }
 
