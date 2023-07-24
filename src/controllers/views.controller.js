@@ -5,10 +5,8 @@ export const get = async(req, res, next) => {
         const response = await getAll()
         if (!response.error){
             let producList = response.res
-            console.log(producList)
             const dataString = JSON.stringify(producList);
             producList = JSON.parse(dataString);
-            console.log(producList)
             res.render('home', {producList})
         }else{
             
@@ -22,6 +20,14 @@ export const get = async(req, res, next) => {
 export const getRealTimeProducts = async(req, res, next) => {
     try{
         res.render('realTimeProducts', {})
+    }catch(err){
+        next(err);
+    }
+}
+
+export const chat = async(req, res, next) => {
+    try{
+        res.render('chat', {})
     }catch(err){
         next(err);
     }

@@ -7,15 +7,13 @@ export default class CartDaoMongoDb {
             const response = await CartModel.findById(cid);
             return response
         } catch (error) {
-            return error
+            return error.message;
         }
     }
 
     async addCart(products) {
         try {
-                console.log(products)
                 const cart = await CartModel.create(products);
-                console.log(cart)
                 // products.products.forEach(element => {
                 //     cart.products.push(element.id);
                 // });
@@ -24,7 +22,7 @@ export default class CartDaoMongoDb {
                 return cart
    
         } catch (error) {
-            return error
+            return error.message;
         }
     }
 
@@ -61,7 +59,7 @@ export default class CartDaoMongoDb {
             
             
         } catch (error) {
-            return error
+            return error.message;
         }
     }
 }

@@ -9,6 +9,7 @@ import express from 'express';
 import './daos/mongodb/connection.js'
 import __dirname from './utils.js';
 import { getAll } from "./services/product.services.js";
+import * as MsgService from "./services/message.services.js";
 
 const app = express();
 app.use(express.json())
@@ -22,20 +23,50 @@ const httpServer = app.listen(8080, () => {console.log('Listening on PORT 8080')
 const io = new Server(httpServer); //Se crea el servidor websocket
 
 
-io.on('connection', socket => { // conexion de websocket
-    console.log('Connection established user:',socket.id);
+io.on('connection', async(socket) => { // conexion de websocket
+
+    console.log('Connection established id:',socket.id);
 
     socket.on('disconnect', () =>{
         console.log(socket.id, 'disconnect from server');
     })
     
-    
+    //Chat
+    const response = await MsgService.getAll()
+    io.emit('messages', response.res);
+    socket.on('newUser', (user)=>{
+        console.log(`>${user} has logged in`);
+    })
+
+    socket.on('chat:message', async(msg) =>{
+        await MsgService.create(msg)
+        const response = await MsgService.getAll()
+        io.emit('messages', response.res);
+    })
+
+    socket.on('chat:delete', async() =>{
+        await MsgService.removeAll();
+        const response = await MsgService.getAll()
+        io.emit('messages', response.res);
+    });
+
+    socket.emit('msg', 'Welcome to chat');
+
+    socket.on('newUser', (user)=>{
+        socket.broadcast.emit('newUser', user); //llega a todos, menos al que inició sesión
+    })
+
+    socket.on('chat:typing', (user)=>{
+        socket.broadcast.emit('chat:typing', user)
+    })
+
+
+    //RealTimeProducts
     socket.on('getProducts', async() => {
         try{
             let products = await getAll()
             const dataString = JSON.stringify(products.res);
             products = JSON.parse(dataString);
-            console.log(products)
             io.emit('arrayProducts', products);
         }catch(err){
             console.log(err);
@@ -43,7 +74,6 @@ io.on('connection', socket => { // conexion de websocket
     })
     socket.on('addProduct', async(product) => { //recibe "message" de cliente
         try{
-            console.log(JSON.stringify(product));
             let response = await fetch('http://localhost:8080/api/products', {
                 method: 'POST',
                 headers: {
@@ -58,7 +88,6 @@ io.on('connection', socket => { // conexion de websocket
                 let products = await getAll()
                 const dataString = JSON.stringify(products.res);
                 products = JSON.parse(dataString);
-                console.log(products)
                 io.emit('arrayProducts', products);
             }else{
                 io.emit('AddProdyctError', response.statusText)
