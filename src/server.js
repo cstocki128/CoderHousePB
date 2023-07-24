@@ -8,7 +8,7 @@ import {Server} from 'socket.io';
 import express from 'express';
 import './daos/mongodb/connection.js'
 import __dirname from './utils.js';
-import ProductManager from "./daos/filesystem/product.dao.js"
+import { getAll } from "./services/product.services.js";
 
 const app = express();
 app.use(express.json())
@@ -32,8 +32,10 @@ io.on('connection', socket => { // conexion de websocket
     
     socket.on('getProducts', async() => {
         try{
-            const productManager = new ProductManager(__dirname+"/files/products.json")
-            let products = await productManager.getProducts()
+            let products = await getAll()
+            const dataString = JSON.stringify(products.res);
+            products = JSON.parse(dataString);
+            console.log(products)
             io.emit('arrayProducts', products);
         }catch(err){
             console.log(err);
@@ -41,6 +43,7 @@ io.on('connection', socket => { // conexion de websocket
     })
     socket.on('addProduct', async(product) => { //recibe "message" de cliente
         try{
+            console.log(JSON.stringify(product));
             let response = await fetch('http://localhost:8080/api/products', {
                 method: 'POST',
                 headers: {
@@ -51,8 +54,10 @@ io.on('connection', socket => { // conexion de websocket
               });
 
             if (response.ok){
-                const productManager = new ProductManager(__dirname+"/files/products.json")
-                let products = await productManager.getProducts()
+                //const productManager = new ProductManager(__dirname+"/files/products.json")
+                let products = await getAll()
+                const dataString = JSON.stringify(products.res);
+                products = JSON.parse(dataString);
                 console.log(products)
                 io.emit('arrayProducts', products);
             }else{

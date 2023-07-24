@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "code": "abc220",
+    "title": "PRUEBA 2",
+    "description": "PRUEBA 2",
+    "price": 253,
+    "thumbnail": ["Link1", "link2"],
+    "stock": 31,
+    "status": true,
+    "category": "category 5"
+  },
+  {
+    "id": 2,
+    "code": "abc230",
+    "title": "PRUEBA 2",
+    "description": "PRUEBA 2",
+    "price": 253,
+    "thumbnail": ["Link1", "link2"],
+    "stock": 31,
+    "status": true,
+    "category": "category 5"
+  },
+  {
+    "id": 3,
+    "code": "abc213",
+    "title": "prueba",
+    "description": "prueba",
+    "price": "1",
+    "thumbnail": [],
+    "stock": "1",
+    "status": true,
+    "category": "prueba"
+  },
+  {
+    "id": 4,
+    "code": "abc299",
+    "title": "prueba",
+    "description": "prueba",
+    "price": "1",
+    "thumbnail": [],
+    "stock": "1",
+    "status": true,
+    "category": "prueba"
+  },
+  {
+    "id": 5,
+    "code": "abc298",
+    "title": "prueba",
+    "description": "prueba",
+    "price": "1",
+    "thumbnail": [],
+    "stock": "1",
+    "status": true,
+    "category": "prueba"
+  }
+]

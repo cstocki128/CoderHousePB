@@ -19,7 +19,7 @@ form.onsubmit = (e) => {
     const description = pdescription.value; 
     const price = pprice.value; 
     const stock = pstock.value; 
-    const status = pstatus.value; 
+    const status = pstatus.checked;
     const category = pcategory.value;
     socket.emit('addProduct',{code,title,description,price,stock,status,category})
 }
@@ -30,7 +30,7 @@ socket.on('arrayProducts', (productsArray) => {
     perror.innerHTML = ''
     let infoProducts = '';
     productsArray.forEach((product) => {
-        infoProducts += `Product:${product.id} - ${product.code} - ${product.title} <br>`
+        infoProducts += `Product: ${product.code} - ${product.title} <br>`
     });
     pproducts.innerHTML = infoProducts;
     
