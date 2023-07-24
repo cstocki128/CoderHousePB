@@ -77,20 +77,22 @@ class ProductManager {
     }
 
     getProductById(id){
+        const idNumeric = parseInt(id)
         const SelectedProd = this._products.filter((prod) => {
-                                return prod.id === id
+                                return prod.id === idNumeric
                             })
 
          return SelectedProd[0] ?? `Product id ${id} not found.`
     }
 
     async updateProduct(id, updProduct){
-        if (updProduct && id){
+        const idNumeric = parseInt(id)
+        if (updProduct && idNumeric){
             let foundId=false
             // console.log(this._products)
             this._products.map((prod) => {
                 
-                if (prod.id === id) {
+                if (prod.id === idNumeric) {
                     foundId = true;
                     prod.title          = updProduct.title       ?? prod.title;
                     prod.description    = updProduct.description ?? prod.description;
@@ -118,8 +120,9 @@ class ProductManager {
     }
 
     async deleteProduct(id){
-        if (id){
-                const index = this._products.findIndex(prod => prod.id === id);
+        const idNumeric = parseInt(id)
+        if (idNumeric){
+                const index = this._products.findIndex(prod => prod.id === idNumeric);
                 if (index!== -1) {
                     this._products.splice(index, 1);
                     await this.#_updProductFile();

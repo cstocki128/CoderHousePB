@@ -16,33 +16,30 @@ export const getAll = async(req, res, next) => {
             }
         }else res.status(400).json({error:response.res})
     }catch(err){
-        console.error(err)
-        //next(err);
+        next(err);
     }
 };
 
 export const getById = async(req, res, next) => {
     try{
-        const id = parseInt(req.params.pid)
+        const id = req.params.pid
         const response = await service.getById(id);
         if (!response.error) res.status(200).json({result:response.res})
         else res.status(400).json({error:response.res})
     }catch(err){
-        console.error(err)
-        //next(err);
+        next(err);
     }
 };
 
 export const update = async(req, res, next) => {
     try{
-        const id = parseInt(req.params.pid)
+        const id = req.params.pid
         const prod = req.body
         const response = await service.update(id,prod);
         if (!response.error) res.status(200).json({result:response.res})
         else res.status(400).json({error:response.res})
     }catch(err){
-        console.error(err)
-        //next(err);
+        next(err);
     }
 };
 
@@ -53,19 +50,17 @@ export const create = async(req, res, next) => {
         if (!response.error) res.status(200).json({result:response.res})
         else res.status(400).json({error:response.res})
     }catch(err){
-        console.error(err)
-        //next(err);
+        next(err);
     }
 };
 
 export const remove = async(req, res, next) => {
     try{
-        const id = parseInt(req.params.pid)
+        const id = req.params.pid
         const response = await service.remove(id);
         if (!response.error) res.status(200).json({result:response.res})
         else res.status(400).json({error:response.res})
     }catch(err){
-        console.error(err)
-        //next(err);
+        next(err);
     }
 };

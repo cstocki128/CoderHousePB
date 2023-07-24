@@ -1,13 +1,15 @@
-import CartDaoFS from '../daos/filesystem/cart.dao.js';
 import __dirname from '../utils.js';
-const cartDao = new CartDaoFS(__dirname+"/files/cart.json");
+//import CartDaoFS from '../daos/filesystem/cart.dao.js';
+import CartDaoMongoDb from '../daos/mongodb/cart.dao.js';
+//const cartDao = new CartDaoFS(__dirname+"/files/cart.json");
+const cartDao = new CartDaoMongoDb();
 
 
 export const getById = async(id) => {
     try {
-        const res = await cartDao.getCart(id)
-        if (res != null){
-            return {error:false, res:res};
+        const response = await cartDao.getCart(id)
+        if (response != null){
+            return {error:false, res:response};
         }else{
             return {error:true, res:'Cart not found'}
         }
@@ -20,11 +22,13 @@ export const getById = async(id) => {
 
 export const create = async(cart) => {
     try {
-        const res = await cartDao.addCart(cart)
-        if (res === null){
+        const response = await cartDao.addCart(cart)
+        if (response === null){
             return {error:false, res:'Cart added succesfully'}
+        }else if(typeof response === 'object'){
+            return {error:false, res:response}
         }else {
-            return {error:true, res:res}
+            return {error:true, res:response}
         }
     } catch (err) {
         const error = `cart.create service error: ${err.message}`;
@@ -34,11 +38,13 @@ export const create = async(cart) => {
 
 export const addProduct= async(cid,pid) => {
     try {
-        const res = await cartDao.addProductToCart(cid,pid)
-        if (res === null){
+        const response = await cartDao.addProductToCart(cid,pid)
+        if (response === null){
             return {error:false, res:`Product id:${pid} added to Cart id:${cid} succesfully`}
+        }else if(typeof response === 'object'){
+            return {error:false, res:response}
         }else {
-            return {error:true, res:res}
+            return {error:true, res:response}
         }
     } catch (err) {
         const error = `cart.addProductToCart service error: ${err.message}`;

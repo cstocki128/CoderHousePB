@@ -34,8 +34,9 @@ class CartManager {
     }
 
     getCart(cid) {
+        const cidNumeric = parseInt(cid)
         const cartFilter =  this._carts.filter((cart) => {
-            return cart.id === cid 
+            return cart.id === cidNumeric 
         })
 
         if (cartFilter.length > 0) {
@@ -45,10 +46,11 @@ class CartManager {
         }
     }
 
-    async addCart(products) {
-        console.log('dao',products)
-        console.log('dao',productList)
+    async addCart(productsList) {
+        
         try{
+            const products = productsList.products;
+            console.log(products)
             const productsError = () => {
                 return  products.some((product) => (product.id == undefined || product.id == 0 || product.quantity == undefined || !productList.some(productL => productL.id == product.id)))
             }
@@ -82,16 +84,18 @@ class CartManager {
     }
 
     async addProductToCart(cid,pid) {
+        const cidNumeric = parseInt(cid)
+        const pidNumeric = parseInt(pid)
         try {
-            if (productList.some(productL => productL.id == pid)){
+            if (productList.some(productL => productL.id == pidNumeric)){
                 let carts = this._carts;
                 let cartMatch;
                 let newCarts = carts.map(cart => {
-                    if (cart.id == cid) {
+                    if (cart.id == cidNumeric) {
                         cartMatch = true;
                         let productMatch;
                         let newProducts = cart.products.map(product => {
-                            if(product.id == pid) {
+                            if(product.id == pidNumeric) {
                                 productMatch = true;
                                 product.quantity +=1;
                             }
@@ -99,7 +103,7 @@ class CartManager {
                         })
                         if (productMatch != true){
                             let newProduct = {
-                                id: pid,
+                                id: pidNumeric,
                                 quantity: 1
                             }
                             newProducts.push(newProduct)

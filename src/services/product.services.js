@@ -1,12 +1,13 @@
-import ProductDaoFS from '../daos/filesystem/product.dao.js';
 import __dirname from '../utils.js';
-const prodDao = new ProductDaoFS(__dirname+"/files/products.json");
-
+//import ProductDaoFS from '../daos/filesystem/product.dao.js';
+import ProductDaoMongoDb from '../daos/mongodb/product.dao.js';
+//const prodDao = new ProductDaoFS(__dirname+"/files/products.json");
+const prodDao = new ProductDaoMongoDb();
 
 export const getAll = async() => {
     try {
-        const products =  await prodDao.getProducts()
-        return {error:false, res:products}
+        const response =  await prodDao.getProducts()
+        return {error:false, res:response}
     } catch (err) {
         const error = `product.getAll service error: ${err.message}`;
         return {error:true, res:error};
@@ -15,11 +16,11 @@ export const getAll = async() => {
 
 export const getById = async(id) => {
     try {
-        const product = await prodDao.getProductById(id)
-        if ( typeof product === 'object') {
-            return {error:false,res:product}
+        const response = await prodDao.getProductById(id)
+        if ( typeof response === 'object') {
+            return {error:false,res:response}
         }else {
-            return {error:true,res:product}
+            return {error:true,res:response}
         }
     } catch (err) {
         const error = `product.getById service error: ${err.message}`;
@@ -29,13 +30,13 @@ export const getById = async(id) => {
 
 export const create = async(prod) => {
     try {
-        const res = await prodDao.addProduct(prod)
-        if (res === null) {
+        const response = await prodDao.addProduct(prod)
+        if (response === null) {
             return {error:false, res:'Product added successfully'}
-        }else if(typeof res === 'object'){
-            return {error:false, res:res}
+        }else if(typeof response === 'object'){
+            return {error:false, res:response}
         }else{
-            return {error:true, res:res}
+            return {error:true, res:response}
         }
     } catch (err) {
         const error = `product.create service error: ${err.message}`;
@@ -45,13 +46,13 @@ export const create = async(prod) => {
 
 export const update = async(id,prod) => {
     try {
-        const res = await prodDao.updateProduct(id,prod)
-        if (res === null) {
+        const response = await prodDao.updateProduct(id,prod)
+        if (response === null) {
             return {error:false, res:`Product ${id} updated successfully`}
-        }else if(typeof res === 'object'){
-            return {error:false, res:res}
+        }else if(typeof response === 'object'){
+            return {error:false, res:response}
         }else{
-            return {error:true, res:res}
+            return {error:true, res:response}
         }
     } catch (err) {
         const error = `product.update service error: ${err.message}`;
@@ -61,11 +62,13 @@ export const update = async(id,prod) => {
 
 export const remove = async(id) => {
     try {
-        const res = await prodDao.deleteProduct(id)
-        if (res === null) {
+        const response = await prodDao.deleteProduct(id)
+        if (response === null) {
             return {error:false, res:`Product ${id} removed successfully`}
+        }else if(typeof response === 'object'){
+            return {error:false, res:response}
         }else{
-            return {error:true, res:res}
+            return {error:true, res:response}
         }
     } catch (err) {
         const error = `product.remove service error: ${err.message}`;

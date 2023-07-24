@@ -2,14 +2,19 @@ import productsRouter from './routes/products.router.js';
 import cartsRouter from './routes/carts.router.js';
 import viewsRouter from './routes/views.router.js';
 import handlebars from 'express-handlebars';
+import {errorHandler} from './middlewares/errorHandler.js';
+import morgan from 'morgan';
 import {Server} from 'socket.io';
 import express from 'express';
+import './daos/mongodb/connection.js'
 import __dirname from './utils.js';
 import ProductManager from "./daos/filesystem/product.dao.js"
 
 const app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended: true})); 
+app.use(errorHandler);
+app.use(morgan('dev'));
 
 //http Server
 const httpServer = app.listen(8080, () => {console.log('Listening on PORT 8080')});
@@ -17,7 +22,7 @@ const httpServer = app.listen(8080, () => {console.log('Listening on PORT 8080')
 const io = new Server(httpServer); //Se crea el servidor websocket
 
 
-io.on('connection', socket => { //accion de conexion de websocket
+io.on('connection', socket => { // conexion de websocket
     console.log('Connection established user:',socket.id);
 
     socket.on('disconnect', () =>{
