@@ -11,16 +11,15 @@ export default class CartDaoMongoDb {
         }
     }
 
-    async addCart(products) {
+    async addCart(cart) {
         try {
-                const cart = await CartModel.create(products);
-                // products.products.forEach(element => {
-                //     cart.products.push(element.id);
-                // });
-                // cart.save();
-                // const productsJson = `{products:${products}}`
-                return cart
-   
+            const productResponse = await ProductModel.find({});
+            const noProd =   cart.products.find((product) => {
+                return !(productResponse.find(prod => prod.id === product.id))
+            })
+            if (!noProd) return await CartModel.create(cart);   
+            return `Products in cart not found`;
+
         } catch (error) {
             return error.message;
         }

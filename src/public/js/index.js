@@ -24,7 +24,7 @@ form.onsubmit = (e) => {
     socket.emit('addProduct',{code,title,description,price,stock,status,category})
 }
 
-socket.emit('getProducts')
+//socket.emit('getProducts')
 
 socket.on('arrayProducts', (productsArray) => {
     perror.innerHTML = ''

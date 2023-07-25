@@ -15,7 +15,7 @@ const app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended: true})); 
 app.use(errorHandler);
-app.use(morgan('dev'));
+//app.use(morgan('dev'));
 
 //http Server
 const httpServer = app.listen(8080, () => {console.log('Listening on PORT 8080')});
@@ -32,46 +32,36 @@ io.on('connection', async(socket) => { // conexion de websocket
     })
     
     //Chat
-    const response = await MsgService.getAll()
+    const response =  await MsgService.getAll()
     io.emit('messages', response.res);
     socket.on('newUser', (user)=>{
         console.log(`>${user} has logged in`);
     })
-
     socket.on('chat:message', async(msg) =>{
         await MsgService.create(msg)
         const response = await MsgService.getAll()
         io.emit('messages', response.res);
     })
-
     socket.on('chat:delete', async() =>{
         await MsgService.removeAll();
         const response = await MsgService.getAll()
         io.emit('messages', response.res);
     });
-
     socket.emit('msg', 'Welcome to chat');
-
     socket.on('newUser', (user)=>{
         socket.broadcast.emit('newUser', user); //llega a todos, menos al que inició sesión
     })
-
     socket.on('chat:typing', (user)=>{
         socket.broadcast.emit('chat:typing', user)
     })
 
 
     //RealTimeProducts
-    socket.on('getProducts', async() => {
-        try{
-            let products = await getAll()
-            const dataString = JSON.stringify(products.res);
-            products = JSON.parse(dataString);
-            io.emit('arrayProducts', products);
-        }catch(err){
-            console.log(err);
-        }
-    })
+    let products = await getAll()
+    const dataString = JSON.stringify(products.res);
+    products = JSON.parse(dataString);
+    io.emit('arrayProducts', products);
+
     socket.on('addProduct', async(product) => { //recibe "message" de cliente
         try{
             let response = await fetch('http://localhost:8080/api/products', {

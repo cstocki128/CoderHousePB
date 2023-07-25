@@ -35,7 +35,7 @@ export default class ProductDaoMongoDb {
 
     async updateProduct(id, updProduct){
         try {
-            const response = await ProductModel.findByIdAndUpdate(id, updProduct,{new: false});
+            const response = await ProductModel.findByIdAndUpdate(id, updProduct,{new: true});
             if (response) {
                 return response;
             }else {
