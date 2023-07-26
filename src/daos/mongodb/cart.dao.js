@@ -4,7 +4,7 @@ import {ProductModel} from "./models/product.model.js";
 export default class CartDaoMongoDb {
     async getCart(cid) {
         try {
-            const response = await CartModel.findById(cid);
+            const response = await CartModel.findById(cid).populate("products._id")
             return response
         } catch (error) {
             return error.message;

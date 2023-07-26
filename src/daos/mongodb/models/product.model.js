@@ -11,4 +11,4 @@ const productSchema = new mongoose.Schema({
     category: {type: String, required: true}
 });
 
-export const ProductModel = mongoose.model('Products', productSchema);
+export const ProductModel = mongoose.model('products', productSchema);
