@@ -4,16 +4,18 @@ import * as service from "../services/product.services.js";
 export const getAll = async(req, res, next) => {
     try{
         const limit = parseInt(req.query.limit)
-        const response = await service.getAll();
+        const page = parseInt(req.query.page)
+        const categoryF = req.query.category
+        let statusF;
+        if (req.query.status == 'true') {statusF = true} else if (req.query.status == 'false') {statusF = false};
+        const sort = req.query.sort
+        const response = await service.getAll(limit, page, sort, categoryF, statusF);
         if (!response.error) {
-            if( !limit || limit == 0 || !Number.isInteger(limit)) { res.status(200).json({result:response.res})}
-            else {
-                products = response.res
-                let productsFilter = products.filter((product) => {
-                    return productsFilter.indexOf(product) < limit
-                })
-                res.status(200).json({result:productsFilter})
-            }
+            const PaginatedResponse = response.res
+            PaginatedResponse.status =  'Success'
+            if (PaginatedResponse.hasPrevPage = true) {PaginatedResponse.prevLink = `http://localhost:8080/api/products?limit=${limit}&page=${page-1}&sort=${sort}&status=${statusF}&category=${categoryF}`} else {PaginatedResponse.prevLink = null}
+            if (PaginatedResponse.hasNextPage = true) {PaginatedResponse.nextLink = `http://localhost:8080/api/products?limit=${limit}&page=${page+1}&sort=${sort}&status=${statusF}&category=${categoryF}` } else {PaginatedResponse.nextLink = null}
+            res.status(200).json(PaginatedResponse)        
         }else res.status(400).json({error:response.res})
     }catch(err){
         next(err);

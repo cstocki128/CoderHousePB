@@ -4,13 +4,13 @@ import {ProductModel} from "./models/product.model.js";
 export default class CartDaoMongoDb {
     async getCart(cid) {
         try {
-            const response = await CartModel.findById(cid);
+            const response = await CartModel.findById(cid).populate('products._id');
             return response
         } catch (error) {
             return error.message;
         }
     }
-
+    
     async addCart(cart) {
         try {
             const productResponse = await ProductModel.find({});
@@ -24,7 +24,7 @@ export default class CartDaoMongoDb {
             return error.message;
         }
     }
-
+    
     async addProductToCart(cid,pid) {
         try {
             const productResponse = await ProductModel.findById(pid);
