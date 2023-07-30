@@ -4,7 +4,11 @@ const cartRouter = Router();
 
 cartRouter.get('/:cid', controller.getById);
 cartRouter.post('/', controller.create);
-cartRouter.post('/:cid/product/:pid', controller.addProduct);
+cartRouter.post('/:cid/products/:pid', controller.addProduct);
+cartRouter.put('/:cid', controller.updProducts);
+cartRouter.put('/:cid/products/:pid', controller.updProduct);
+cartRouter.delete('/:cid/products/:pid', controller.deleteProduct);
+cartRouter.delete('/:cid', controller.deleteProducts);
 
 export default cartRouter;
 

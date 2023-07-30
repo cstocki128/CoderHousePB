@@ -2,7 +2,6 @@ import {ProductModel} from "./models/product.model.js";
 
 export default class ProductDaoMongoDb {
     async getProducts(limit, page, sort, categoryF, statusF){
-        console.log(limit, page, sort, categoryF, statusF)
         try {
 
             const myCustomLabels = {
@@ -10,6 +9,8 @@ export default class ProductDaoMongoDb {
                 docs: 'payloads',
                 pagingCounter: false,
                 limit: false,
+                hasPrevPage: 'hasPrevPage',
+                hasNextPage: 'hasNextPage',
             };
               
             //query params filter paginate

@@ -72,7 +72,7 @@ class ProductManager {
         }
     }
 
-    getProducts(){
+    getProducts(limit, page, sort, categoryF, statusF){
         return this._products;
     }
 

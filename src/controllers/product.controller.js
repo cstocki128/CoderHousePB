@@ -4,7 +4,7 @@ import * as service from "../services/product.services.js";
 export const getAll = async(req, res, next) => {
     try{
         const limit = parseInt(req.query.limit)
-        const page = parseInt(req.query.page)
+        const page = parseInt(req.query.page ?? 1) 
         const categoryF = req.query.category
         let statusF;
         if (req.query.status == 'true') {statusF = true} else if (req.query.status == 'false') {statusF = false};
@@ -13,8 +13,13 @@ export const getAll = async(req, res, next) => {
         if (!response.error) {
             const PaginatedResponse = response.res
             PaginatedResponse.status =  'Success'
-            if (PaginatedResponse.hasPrevPage = true) {PaginatedResponse.prevLink = `http://localhost:8080/api/products?limit=${limit}&page=${page-1}&sort=${sort}&status=${statusF}&category=${categoryF}`} else {PaginatedResponse.prevLink = null}
-            if (PaginatedResponse.hasNextPage = true) {PaginatedResponse.nextLink = `http://localhost:8080/api/products?limit=${limit}&page=${page+1}&sort=${sort}&status=${statusF}&category=${categoryF}` } else {PaginatedResponse.nextLink = null}
+            let newLink = `http://localhost:8080/api/products?`
+            if (limit) newLink += `limit=${limit}`
+            if (sort) newLink += `&sort=${sort}`
+            if (statusF != undefined) newLink += `&status=${statusF}`
+            if (categoryF) newLink += `&category=${categoryF}`
+            if (PaginatedResponse.hasPrevPage == true) {PaginatedResponse.prevLink = `${newLink}&page=${page-1}`} else {PaginatedResponse.prevLink = null}
+            if (PaginatedResponse.hasNextPage == true) {PaginatedResponse.nextLink = `${newLink}&page=${page+1}` } else {PaginatedResponse.nextLink = null}
             res.status(200).json(PaginatedResponse)        
         }else res.status(400).json({error:response.res})
     }catch(err){

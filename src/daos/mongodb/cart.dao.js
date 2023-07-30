@@ -61,4 +61,100 @@ export default class CartDaoMongoDb {
             return error.message;
         }
     }
+
+    async updProducts(cid,products) {
+        try {
+            if (products.payloads) {
+                const cart = await CartModel.findById(cid)
+                if (cart) {
+                    const productsList = products.payloads
+                    productsList.forEach((product) => {
+                        let ProdFound = false;
+                        cart.products.forEach((cartProd) => {
+                            if (cartProd._id == product._id) {
+                                const prod = ProductModel.findById(product._id);
+                                if (prod) {
+                                    cartProd.quantity +=1;
+                                    ProdFound = true;
+                                }else return `product ${pid} does not found`;
+                            }
+                        })
+                        if (ProdFound == false) {
+                            const prod = ProductModel.findById(product._id);
+                            if (prod) {
+                                const newProd = {_id: product._id, quantity:1}
+                                cart.products.push(newProd)
+                            }else return `product ${pid} does not found`;
+                        }
+                    })
+                    cart.save()
+                    return null
+                }else return `cart ${cid} not found`;
+            }else return 'Must send products to update cart with';
+        } catch (error) {
+           return error.message; 
+        }
+    }
+
+    async updProduct(cid,pid,quantity) {
+        try {
+            const cart = await CartModel.findById(cid)
+            if (cart) {
+                const product = await ProductModel.findById(pid);
+                if (product) {
+                    let prodFound = false;
+                    cart.products.forEach(prodCart => {
+                        if (prodCart.id == product.id){
+                            prodCart.quantity = quantity;
+                            prodFound = true;
+                        }
+                    })
+                    if (prodFound){
+                        cart.save();
+                        return null
+                    }else return `product ${pid} does not found in cart ${cid}`;
+                }else return `product ${pid} not found`;
+            }else return `cart ${cid} not found`;
+        } catch (error) {
+           return error.message; 
+        }
+    }
+
+    async deleteProducts(cid) {
+        try {
+            const cart = await CartModel.findById(cid)
+            if (cart) {
+                if (cart.products.length > 0) {
+                    cart.products = [];
+                    cart.save();
+                    return null
+                }else return `cart ${cid} does not have products`;
+            }else return `cart ${cid} not found`; 
+        } catch (error) {
+           return error.message; 
+        }
+    }
+
+    async deleteProduct(cid,pid) {
+        try {
+            const cart = await CartModel.findById(cid)
+            if (cart) {
+                if (cart.products.length > 0) {
+                    const product = await ProductModel.findById(pid);
+                    if (product) {
+                        const indexProd = cart.products.findIndex(prod => {
+                            return prod.id == product.id
+                        })
+                        if (indexProd >= 0) {
+                            cart.products.splice(indexProd, 1)
+                            cart.save();
+                            return null
+                        }else return `product ${pid} does not found in cart ${cid}`;
+                    }else return `product ${pid} does not found`;
+                }else return `cart ${cid} does not have products`;
+            }else return `cart ${cid} not found`; 
+        } catch (error) {
+           return error.message; 
+        }
+    }
 }

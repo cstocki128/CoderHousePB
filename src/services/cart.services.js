@@ -51,3 +51,67 @@ export const addProduct= async(cid,pid) => {
         return {error:true, res:error};
     }
 }
+
+export const updProducts = async(cid,products) => {
+    try {
+        const response = await cartDao.updProducts(cid,products)
+        if (response === null){
+            return {error:false, res:`Products updated in cart id:${cid} succesfully`}
+        }else if(typeof response === 'object'){
+            return {error:false, res:response}
+        }else {
+            return {error:true, res:response}
+        }  
+    } catch (err) {
+        const error = `cart.updProducts service error: ${err.message}`;
+        return {error:true, res:error}; 
+    }
+}
+
+export const updProduct = async(cid,pid,quantity) => {
+    try {
+        const response = await cartDao.updProduct(cid,pid,quantity)
+        if (response === null){
+            return {error:false, res:`Product id:${pid} updated in cart id:${cid} succesfully`}
+        }else if(typeof response === 'object'){
+            return {error:false, res:response}
+        }else {
+            return {error:true, res:response}
+        }  
+    } catch (err) {
+        const error = `cart.updProducts service error: ${err.message}`;
+        return {error:true, res:error}; 
+    }
+}
+
+export const deleteProducts = async(cid) => {
+    try {
+        const response = await cartDao.deleteProducts(cid)
+        if (response === null){
+            return {error:false, res:`Products deleted in cart id:${cid} succesfully`}
+        }else if(typeof response === 'object'){
+            return {error:false, res:response}
+        }else {
+            return {error:true, res:response}
+        }  
+    } catch (err) {
+        const error = `cart.deleteProducts service error: ${err.message}`;
+        return {error:true, res:error}; 
+    }
+}
+
+export const deleteProduct = async(cid,pid) => {
+    try {
+        const response = await cartDao.deleteProduct(cid,pid)
+        if (response === null){
+            return {error:false, res:`Product ${pid} deleted in cart id:${cid} succesfully`}
+        }else if(typeof response === 'object'){
+            return {error:false, res:response}
+        }else {
+            return {error:true, res:response}
+        }  
+    } catch (err) {
+        const error = `cart.deleteProducts service error: ${err.message}`;
+        return {error:true, res:error}; 
+    }
+}
