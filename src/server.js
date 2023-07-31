@@ -87,6 +87,15 @@ io.on('connection', async(socket) => { // conexion de websocket
             console.log(err);
         }
     })
+
+    //Products
+    socket.on('btnPage', async(page) => { 
+        let limit,sort,categoryF,statusF;
+        const response = await getAll(limit, page, sort, categoryF, statusF)
+        const dataString = JSON.stringify(response.res);
+        products = JSON.parse(dataString);
+        io.emit('arrayProducts', products);
+    })
 })
 
 
