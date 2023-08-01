@@ -9,9 +9,8 @@
 
 - [localhost:8080/products](http://localhost:8080/products): Listado de productos.
 - `localhost:8080/carts/:cartId`: Listado de items del cart seleccionado.
-- [localhost:8080/realTimeProducts](localhost:8080/realTimeProducts): Listado de productos en tiempo real con WEBSOCKET
-- [localhost:8080/chat](localhost:8080/chat):Chat en tiempo real con WEBSOCKET
-- [localhost:8080/chat](localhost:8080/chat):Chat en tiempo real con WEBSOCKET
+- [localhost:8080/realTimeProducts](http://localhost:8080/realTimeProducts): Listado de productos en tiempo real con WEBSOCKET
+- [localhost:8080/chat](http://localhost:8080/chat): Chat en tiempo real con WEBSOCKET
 
 ## Endpoints
 
