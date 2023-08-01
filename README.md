@@ -32,7 +32,7 @@
 - `DELETE /api/carts/:id/product/:productId`: Elimina el producto seleccionado del carrito.
 - `DELETE /api/carts/:id`: Elimina todos los productos del carrito
 - `PUT /api/carts/:id/product/:productId`: Actualiza la cantidad de producto del cart. Debe recibir Form-encode {quantity: value}
-- `PUT /api/carts/:id`: Actualiza los prooductos del cart. Debe recibir en el body la salida de `GET /api/products`:
+- `PUT /api/carts/:id`: Actualiza los productos del cart. Debe recibir en el body la salida de `GET /api/products`:
 
 ```
 {
