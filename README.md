@@ -34,7 +34,7 @@
 - `PUT /api/carts/:id/product/:productId`: Actualiza la cantidad de producto del cart. Debe recibir Form-encode {quantity: value}
 - `PUT /api/carts/:id`: Actualiza los prooductos del cart. Debe recibir en el body la salida de `GET /api/products`:
 
-...
+```
 {
   "payloads": [
       Productos...
@@ -49,4 +49,4 @@
   "prevLink": null,
   "nextLink": null
 }
-...
+```
