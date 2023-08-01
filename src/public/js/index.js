@@ -1,7 +1,7 @@
 const socket = io(); //Se instancia a socket.io asi por convencion del lado del cliente
 
 //form management
-const pform = document.getElementById('form');
+const form = document.getElementById('form');
 const pcode = document.getElementById('code');
 const ptitle = document.getElementById('title');
 const pdescription = document.getElementById('description');
@@ -29,7 +29,7 @@ form.onsubmit = (e) => {
 socket.on('arrayProducts', (productsArray) => {
     perror.innerHTML = ''
     let infoProducts = '';
-    productsArray.forEach((product) => {
+    productsArray.payloads.forEach((product) => {
         infoProducts += `Product: ${product.code} - ${product.title} <br>`
     });
     pproducts.innerHTML = infoProducts;

@@ -4,7 +4,6 @@ const productListSchema = new mongoose.Schema({
   _id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "products",
-    required: true,
   },
   quantity: { type: Number, required: true },
 });
@@ -13,8 +12,8 @@ const cartSchema = new mongoose.Schema({
   products: { type: [productListSchema], default: [] },
 });
 
-// productListSchema.pre('find', function(){
-//     this.populate('products')
-//   })
+// cartSchema.pre('find', function(){ //NO FUNCIONA
+//   this.populate('products._id');
+// });
 
-export const CartModel = mongoose.model('carts', cartSchema);
+export const CartModel = mongoose.model("carts", cartSchema);

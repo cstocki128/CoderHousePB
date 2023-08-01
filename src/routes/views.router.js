@@ -6,6 +6,8 @@ const viewsRouter = express.Router();
 viewsRouter.get('/', controller.get);
 viewsRouter.get('/realTimeProducts', controller.getRealTimeProducts);
 viewsRouter.get('/chat', controller.chat);
+viewsRouter.get('/products', controller.products);
+viewsRouter.get('/carts/:cid', controller.cart);
 export default viewsRouter;
 
 // viewsRouter.get('/', async(req,res) =>{

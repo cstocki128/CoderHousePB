@@ -1,9 +1,38 @@
 import {ProductModel} from "./models/product.model.js";
 
 export default class ProductDaoMongoDb {
-    async getProducts(){
+    async getProducts(limit, page, sort, categoryF, statusF){
         try {
-            const response = await ProductModel.find({});
+
+            const myCustomLabels = {
+                totalDocs: false,
+                docs: 'payloads',
+                pagingCounter: false,
+                limit: false,
+                hasPrevPage: 'hasPrevPage',
+                hasNextPage: 'hasNextPage',
+            };
+              
+            //query params filter paginate
+            if (isNaN(page)) page = 1;
+            if (isNaN(limit)) limit = 10;
+            
+            let options = {
+            page: page,
+            limit: limit,
+            customLabels: myCustomLabels,
+            sort: {price: sort}
+            };
+            let query = {category: categoryF,
+            status: statusF
+            }
+
+            if (!sort)  delete options['sort'];
+            if (!categoryF)  delete query['category'];
+            if (statusF != true && statusF != false)  delete query['status'];          
+            //
+
+            const response = await ProductModel.paginate(query, options);
             return response;
         } catch (error) {
             return error.message;

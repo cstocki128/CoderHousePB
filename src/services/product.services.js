@@ -4,9 +4,9 @@ import ProductDaoMongoDb from '../daos/mongodb/product.dao.js';
 //const prodDao = new ProductDaoFS(__dirname+"/files/products.json");
 const prodDao = new ProductDaoMongoDb();
 
-export const getAll = async() => {
+export const getAll = async(limit, page, sort, categoryF, statusF) => {
     try {
-        const response =  await prodDao.getProducts()
+        const response =  await prodDao.getProducts(limit, page, sort, categoryF, statusF)
         return {error:false, res:response}
     } catch (err) {
         const error = `product.getAll service error: ${err.message}`;
