@@ -10,11 +10,13 @@ import './daos/mongodb/connection.js'
 import __dirname from './utils.js';
 import { getAll } from "./services/product.services.js";
 import * as MsgService from "./services/message.services.js";
+import cookieParser from 'cookie-parser';
 
 const app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended: true})); 
 app.use(errorHandler);
+app.use(cookieParser());
 //app.use(morgan('dev'));
 
 //http Server
@@ -86,15 +88,6 @@ io.on('connection', async(socket) => { // conexion de websocket
         }catch(err){
             console.log(err);
         }
-    })
-
-    //Products
-    socket.on('btnPage', async(page) => { 
-        let limit,sort,categoryF,statusF;
-        const response = await getAll(limit, page, sort, categoryF, statusF)
-        const dataString = JSON.stringify(response.res);
-        products = JSON.parse(dataString);
-        io.emit('arrayProducts', products);
     })
 })
 

@@ -1,11 +1,17 @@
 <div id="chat-container">
     <div id="chat-window">
         <div>
-            <div id="output"></div>
+            <div id="output">
+            {{#each producList.payloads}}          
+                <p>Product: {{this.code}} - {{this.title}}</p><button id="sendProd" onclick="addProdToCart({{this.id}})">Add to cart</button><br>
+                <hr>
+            {{/each}}
+            </div>
+            <p>page: {{producList.page}}/{{producList.totalPages}}</p>
         </div>
     </div>
-    <button id="send">Previous page</button><button id="delete">Next page</button>
+    <button id="send" onclick="prevPage({{producList.prevPage}})">Previous page</button><button id="delete" onclick="nextPage({{producList.nextPage}})">Next page</button>
 </div>
 
-<script src="/socket.io/socket.io.js" charset="utf-8"></script>
+{{!-- <script src="/socket.io/socket.io.js" charset="utf-8"></script> --}}
 <script src="js/productsIndex.js" charset="utf-8"></script>

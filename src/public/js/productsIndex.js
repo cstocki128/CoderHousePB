@@ -1,52 +1,24 @@
-const socket = io();
+//const socket = io();
 
 const btnPrev = document.getElementById('send');
 const btnNext = document.getElementById('delete');
 const output = document.getElementById('output');
 
-// const addPrev = () => {
-//     if (productsArray.prevPage) {
-//         socket.emit('btnPage', productsArray.prevPage)
-//     }else alert('No prev page available')
-     
-// }
-// const addNext = () => {
-//     if (productsArray.nextPage) {
-//         socket.emit('btnPage', productsArray.nextPage) 
-//     }else alert('No next page available')
-     
-// }
 
-
-
-socket.on('arrayProducts', (productsArray)=>{
-    // btnPrev.removeEventListener('click',addNext)
-    // btnPrev.removeEventListener('click',addPrev)
+function prevPage(page) {
+    if (page) {
+        location.href=`http://localhost:8080/products?page=${page}`
+    }else alert('No previous page available')
     
-    btnPrev.addEventListener('click', function addPrev (){
-        if (productsArray.prevPage) {
-            socket.emit('btnPage', productsArray.prevPage)
-        }else alert('No prev page available')
-        btnPrev.removeEventListener('click',addPrev)
-    },{once: true});
-    btnNext.addEventListener('click', function addNext (){
-        if (productsArray.nextPage) {
-            socket.emit('btnPage', productsArray.nextPage) 
-        }else alert('No next page available')
-        btnNext.removeEventListener('click',addNext)
-    },{once:true});
-    
-    const productsRender = productsArray.payloads.map((product)=>{
-        return `<p>Product: ${product.code} - ${product.title} </p><button id="sendProd" onclick="addProdToCart(${product.Id})">Add to cart</button>`
-    }).join(' ')
-    output.innerHTML = productsRender
-});
+}
 
-const createNewCart = () => {
- //socket.emit('createNewCart')
-};
-//createNewCart();
+function nextPage(page) {
+    if (page) {
+        location.href=`http://localhost:8080/products?page=${page}`
+    }else alert('No next page available')
+}
 
-const addProdToCart = (pid,cid) => {
 
-};
+// const addProdToCart = (pid) => {
+
+// };

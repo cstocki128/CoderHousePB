@@ -14,9 +14,15 @@ export default class CartDaoMongoDb {
     async addCart(cart) {
         try {
             const productResponse = await ProductModel.find({});
-            const noProd =   cart.products.find((product) => {
-                return !(productResponse.find(prod => prod.id === product.id))
-            })
+            let noProd;
+            if (cart.products != undefined){
+                noProd =  cart.products.find((product) => {
+                    return !(productResponse.find(prod => prod.id === product.id))
+                })
+            }else{ 
+                cart = {products: []};
+                noProd = null;
+            }
             if (!noProd) return await CartModel.create(cart);   
             return `Products in cart not found`;
 

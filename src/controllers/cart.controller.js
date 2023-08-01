@@ -50,8 +50,8 @@ export const updProduct= async(req, res, next) => {
     try{
         const cid = req.params.cid
         const pid = req.params.pid
-        const quantity = req.body.quantity
-        if (!quantity || quantity < 0){
+        const quantity = Number(req.body.quantity)
+        if (!quantity || quantity < 0 || !Number.isInteger(quantity)){
             res.status(400).json({error:'Quantity must be a positive number'})
         }else {
             const response = await service.updProduct(cid,pid,quantity);

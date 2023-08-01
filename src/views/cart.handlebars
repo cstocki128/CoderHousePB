@@ -1,0 +1,16 @@
+<div id="chat-container">
+    <div id="chat-window">
+        <div>
+            <hr>
+            <hr>
+            <div id="output">
+            {{#each cart.products}}          
+                <p>Product: {{this._id.code}} - {{this._id.title}}</p>
+                <hr>
+            {{/each}}
+            </div>
+            <hr>
+            <p>cart: {{cart._id}}</p>
+        </div>
+    </div>
+</div>
