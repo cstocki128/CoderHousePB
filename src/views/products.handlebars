@@ -1,16 +1,24 @@
 <div id="chat-container">
     <div id="chat-window">
+<h2 style="text-align: center;">Welcome {{user.role}} {{user.firstName}} {{user.lastName}} <div id="output"><button id="delete" onclick="location.href = 'api/users/logout'">LogOut</button></div></h2>
+    </div>
+    </div>
+<div id="chat-container">
+    <div id="chat-window">
         <div>
+            
+            <hr>
             <div id="output">
             {{#each producList.payloads}}          
                 <p>Product: {{this.code}} - {{this.title}}</p><button id="sendProd" onclick="addProdToCart({{this.id}})">Add to cart</button><br>
                 <hr>
             {{/each}}
             </div>
-            <p>page: {{producList.page}}/{{producList.totalPages}}</p>
+            <p style="text-align: center;">page: {{producList.page}}/{{producList.totalPages}}</p>
         </div>
+        <button id="send" onclick="prevPage({{producList.prevPage}})">Previous page</button><button id="delete" onclick="nextPage({{producList.nextPage}})">Next page</button>
     </div>
-    <button id="send" onclick="prevPage({{producList.prevPage}})">Previous page</button><button id="delete" onclick="nextPage({{producList.nextPage}})">Next page</button>
+    
 </div>
 
 {{!-- <script src="/socket.io/socket.io.js" charset="utf-8"></script> --}}

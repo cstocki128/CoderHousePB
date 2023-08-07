@@ -1,9 +1,17 @@
-<h1>LOGIN</h1>
+<div id="chat-container">
+<div id="chat-window">
+<h1 style="text-align: center;">LOGIN</h1>
+<div id="output">
+    <div id="chat-window">
 <form action="api/users/login" method="post">
     Email: <input type="email" name="email" id="email"/>
     Password: <input type="password" name="password" id="password"/>
-    <input type="submit" value="LOGIN"/>
+    <br>
+    <button type="submit" value="LOGIN">LOGIN</button>
 </form>
-
-<h2>Usuario nuevo?</h2>
-<button onclick="location.href = '/register'">Ir a registro</button>
+</div>
+</div>
+<h2 style="text-align: center;" >New user?</h2>
+<button onclick="location.href = '/register'">Register</button>
+</div>
+</div>

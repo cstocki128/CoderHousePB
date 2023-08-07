@@ -3,12 +3,18 @@ import { UserModel } from "./models/user.model.js";
 export default class UserDaoMongoDb {
     async registerUser(user) {
         try {
-            const {email} = user;
+            const {email, password} = user;
             const existUser = await UserModel.findOne({email});
             console.log('ExistUser:', existUser)
             if (!existUser){
-                const newUser = await UserModel.create(user); 
-                return newUser;
+                if (email === 'adminCoder@coder.com' && password === 'adminCod3r123' ) {
+                    const newUser = await UserModel.create({...user,role: 'admin'})
+                    return newUser
+                }
+                else {
+                    const newUser = await UserModel.create(user);
+                    return newUser
+                }
             }else return 'User already exists';
         }catch(error){
             return error.message;

@@ -28,11 +28,11 @@ const mongoStoreOptions = {
         // crypto: {
         //     secret: '1234'
         // }
-        ttl: 60,
-        reapInterval: 30
+        // ttl: 60,
+        // reapInterval: 30
     }),
     secret: '1234',
-    cookie: {maxAge: 10000},
+    cookie: {maxAge: 100000},
     saveUninitialized: false,
     resave: false
 }
