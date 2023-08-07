@@ -9,9 +9,8 @@
 
 - [localhost:8080/products](http://localhost:8080/products): Listado de productos.
 - `localhost:8080/carts/:cartId`: Listado de items del cart seleccionado.
-- [localhost:8080/realTimeProducts](localhost:8080/realTimeProducts): Listado de productos en tiempo real con WEBSOCKET
-- [localhost:8080/chat](localhost:8080/chat):Chat en tiempo real con WEBSOCKET
-- [localhost:8080/chat](localhost:8080/chat):Chat en tiempo real con WEBSOCKET
+- [localhost:8080/realTimeProducts](http://localhost:8080/realTimeProducts): Listado de productos en tiempo real con WEBSOCKET
+- [localhost:8080/chat](http://localhost:8080/chat): Chat en tiempo real con WEBSOCKET
 
 ## Endpoints
 
@@ -32,9 +31,9 @@
 - `DELETE /api/carts/:id/product/:productId`: Elimina el producto seleccionado del carrito.
 - `DELETE /api/carts/:id`: Elimina todos los productos del carrito
 - `PUT /api/carts/:id/product/:productId`: Actualiza la cantidad de producto del cart. Debe recibir Form-encode {quantity: value}
-- `PUT /api/carts/:id`: Actualiza los prooductos del cart. Debe recibir en el body la salida de `GET /api/products`:
+- `PUT /api/carts/:id`: Actualiza los productos del cart. Debe recibir en el body la salida de `GET /api/products`:
 
-...
+```
 {
   "payloads": [
       Productos...
@@ -49,4 +48,4 @@
   "prevLink": null,
   "nextLink": null
 }
-...
+```
