@@ -5,7 +5,6 @@ export default class UserDaoMongoDb {
         try {
             const {email, password} = user;
             const existUser = await UserModel.findOne({email});
-            console.log('ExistUser:', existUser)
             if (!existUser){
                 if (email === 'adminCoder@coder.com' && password === 'adminCod3r123' ) {
                     const newUser = await UserModel.create({...user,role: 'admin'})
