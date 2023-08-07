@@ -1,6 +1,7 @@
 import productsRouter from './routes/products.router.js';
 import cartsRouter from './routes/carts.router.js';
 import viewsRouter from './routes/views.router.js';
+import userRouter from './routes/user.router.js';
 import handlebars from 'express-handlebars';
 import {errorHandler} from './middlewares/errorHandler.js';
 import morgan from 'morgan';
@@ -11,12 +12,31 @@ import __dirname from './utils.js';
 import { getAll } from "./services/product.services.js";
 import * as MsgService from "./services/message.services.js";
 import cookieParser from 'cookie-parser';
+import session from 'express-session';
+import MongoStore from 'connect-mongo';
+import connectionString from './daos/mongodb/connection.js'
 
 const app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended: true})); 
 app.use(errorHandler);
 app.use(cookieParser());
+
+const mongoStoreOptions = {
+    store: MongoStore.create({
+        mongoUrl: connectionString,
+        // crypto: {
+        //     secret: '1234'
+        // }
+        // ttl: 60,
+        // reapInterval: 30
+    }),
+    secret: '1234',
+    cookie: {maxAge: 100000},
+    saveUninitialized: false,
+    resave: false
+}
+app.use(session(mongoStoreOptions)); 
 //app.use(morgan('dev'));
 
 //http Server
@@ -92,7 +112,6 @@ io.on('connection', async(socket) => { // conexion de websocket
 })
 
 
-
 //handlebars
 app.engine('handlebars', handlebars.engine());     //Inicializa motor
 app.set('views', __dirname+'/views')          //setea carpeta de views
@@ -102,6 +121,7 @@ app.use(express.static(__dirname+'/public'))  //setea carpeta estatica public
 //apis
 app.use('/api/products/',productsRouter);
 app.use('/api/carts/',cartsRouter);
+app.use('/api/users/',userRouter);
 //views
 app.use('/',viewsRouter);
 

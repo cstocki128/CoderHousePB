@@ -1,6 +1,48 @@
 import { getAll } from "../services/product.services.js";
 import { create,getById } from "../services/cart.services.js";
 
+
+export const register = async(req, res, next) => {
+    try {
+        res.render('register')
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const errorRegister = async(req, res, next) => {
+    try {
+        res.render('errorRegister')
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const login = async(req, res, next) => {
+    try {
+        res.render('login')
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const errorLogin = async(req, res, next) => {
+    try {
+        res.render('errorLogin')
+    } catch (error) {
+        next(error);
+    }
+};
+
+
+// export const profile = async(req, res, next) => {
+//     try {
+//         res.render('profile')
+//     } catch (error) {
+//         next(error);
+//     }
+// };
+
 export const get = async(req, res, next) => {
     try{
         const response = await getAll()
@@ -55,7 +97,13 @@ export const products = async(req, res, next) => {
             let producList = response.res
             const dataString = JSON.stringify(producList);
             producList = JSON.parse(dataString);
-            res.render('products', {producList})
+
+            const user = {
+                firstName: req.session.first_name,
+                lastName: req.session.last_name,
+                role: req.session.role
+            }
+            res.render('products', {producList, user:user})
         }else{
             res.status(404).send(response.res)
         }
