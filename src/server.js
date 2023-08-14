@@ -17,6 +17,7 @@ import MongoStore from 'connect-mongo';
 import connectionString from './daos/mongodb/connection.js'
 import passport from 'passport';
 import './passport/local-strategy.js';
+import './passport/github-strategy.js';
 
 const app = express();
 app.use(express.json())
