@@ -7,6 +7,7 @@
 
 ## Vistas
 
+- [localhost:8080/login](http://localhost:8080/login): Login
 - [localhost:8080/products](http://localhost:8080/products): Listado de productos.
 - `localhost:8080/carts/:cartId`: Listado de items del cart seleccionado.
 - [localhost:8080/realTimeProducts](http://localhost:8080/realTimeProducts): Listado de productos en tiempo real con WEBSOCKET
