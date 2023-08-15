@@ -15,6 +15,9 @@ import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import connectionString from './daos/mongodb/connection.js'
+import passport from 'passport';
+import './passport/local-strategy.js';
+import './passport/github-strategy.js';
 
 const app = express();
 app.use(express.json())
@@ -25,11 +28,6 @@ app.use(cookieParser());
 const mongoStoreOptions = {
     store: MongoStore.create({
         mongoUrl: connectionString,
-        // crypto: {
-        //     secret: '1234'
-        // }
-        // ttl: 60,
-        // reapInterval: 30
     }),
     secret: '1234',
     cookie: {maxAge: 100000},
@@ -37,6 +35,9 @@ const mongoStoreOptions = {
     resave: false
 }
 app.use(session(mongoStoreOptions)); 
+
+app.use(passport.initialize());
+app.use(passport.session());
 //app.use(morgan('dev'));
 
 //http Server

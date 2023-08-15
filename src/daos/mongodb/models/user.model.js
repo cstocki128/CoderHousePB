@@ -22,11 +22,17 @@ const userSchema = new mongoose.Schema({
     },
     age: {
         type: Number,
-        required: true
+        required: true,
+        default: 0
     },
     password: {
       type: String,
       required: true  
+    },
+    isGithub: {
+        type: Boolean,
+        required: true,
+        default: false
     }
 });
 

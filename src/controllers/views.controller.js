@@ -35,13 +35,16 @@ export const errorLogin = async(req, res, next) => {
 };
 
 
-// export const profile = async(req, res, next) => {
-//     try {
-//         res.render('profile')
-//     } catch (error) {
-//         next(error);
-//     }
-// };
+export const githubResponse = async (req, res, next) => {
+    try {
+      req.session.first_name = req.user.first_name;
+      req.session.last_name =  req.user.last_name;
+      req.session.role = req.user.role;
+      res.redirect('/products')
+    } catch (error) {
+      next(error.message);
+    }
+  };
 
 export const get = async(req, res, next) => {
     try{
