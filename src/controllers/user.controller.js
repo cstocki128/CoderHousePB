@@ -11,17 +11,21 @@ export const register = async(req, res, next) => {
 
 export const login = async(req, res, next) => {
     try {
-        console.log('passport',req.session.passport.user)
-        const user = await service.getByid(req.session.passport.user);
-        console.log('user',user)
-        if(!user.error){
-            req.session.first_name = user.res.first_name;
-            req.session.last_name =  user.res.last_name;
-            req.session.role = user.res.role;
-            delete req.session.password;
-            res.redirect('/products');
-        }
-        else res.redirect('/error-login');
+        console.log('PRUEBA') 
+        if (req){
+            
+            console.log('passport',req.session.passport.user)
+            const user = await service.getByid(req.session.passport.user);
+            console.log('user',user)
+            if(!user.error){
+                req.session.first_name = user.res.first_name;
+                req.session.last_name =  user.res.last_name;
+                req.session.role = user.res.role;
+                delete req.session.password;
+                res.redirect('/products');
+            }
+            else res.redirect('/error-login');
+        }else res.redirect('/error-login');
     } catch (error) {
         next(error);
     }
@@ -34,21 +38,3 @@ export const logout = async(req, res) => {
     })
 };
 
-export const githubResponse = async (req, res, next) => {
-    try {
-      // console.log(req.user)
-      const { first_name, last_name, email, isGithub } = req.user;
-      res.json({
-        msg: "Register/Login Github OK",
-        session: req.session,
-        userData: {
-          first_name,
-          last_name,
-          email,
-          isGithub,
-        },
-      });
-    } catch (error) {
-      next(error.message);
-    }
-  };

@@ -30,11 +30,10 @@ export default class UserDaoMongoDb {
             console.log('userExist',userExist)
             if (userExist) {
                 if (isValidPassword(password,userExist)) {
-                    console.log('isValidPassword')
                     return userExist
-                }else return 'Incorrect Password'; 
+                }else return 'Incorrect Password';
             }
-            else return 'User does not exist'; 
+            else return 'User does not exist';
         }catch(error){
             return error.message;
         }

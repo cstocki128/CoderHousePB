@@ -1,40 +1,46 @@
 import passport from 'passport';
-import * as service from "../services/user.services.js";
 import GitHubStrategy from 'passport-github2';
+import UserDaoMongoDb from '../daos/mongodb/user.dao.js';
+const UserDao = new UserDaoMongoDb();
 
 const strategyOptions = {
-    clientId: 'Iv1.d6d030eaf23fa1b1',
-    clientSecret: 'f7a56b51e9c29c09a099a2dcf7395a4442e4ad53',
-    callbackURL: 'http://localhost:8080/users/github'
+    clientID: 'Iv1.d6d030eaf23fa1b1',
+    clientSecret: 'cfaba61e3fadb619800f2264af0e42584547b36e',
+    callbackURL: 'http://localhost:8080/profile-github'
 }
-    
-//     , async (accessToken, refreshToken, profile, done) => {
-//         try {
-//             console.log('progile: ', profile);
-//             const user = await service.getByEmail(profile._json.email);
-//             if (!user){
-//                 const newUser = {
-//                     first_name: profile._json.first_name,
-//                     last_name: '',
-//                     age: 18,
-//                     email: profile._json.email,
-//                     password: ''
-//                 }
-//                 const result = await userService.create(newUser);
-//                 done(null, result);
-//             }else done(null,user)
-//         } catch (error) {
-//             done(error.message, false)  
-//         }
-//     }))
+  
 
-// }
+const registerOrLogin = async(accessToken,refreshToken,profile, done) => {
+    try {
+        console.log('PROFILE: ',profile);
+        const email = profile._json.email ?? profile._json.login;
+        const user = await UserDao.loginUser({email, password: ''});
+        console.log('user1',user)
+        if (typeof user === 'object') return done(null, user);
+        const newUser = await UserDao.registerUser({
+            first_name: profile._json.name.split(' ')[0],
+            last_name: profile._json.name.split(' ')[1] ?? profile._json.name.split(' ')[2],
+            email,
+            password: '',
+            isGithub: true
+        })
+        return done(null,newUser);
+    } catch (error) {
+        return done(error,false)
+    }
+    
+};
+
+passport.use('github', new GitHubStrategy(strategyOptions, registerOrLogin))
 
 //serialize y deserialize
+//Guarda el usuario en req.session.passport
 passport.serializeUser((user, done) => {
+    console.log('serializeUser ',user)
     done(null,user._id);
 });
 passport.deserializeUser(async(id, done) => {
     const user = await service.getByid(id);
+    console.log('deserializeUser ',user)
     return done(null,user);
 });

@@ -16,7 +16,7 @@ const register = async(req, email, password, done) => {
         else {
             const response = await service.register(req.body)
             if (!response.error) return done(null,response.res)
-            else ;//done(response.res, false)
+            else done(response.res, false)
         }
     } catch (error) {
         done(error.message, false)
@@ -27,7 +27,6 @@ const login = async(req, email, password, done) => {
     try {
         const user = {email, password}
         const response = await service.login(user);
-        console.log('response',response)
         if (response.error) done(response.res,false); 
         else return done(null,response.res)
     } catch (error) {
