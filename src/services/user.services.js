@@ -56,3 +56,17 @@ export const getByEmail = async(email) => {
         return {error:true,res:error};
     }
 }
+
+export const addCart = async(email,cid) => {
+    try {
+        const response =  await UserDao.addCart(email,cid)
+        if ( typeof response === 'object') {
+            return {error:false,res:response}
+        }else {
+            return {error:true,res:response}
+        }
+    } catch (err) {
+        const error = `user.addCart service error: ${err.message}`;
+        return {error:true,res:error};
+    }
+}

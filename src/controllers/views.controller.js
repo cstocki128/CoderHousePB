@@ -1,5 +1,6 @@
 import { getAll } from "../services/product.services.js";
 import { create,getById } from "../services/cart.services.js";
+import { generateToken } from "../middlewares/jwt.js"
 
 
 export const register = async(req, res, next) => {
@@ -37,12 +38,17 @@ export const errorLogin = async(req, res, next) => {
 
 export const githubResponse = async (req, res, next) => {
     try {
-      req.session.first_name = req.user.first_name;
-      req.session.last_name =  req.user.last_name;
-      req.session.role = req.user.role;
-      res.redirect('/products')
+    //   req.session.first_name = req.user.first_name;
+    //   req.session.last_name =  req.user.last_name;
+    //   req.session.role = req.user.role;
+    //   res.redirect('/products')
+        const user = req.user
+        const accessToken = generateToken(user)
+        res
+            .cookie('token', accessToken, {httpOnly: true})
+            .redirect('/products');
     } catch (error) {
-      next(error.message);
+        next(error.message);
     }
   };
 
@@ -101,10 +107,15 @@ export const products = async(req, res, next) => {
             const dataString = JSON.stringify(producList);
             producList = JSON.parse(dataString);
 
+            // const user = {
+            //     firstName: req.session.first_name,
+            //     lastName: req.session.last_name,
+            //     role: req.session.role
+            // }
             const user = {
-                firstName: req.session.first_name,
-                lastName: req.session.last_name,
-                role: req.session.role
+                firstName: req.user.first_name,
+                lastName: req.user.last_name,
+                role: req.user.role
             }
             res.render('products', {producList, user:user})
         }else{

@@ -4,11 +4,11 @@ import viewsRouter from './routes/views.router.js';
 import userRouter from './routes/user.router.js';
 import handlebars from 'express-handlebars';
 import {errorHandler} from './middlewares/errorHandler.js';
-import morgan from 'morgan';
 import {Server} from 'socket.io';
 import express from 'express';
 import './daos/mongodb/connection.js'
 import __dirname from './utils.js';
+import { PRIVATE_KEY } from './middlewares/jwt.js';
 import { getAll } from "./services/product.services.js";
 import * as MsgService from "./services/message.services.js";
 import cookieParser from 'cookie-parser';
@@ -16,29 +16,34 @@ import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import connectionString from './daos/mongodb/connection.js'
 import passport from 'passport';
-import './passport/local-strategy.js';
+// import './passport/local-strategy.js';
 import './passport/github-strategy.js';
+import "./passport/jwt-strategy.js";
 
+//Express
 const app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended: true})); 
+
+//Middlewares
 app.use(errorHandler);
 app.use(cookieParser());
 
-const mongoStoreOptions = {
-    store: MongoStore.create({
-        mongoUrl: connectionString,
-    }),
-    secret: '1234',
-    cookie: {maxAge: 100000},
-    saveUninitialized: false,
-    resave: false
-}
-app.use(session(mongoStoreOptions)); 
+//Session mongoDb
+// const mongoStoreOptions = {
+//     store: MongoStore.create({
+//         mongoUrl: connectionString,
+//     }),
+//     secret: PRIVATE_KEY,
+//     cookie: {maxAge: 100000},
+//     saveUninitialized: true,
+//     resave: false
+// }
+// app.use(session(mongoStoreOptions)); 
 
+//Passport
 app.use(passport.initialize());
-app.use(passport.session());
-//app.use(morgan('dev'));
+// app.use(passport.session());
 
 //http Server
 const httpServer = app.listen(8080, () => {console.log('Listening on PORT 8080')});
