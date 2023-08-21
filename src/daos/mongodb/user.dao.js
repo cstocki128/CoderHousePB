@@ -1,5 +1,6 @@
 import { UserModel } from "./models/user.model.js";
 import {createHash, isValidPassword} from '../../utils.js'
+import {CartModel} from "./models/cart.model.js";
 
 export default class UserDaoMongoDb {
     async registerUser(user) {
@@ -25,9 +26,7 @@ export default class UserDaoMongoDb {
     async loginUser(user) {
         try {
             const {email, password} = user;
-            console.log('USER',user)
             const userExist = await this.getByEmail(email)
-            console.log('userExist',userExist)
             if (userExist) {
                 if (isValidPassword(password,userExist)) {
                     return userExist
@@ -42,7 +41,7 @@ export default class UserDaoMongoDb {
 
     async getByid(_id) {
         try {
-            const userExist = await UserModel.findOne({_id});
+            const userExist = await UserModel.findOne({_id}).populate('cart');
             if (userExist) return userExist
             else return false
         }catch(error){
@@ -52,10 +51,30 @@ export default class UserDaoMongoDb {
 
     async getByEmail(email) {
         try {
-            const userExist = await UserModel.findOne({email});
+            const userExist = await UserModel.findOne({email}).populate('cart');
             if (userExist) return userExist
             else return false
         }catch(error){
+            return error.message;
+        }
+    }
+
+    async addCart(email,cid) {
+        try {
+            const cartResponse = await CartModel.findById(cid);
+            if (cartResponse) {
+                const user = await this.getByEmail(email);
+                if (user) {
+                    user.cart = cartResponse._id;
+                    user.save();
+                    return user
+                }else{
+                    return `user ${email} not found`;  
+                }
+            }else{
+                return `Cart ${cid} not found`;
+            }
+        } catch(error){
             return error.message;
         }
     }

@@ -15,6 +15,11 @@ const userSchema = new mongoose.Schema({
         required: true,
         default: 'user'
     },
+    cart: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "carts",
+        default: null
+    },
     email: { 
         type: String,
         required: true,
@@ -35,5 +40,9 @@ const userSchema = new mongoose.Schema({
         default: false
     }
 });
+
+// userSchema.pre('find', function(){ 
+//   this.populate('cart');
+// });
 
 export const UserModel = mongoose.model('users',userSchema)

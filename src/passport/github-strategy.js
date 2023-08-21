@@ -15,7 +15,6 @@ const registerOrLogin = async(accessToken,refreshToken,profile, done) => {
         console.log('PROFILE: ',profile);
         const email = profile._json.email ?? profile._json.login;
         const user = await UserDao.loginUser({email, password: ''});
-        console.log('user1',user)
         if (typeof user === 'object') return done(null, user);
         const newUser = await UserDao.registerUser({
             first_name: profile._json.name.split(' ')[0],
@@ -40,7 +39,6 @@ passport.serializeUser((user, done) => {
     done(null,user._id);
 });
 passport.deserializeUser(async(id, done) => {
-    const user = await service.getByid(id);
-    console.log('deserializeUser ',user)
+    const user = await UserDao.getByid(id);
     return done(null,user);
 });
