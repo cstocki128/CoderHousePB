@@ -15,6 +15,12 @@
 
 ## Endpoints
 
+### Users
+
+- `GET /api/users/authenticate`: Genera y retorna token JWT. Debe recibir Form-encode `{email, password}`
+- `POST /api/users/current`: Retorna datos de usuario/sesión. Requiere Bearer Auth.
+- `POST /api/users/addCart`: Agrega cart al usuario. Debe recibir Form-encode `{email, cid}`
+
 ### Products
 
 - `GET /api/products`: Retorna todos los productos paginados. Recibe parámetros opcionales: `limit`, `page`, `sort`, `category` y `status`
