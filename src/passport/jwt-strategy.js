@@ -11,7 +11,6 @@ const strategyOptionsHeaders = {
 };
 
 const cookieExtractor = (req) => {
-    console.log('req.cookie.token: ',req.cookies.token)
     const token = req.cookies.token;
     return token;
 }
