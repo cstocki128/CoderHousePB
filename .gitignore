@@ -1,2 +1,4 @@
 # Dependency directories
 node_modules/
+# Variables de entono
+.env

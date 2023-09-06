@@ -19,6 +19,7 @@ import passport from 'passport';
 // import './passport/local-strategy.js';
 import './passport/github-strategy.js';
 import "./passport/jwt-strategy.js";
+import config from './config.js';
 
 //Express
 const app = express();
@@ -46,7 +47,8 @@ app.use(passport.initialize());
 // app.use(passport.session());
 
 //http Server
-const httpServer = app.listen(8080, () => {console.log('Listening on PORT 8080')});
+const httpServer = app.listen(config.port, () => {console.log(`Listening on PORT ${config.port}`)});
+
 //socket Server
 const io = new Server(httpServer); //Se crea el servidor websocket
 

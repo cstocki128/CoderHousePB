@@ -1,11 +1,12 @@
 import mongoose from 'mongoose';
+import config from '../../config.js';
 
-const connectionString = 'mongodb+srv://cstocki128:MatSto128@clustermongo.anw8mjc.mongodb.net/ecommerce?retryWrites=true&w=majority'
+const connectionString = config.mongoUrl
 export default connectionString;
 
 try{
     await mongoose.connect(connectionString);
     console.log('Conected to MongoDb Database')
 }catch(err){
-    console.log(err);
+    console.log(err); 
 }

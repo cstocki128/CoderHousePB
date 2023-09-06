@@ -1,3 +1,4 @@
+import config from '../../config.js';
 import { UserModel } from "./models/user.model.js";
 import {createHash, isValidPassword} from '../../utils.js'
 import {CartModel} from "./models/cart.model.js";
@@ -9,7 +10,7 @@ export default class UserDaoMongoDb {
             const existUser = await this.getByEmail(email)
             user.password = createHash(user.password); //Hasheo
             if (!existUser){
-                if (email === 'adminCoder@coder.com' && password === 'adminCod3r123' ) {
+                if (email === config.adminEmail && config.adminPassword ) {
                     const newUser = await UserModel.create({...user,role: 'admin'})
                     return newUser
                 }

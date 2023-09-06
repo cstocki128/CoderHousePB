@@ -12,7 +12,6 @@ const strategyOptions = {
 
 const registerOrLogin = async(accessToken,refreshToken,profile, done) => {
     try {
-        console.log('PROFILE: ',profile);
         const email = profile._json.email ?? profile._json.login;
         const user = await UserDao.loginUser({email, password: ''});
         if (typeof user === 'object') return done(null, user);
@@ -35,7 +34,6 @@ passport.use('github', new GitHubStrategy(strategyOptions, registerOrLogin))
 //serialize y deserialize
 //Guarda el usuario en req.session.passport
 passport.serializeUser((user, done) => {
-    console.log('serializeUser ',user)
     done(null,user._id);
 });
 passport.deserializeUser(async(id, done) => {
