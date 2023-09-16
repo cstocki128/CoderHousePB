@@ -1,12 +1,13 @@
 import {Router} from 'express';
 import * as controller from "../controllers/product.controller.js"
+import passport from 'passport'
 const productsRouter = Router();
 
-productsRouter.get('/', controller.getAll);
-productsRouter.get('/:pid', controller.getById);
-productsRouter.post('/', controller.create);
-productsRouter.put('/:pid', controller.update);
-productsRouter.delete('/:pid', controller.remove);
+productsRouter.get('/',passport.authenticate('jwt-header',{session:false}), controller.getAll);
+productsRouter.get('/:pid',passport.authenticate('jwt-header',{session:false}), controller.getById);
+productsRouter.post('/',passport.authenticate('jwt-header',{session:false}), controller.create);
+productsRouter.put('/:pid',passport.authenticate('jwt-header',{session:false}), controller.update);
+productsRouter.delete('/:pid',passport.authenticate('jwt-header',{session:false}), controller.remove);
 
 export default productsRouter;
 

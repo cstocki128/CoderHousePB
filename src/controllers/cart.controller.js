@@ -85,3 +85,21 @@ export const deleteProducts= async(req, res, next) => {
         next(err);
     }
 };
+
+export const purchase = async(req, res, next) => {
+    try{
+        const cid = req.params.cid
+        const email = req.user.email
+        const userCid = req.user.cart
+        if (userCid){
+            if (userCid !== cid) {
+                const response = await service.purchase(cid,email);
+                if (!response.error) res.status(200).json({result:response.res})
+                else res.status(400).json({error:response.res})
+            }else res.status(400).json({error:`cart id ${cid} is not user's cart`})
+        }
+        else res.status(400).json({error:"User does not have a cart, please add one before purchase"})
+    }catch(err){
+        next(err);
+    }
+};

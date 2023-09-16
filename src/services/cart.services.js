@@ -115,3 +115,19 @@ export const deleteProduct = async(cid,pid) => {
         return {error:true, res:error}; 
     }
 }
+
+export const purchase = async(cid,email) => {
+    try {
+        const response = await cartDao.purchase(cid,email)
+        if (response === null){
+            return {error:false, res:`Cart ${cid} purchased successfully`}
+        }else if(typeof response === 'object'){
+            return {error:false, res:response}
+        }else {
+            return {error:true, res:response}
+        }  
+    } catch (err) {
+        const error = `cart.purchase service error: ${err.message}`;
+        return {error:true, res:error}; 
+    }
+}

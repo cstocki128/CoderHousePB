@@ -1,5 +1,7 @@
 import {CartModel} from './models/cart.model.js';
 import {ProductModel} from "./models/product.model.js";
+import {TicketModel} from "./models/ticket.model.js";
+import crypto from 'crypto';
 
 export default class CartDaoMongoDb {
     async getCart(cid) {
@@ -163,4 +165,32 @@ export default class CartDaoMongoDb {
            return error.message; 
         }
     }
-}
+
+    async purchase(cid,email) {
+        try {
+            const cart = await CartModel.findById(cid)
+            if (cart) {
+                const noStockProducts = [];
+                let amount=0;
+                for (const prod of cart.products) {
+                    const product = await ProductModel.findById(prod.id); 
+                    if (product.stock < prod.quantity) {
+                        noStockProducts.push(prod);
+                    }else {
+                        amount += (product.price * prod.quantity);
+                        product.stock -= prod.quantity;
+                        product.save();
+                    }
+                }
+                if (amount>0){
+                    cart.products = noStockProducts;
+                    cart.save();
+                    const newTicket = {amount: amount, purchaser:email};
+                    return await TicketModel.create({...newTicket, code:`TICK${crypto.randomBytes(8).toString('hex')}`});
+                }else return {description:`cart ${cid} does not have products in stock for the ordered quantity `, products: noStockProducts};
+            }else return `cart ${cid} not found`; 
+        } catch (error) {
+            return error.message;
+        };
+    };
+};

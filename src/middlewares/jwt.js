@@ -13,7 +13,7 @@ export const generateToken = (user) => {
   };
 
   const token = jwt.sign(payload, PRIVATE_KEY, {
-    expiresIn: '1m',  
+    expiresIn: '15m',  
   });
   return token;
 };
