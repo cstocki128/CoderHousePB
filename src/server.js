@@ -6,14 +6,12 @@ import handlebars from 'express-handlebars';
 import {errorHandler} from './middlewares/errorHandler.js';
 import {Server} from 'socket.io';
 import express from 'express';
-import './daos/mongodb/connection.js'
 import __dirname from './utils.js';
 import { getAll } from "./services/product.services.js";
 import * as MsgService from "./services/message.services.js";
 import cookieParser from 'cookie-parser';
 // import session from 'express-session';
 // import MongoStore from 'connect-mongo';
-// import connectionString from './daos/mongodb/connection.js'
 import passport from 'passport';
 // import './passport/local-strategy.js';
 import './passport/github-strategy.js';

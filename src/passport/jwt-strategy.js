@@ -1,9 +1,9 @@
 import passport from 'passport';
 import { ExtractJwt, Strategy as jwtStrategy } from 'passport-jwt';
 import * as service from "../services/user.services.js";
-import UserDaoMongoDb from '../daos/mongodb/user.dao.js';
 import { PRIVATE_KEY } from '../middlewares/jwt.js';
-const UserDao = new UserDaoMongoDb();
+import UserRepository from '../persistence/repository/user/user.repository.js';
+const userRepository = new UserRepository();
 
 const strategyOptionsHeaders = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -36,6 +36,6 @@ passport.serializeUser((user, done) => {
     done(null,user.userId);
 });
 passport.deserializeUser(async(id, done) => {
-    const user = await UserDao.getByid(id);
+    const user = await userRepository.getByid(id);
     return done(null,user);
 });

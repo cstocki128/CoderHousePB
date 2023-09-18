@@ -1,9 +1,9 @@
-import UserDaoMongoDb from '../daos/mongodb/user.dao.js';
-const UserDao = new UserDaoMongoDb();
+import UserRepository from "../persistence/repository/user/user.repository.js"
+const userRepository = new UserRepository();
 
 export const login = async(user) => {
     try {
-        const response =  await UserDao.loginUser(user)
+        const response =  await userRepository.dao.loginUser(user)
         if ( typeof response === 'object') {
             return {error:false,res:response}
         }else {
@@ -17,7 +17,7 @@ export const login = async(user) => {
 
 export const register = async(user) => {
     try {
-        const response =  await UserDao.registerUser(user)
+        const response =  await userRepository.dao.registerUser(user)
         if ( typeof response === 'object') {
             return {error:false,res:response}
         }else {
@@ -31,7 +31,7 @@ export const register = async(user) => {
 
 export const getByid = async(id) => {
     try {
-        const response =  await UserDao.getByid(id)
+        const response =  await userRepository.dao.getByid(id)
         if ( typeof response === 'object') {
             return {error:false,res:response}
         }else {
@@ -45,7 +45,7 @@ export const getByid = async(id) => {
 
 export const getByEmail = async(email) => {
     try {
-        const response =  await UserDao.getByEmail(email)
+        const response =  await userRepository.dao.getByEmail(email)
         if ( typeof response === 'object') {
             return {error:false,res:response}
         }else {
@@ -59,14 +59,24 @@ export const getByEmail = async(email) => {
 
 export const addCart = async(email,cid) => {
     try {
-        const response =  await UserDao.addCart(email,cid)
+        const response =  await userRepository.dao.addCart(email,cid)
         if ( typeof response === 'object') {
-            return {error:false,res:response}
+            return {error:false,res: await userRepository.currentDTO(response)}
         }else {
             return {error:true,res:response}
         }
     } catch (err) {
         const error = `user.addCart service error: ${err.message}`;
+        return {error:true,res:error};
+    }
+}
+
+export const current = async (user) => {
+    try {
+        const userDTO = await userRepository.currentDTO(user)
+        return userDTO
+    } catch (err) {
+        const error = `user.currentDTO service error: ${err.message}`;
         return {error:true,res:error};
     }
 }

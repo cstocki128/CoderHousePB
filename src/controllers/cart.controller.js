@@ -26,9 +26,12 @@ export const addProduct= async(req, res, next) => {
     try{
         const cid = req.params.cid
         const pid = req.params.pid
-        const response = await service.addProduct(cid,pid);
-        if (!response.error) res.status(200).json({result:response.res})
-        else res.status(400).json({error:response.res})
+        if (!req.user.cart) return res.status(403).json({error:'Unauthorized cart'})
+        if (req.user.cart._id == cid) {
+            const response = await service.addProduct(cid,pid);
+            if (!response.error) res.status(200).json({result:response.res})
+            else res.status(400).json({error:response.res})
+        }else res.status(403).json({error:'Unauthorized cart'})
     }catch(err){
         next(err);
     }

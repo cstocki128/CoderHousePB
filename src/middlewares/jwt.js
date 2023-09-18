@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
+import config from '../config.js'
 
-export const PRIVATE_KEY = '1234'
+export const PRIVATE_KEY = config.privateKey
 
 export const generateToken = (user) => {
   const payload = {
@@ -9,7 +10,10 @@ export const generateToken = (user) => {
     last_name: user.last_name,
     email: user.email,
     role: user.role,
-    cart: user.cart
+    cart: user.cart,
+    age: user.age,
+    password: user.password,
+    isGithub: user.isGithub
   };
 
   const token = jwt.sign(payload, PRIVATE_KEY, {

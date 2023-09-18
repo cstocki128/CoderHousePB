@@ -1,12 +1,9 @@
-import __dirname from '../utils.js';
-//import ProductDaoFS from '../daos/filesystem/product.dao.js';
-import ProductDaoMongoDb from '../daos/mongodb/product.dao.js';
-//const prodDao = new ProductDaoFS(__dirname+"/files/products.json");
-const prodDao = new ProductDaoMongoDb();
+import ProductRepository from "../persistence/repository/product/product.repository.js"
+const productRepository = new ProductRepository();
 
 export const getAll = async(limit, page, sort, categoryF, statusF) => {
     try {
-        const response =  await prodDao.getProducts(limit, page, sort, categoryF, statusF)
+        const response =  await productRepository.dao.getProducts(limit, page, sort, categoryF, statusF)
         return {error:false, res:response}
     } catch (err) {
         const error = `product.getAll service error: ${err.message}`;
@@ -16,7 +13,7 @@ export const getAll = async(limit, page, sort, categoryF, statusF) => {
 
 export const getById = async(id) => {
     try {
-        const response = await prodDao.getProductById(id)
+        const response = await productRepository.dao.getProductById(id)
         if ( typeof response === 'object') {
             return {error:false,res:response}
         }else {
@@ -30,7 +27,7 @@ export const getById = async(id) => {
 
 export const create = async(prod) => {
     try {
-        const response = await prodDao.addProduct(prod)
+        const response = await productRepository.dao.addProduct(prod)
         if (response === null) {
             return {error:false, res:'Product added successfully'}
         }else if(typeof response === 'object'){
@@ -46,7 +43,7 @@ export const create = async(prod) => {
 
 export const update = async(id,prod) => {
     try {
-        const response = await prodDao.updateProduct(id,prod)
+        const response = await productRepository.dao.updateProduct(id,prod)
         if (response === null) {
             return {error:false, res:`Product ${id} updated successfully`}
         }else if(typeof response === 'object'){
@@ -62,7 +59,7 @@ export const update = async(id,prod) => {
 
 export const remove = async(id) => {
     try {
-        const response = await prodDao.deleteProduct(id)
+        const response = await productRepository.dao.deleteProduct(id)
         if (response === null) {
             return {error:false, res:`Product ${id} removed successfully`}
         }else if(typeof response === 'object'){

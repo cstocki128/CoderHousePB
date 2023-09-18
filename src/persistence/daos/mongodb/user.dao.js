@@ -1,6 +1,6 @@
-import config from '../../config.js';
+import config from '../../../config.js';
 import { UserModel } from "./models/user.model.js";
-import {createHash, isValidPassword} from '../../utils.js'
+import {createHash, isValidPassword} from '../../../utils.js'
 import {CartModel} from "./models/cart.model.js";
 
 export default class UserDaoMongoDb {

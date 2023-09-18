@@ -1,13 +1,14 @@
 import {Router} from 'express';
 import * as controller from "../controllers/product.controller.js"
+import validateAdmin from "../middlewares/validateAdmin.js"
 import passport from 'passport'
 const productsRouter = Router();
 
 productsRouter.get('/',passport.authenticate('jwt-header',{session:false}), controller.getAll);
 productsRouter.get('/:pid',passport.authenticate('jwt-header',{session:false}), controller.getById);
-productsRouter.post('/',passport.authenticate('jwt-header',{session:false}), controller.create);
-productsRouter.put('/:pid',passport.authenticate('jwt-header',{session:false}), controller.update);
-productsRouter.delete('/:pid',passport.authenticate('jwt-header',{session:false}), controller.remove);
+productsRouter.post('/',passport.authenticate('jwt-header',{session:false}),validateAdmin, controller.create);
+productsRouter.put('/:pid',passport.authenticate('jwt-header',{session:false}),validateAdmin, controller.update);
+productsRouter.delete('/:pid',passport.authenticate('jwt-header',{session:false}),validateAdmin, controller.remove);
 
 export default productsRouter;
 
