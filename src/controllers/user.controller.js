@@ -41,7 +41,6 @@ export const login = async(req, res, next) => {
     if (response.error) res.redirect('/error-login')
     else{
         const accessToken = generateToken(response.res)
-        console.log('access token: ',accessToken);
         res
             .cookie('token', accessToken, {httpOnly: true})
             .redirect('/products');
@@ -71,7 +70,7 @@ export const addCart = async(req, res) => {
 };
 
 export const current = async(req, res) => {
-    if (req.user) res.json(req.user);
+    if (req.user) { res.json(await service.current(req.user)) }
     else res.status(404).send({error: 'Not logged in'});  
 };
 

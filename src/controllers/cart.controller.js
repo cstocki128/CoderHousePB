@@ -26,9 +26,12 @@ export const addProduct= async(req, res, next) => {
     try{
         const cid = req.params.cid
         const pid = req.params.pid
-        const response = await service.addProduct(cid,pid);
-        if (!response.error) res.status(200).json({result:response.res})
-        else res.status(400).json({error:response.res})
+        if (!req.user.cart) return res.status(403).json({error:'Unauthorized cart'})
+        if (req.user.cart._id == cid) {
+            const response = await service.addProduct(cid,pid);
+            if (!response.error) res.status(200).json({result:response.res})
+            else res.status(400).json({error:response.res})
+        }else res.status(403).json({error:'Unauthorized cart'})
     }catch(err){
         next(err);
     }
@@ -81,6 +84,44 @@ export const deleteProducts= async(req, res, next) => {
         const response = await service.deleteProducts(cid);
         if (!response.error) res.status(200).json({result:response.res})
         else res.status(400).json({error:response.res})
+    }catch(err){
+        next(err);
+    }
+};
+
+export const purchase = async(req, res, next) => {
+    try{
+        const cid = req.params.cid
+        const email = req.user.email
+        const userCid = req.user.cart
+        if (userCid){
+            if (userCid !== cid) {
+                const response = await service.purchase(cid,email);
+                if (!response.error) {
+                    const ticket = response.res
+                    //Envia email de aviso
+                    const body ={
+                        email: req.user.email,
+                        subject: 'Successful purchase!',
+                        title: 'Here is yout ticket',
+                        message: `- Code: ${ticket.code} <br> 
+                        - Total: ${ticket.amount} <br>  
+                        - Date: ${ticket.purchase_datetime.toDateString()}`
+                    }
+                    await fetch('http://localhost:8080/mail/send', {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json;charset=utf-8'
+                        },
+                        body: JSON.stringify(body)
+                    });
+                    res.status(200).json({result:response.res})
+                }
+                else res.status(400).json({error:response.res})
+            }else res.status(400).json({error:`cart id ${cid} is not user's cart`})
+        }
+        else res.status(400).json({error:"User does not have a cart, please add one before purchase"})
     }catch(err){
         next(err);
     }

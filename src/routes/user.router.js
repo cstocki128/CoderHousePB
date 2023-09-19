@@ -7,7 +7,7 @@ const userRouter = Router();
 //userRouter.post('/register',passport.authenticate('register',{ failureRedirect: '/error-register' }), register);
 userRouter.post('/login', login);
 userRouter.post('/register',register);
-userRouter.post('/addCart',addCart);
+userRouter.post('/addCart',passport.authenticate('jwt-header',{session:false}),addCart);
 userRouter.get('/logout', logout);
 userRouter.post('/authenticate', authenticate);
 userRouter.get('/current',passport.authenticate('jwt-header',{session:false}), current);

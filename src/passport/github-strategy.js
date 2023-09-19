@@ -1,21 +1,22 @@
 import passport from 'passport';
 import GitHubStrategy from 'passport-github2';
-import UserDaoMongoDb from '../daos/mongodb/user.dao.js';
-const UserDao = new UserDaoMongoDb();
+import config from '../config.js';
+import UserRepository from '../persistence/repository/user/user.repository.js';
+const userRepository = new UserRepository();
 
 const strategyOptions = {
-    clientID: 'Iv1.d6d030eaf23fa1b1',
-    clientSecret: 'cfaba61e3fadb619800f2264af0e42584547b36e',
-    callbackURL: 'http://localhost:8080/profile-github'
+    clientID: config.clientId_Github,
+    clientSecret: config.clientSecret_Github,
+    callbackURL: config.callbackUrl_Github
 }
   
 
 const registerOrLogin = async(accessToken,refreshToken,profile, done) => {
     try {
         const email = profile._json.email ?? profile._json.login;
-        const user = await UserDao.loginUser({email, password: ''});
+        const user = await userRepository.dao.loginUser({email, password: ''});
         if (typeof user === 'object') return done(null, user);
-        const newUser = await UserDao.registerUser({
+        const newUser = await userRepository.dao.registerUser({
             first_name: profile._json.name.split(' ')[0],
             last_name: profile._json.name.split(' ')[1] ?? profile._json.name.split(' ')[2],
             email,
@@ -37,6 +38,6 @@ passport.serializeUser((user, done) => {
     done(null,user._id);
 });
 passport.deserializeUser(async(id, done) => {
-    const user = await UserDao.getByid(id);
+    const user = await userRepository.dao.getByid(id);
     return done(null,user);
 });

@@ -2,19 +2,17 @@ import productsRouter from './routes/products.router.js';
 import cartsRouter from './routes/carts.router.js';
 import viewsRouter from './routes/views.router.js';
 import userRouter from './routes/user.router.js';
+import mailingRouter from './routes/mailing.router.js';
 import handlebars from 'express-handlebars';
 import {errorHandler} from './middlewares/errorHandler.js';
 import {Server} from 'socket.io';
 import express from 'express';
-import './daos/mongodb/connection.js'
 import __dirname from './utils.js';
-import { PRIVATE_KEY } from './middlewares/jwt.js';
 import { getAll } from "./services/product.services.js";
 import * as MsgService from "./services/message.services.js";
 import cookieParser from 'cookie-parser';
-import session from 'express-session';
-import MongoStore from 'connect-mongo';
-import connectionString from './daos/mongodb/connection.js'
+// import session from 'express-session';
+// import MongoStore from 'connect-mongo';
 import passport from 'passport';
 // import './passport/local-strategy.js';
 import './passport/github-strategy.js';
@@ -46,8 +44,10 @@ app.use(cookieParser());
 app.use(passport.initialize());
 // app.use(passport.session());
 
+console.log('Process arguments received: ',process.argv.slice(2));
 //http Server
 const httpServer = app.listen(config.port, () => {console.log(`Listening on PORT ${config.port}`)});
+
 
 //socket Server
 const io = new Server(httpServer); //Se crea el servidor websocket
@@ -132,6 +132,8 @@ app.use('/api/carts/',cartsRouter);
 app.use('/api/users/',userRouter);
 //views
 app.use('/',viewsRouter);
+//mailing
+app.use('/mail',mailingRouter);
 
 
 
