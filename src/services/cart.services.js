@@ -118,7 +118,8 @@ export const purchase = async(cid,email) => {
         if (response === null){
             return {error:false, res:`Cart ${cid} purchased successfully`}
         }else if(typeof response === 'object'){
-            return {error:false, res:response}
+            if (response.code) return {error:false, res:response}
+            else return {error:true, res:response}
         }else {
             return {error:true, res:response}
         }  

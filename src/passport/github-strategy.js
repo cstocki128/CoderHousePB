@@ -14,9 +14,9 @@ const strategyOptions = {
 const registerOrLogin = async(accessToken,refreshToken,profile, done) => {
     try {
         const email = profile._json.email ?? profile._json.login;
-        const user = await userRepository.loginUser({email, password: ''});
+        const user = await userRepository.dao.loginUser({email, password: ''});
         if (typeof user === 'object') return done(null, user);
-        const newUser = await userRepository.registerUser({
+        const newUser = await userRepository.dao.registerUser({
             first_name: profile._json.name.split(' ')[0],
             last_name: profile._json.name.split(' ')[1] ?? profile._json.name.split(' ')[2],
             email,
@@ -38,6 +38,6 @@ passport.serializeUser((user, done) => {
     done(null,user._id);
 });
 passport.deserializeUser(async(id, done) => {
-    const user = await userRepository.getByid(id);
+    const user = await userRepository.dao.getByid(id);
     return done(null,user);
 });

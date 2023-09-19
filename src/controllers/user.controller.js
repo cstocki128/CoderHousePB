@@ -41,7 +41,6 @@ export const login = async(req, res, next) => {
     if (response.error) res.redirect('/error-login')
     else{
         const accessToken = generateToken(response.res)
-        console.log('access token: ',accessToken);
         res
             .cookie('token', accessToken, {httpOnly: true})
             .redirect('/products');

@@ -97,7 +97,27 @@ export const purchase = async(req, res, next) => {
         if (userCid){
             if (userCid !== cid) {
                 const response = await service.purchase(cid,email);
-                if (!response.error) res.status(200).json({result:response.res})
+                if (!response.error) {
+                    const ticket = response.res
+                    //Envia email de aviso
+                    const body ={
+                        email: req.user.email,
+                        subject: 'Successful purchase!',
+                        title: 'Here is yout ticket',
+                        message: `- Code: ${ticket.code} <br> 
+                        - Total: ${ticket.amount} <br>  
+                        - Date: ${ticket.purchase_datetime.toDateString()}`
+                    }
+                    await fetch('http://localhost:8080/mail/send', {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json;charset=utf-8'
+                        },
+                        body: JSON.stringify(body)
+                    });
+                    res.status(200).json({result:response.res})
+                }
                 else res.status(400).json({error:response.res})
             }else res.status(400).json({error:`cart id ${cid} is not user's cart`})
         }

@@ -2,6 +2,7 @@ import productsRouter from './routes/products.router.js';
 import cartsRouter from './routes/carts.router.js';
 import viewsRouter from './routes/views.router.js';
 import userRouter from './routes/user.router.js';
+import mailingRouter from './routes/mailing.router.js';
 import handlebars from 'express-handlebars';
 import {errorHandler} from './middlewares/errorHandler.js';
 import {Server} from 'socket.io';
@@ -131,6 +132,8 @@ app.use('/api/carts/',cartsRouter);
 app.use('/api/users/',userRouter);
 //views
 app.use('/',viewsRouter);
+//mailing
+app.use('/mail',mailingRouter);
 
 
 
