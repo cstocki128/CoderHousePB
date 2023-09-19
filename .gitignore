@@ -2,3 +2,5 @@
 node_modules/
 # Variables de entono
 .env
+.env.development
+.env.production
