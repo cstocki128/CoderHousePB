@@ -5,6 +5,9 @@
   - `npm start`: iniciar con node
   - `npm run dev`: Iniciar con nodemon
 
+  * Al usar npm start se usa .env.production, al usar npm run dev se usa .npm.development
+  * Se puede elegir la persistencia enviando como parametro 'MONGO' o 'FILE' en el comando de inicio (ej: npm start MONGO, en caso de no enviar parametro, por defecto se usa MONGO)
+    ** Se aclara que DAO de FileSystem no esta actualizado y puede no funcionar correctamente.
 ## Vistas
 
 - [localhost:8080/login](http://localhost:8080/login): Login
@@ -25,12 +28,13 @@
 
 - `GET /api/products`: Retorna todos los productos paginados. Recibe parámetros opcionales: `limit`, `page`, `sort`, `category` y `status`
 - `GET /api/products/:id`: Retorna el producto por id.
-- `POST /api/products`: Crea un producto nuevo.
-- `PUT /api/products/:id`: Edita el producto. 
-- `DELETE /api/products/:id`: Elimina el producto enviado.
+- `POST /api/products`: Crea un producto nuevo. `Solo user admin`
+- `PUT /api/products/:id`: Edita el producto. `Solo user admin`
+- `DELETE /api/products/:id`: Elimina el producto enviado. `Solo user admin`
 
 ### Cart
 
+- `POST /api/carts/:id/purchase`: Realiza la compra del carrito. 
 - `GET /api/carts`: Retorna todos los carts.
 - `GET /api/carts/:id`: Retorna el cart por id.
 - `POST /api/carts`: Crea un cart nuevo. Con o sin productos
