@@ -5,9 +5,9 @@
   - `npm start`: iniciar con node
   - `npm run dev`: Iniciar con nodemon
 
-  * Al usar npm start se usa .env.production, al usar npm run dev se usa .npm.development
+  * Al usar npm start se usa ".env.production", al usar npm run dev se usa ".npm.development"
   * Se puede elegir la persistencia enviando como parametro 'MONGO' o 'FILE' en el comando de inicio (ej: npm start MONGO, en caso de no enviar parametro, por defecto se usa MONGO)
-    ** Se aclara que DAO de FileSystem no esta actualizado y puede no funcionar correctamente.
+    *  Se aclara que DAO de FileSystem no esta actualizado y puede no funcionar correctamente.
 ## Vistas
 
 - [localhost:8080/login](http://localhost:8080/login): Login
