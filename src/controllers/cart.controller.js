@@ -95,7 +95,7 @@ export const purchase = async(req, res, next) => {
         const email = req.user.email
         const userCid = req.user.cart
         if (userCid){
-            if (userCid !== cid) {
+            if (userCid.id == cid) {
                 const response = await service.purchase(cid,email);
                 if (!response.error) {
                     const ticket = response.res
