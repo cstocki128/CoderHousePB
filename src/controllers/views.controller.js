@@ -13,7 +13,7 @@ export const register = async(req, res, next) => {
 
 export const errorRegister = async(req, res, next) => {
     try {
-        res.render('errorRegister')
+        res.render('errorRegister',{})
     } catch (error) {
         next(error);
     }
