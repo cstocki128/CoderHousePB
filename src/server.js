@@ -18,6 +18,7 @@ import passport from 'passport';
 import './passport/github-strategy.js';
 import "./passport/jwt-strategy.js";
 import config from './config.js';
+import compression from 'express-compression';
 
 //Express
 const app = express();
@@ -27,6 +28,9 @@ app.use(express.urlencoded({extended: true}));
 //Middlewares
 app.use(errorHandler);
 app.use(cookieParser());
+app.use(compression({
+    brotli: {enabled: true, zlib:{}}
+}))
 
 //Session mongoDb
 // const mongoStoreOptions = {

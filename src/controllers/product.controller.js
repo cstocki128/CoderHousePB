@@ -71,3 +71,14 @@ export const remove = async(req, res, next) => {
         next(err);
     }
 };
+
+export const mockingProducts = async(req, res, next) => {
+    try{
+        const quantity = parseInt(req.query.quantity);
+        const response = await service.mockingProducts(quantity);
+        if (!response.error) res.status(200).json({result:response.res})
+        else res.status(400).json({error:response.res})
+    }catch(err){
+        next(err);
+    }
+};

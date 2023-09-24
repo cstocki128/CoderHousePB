@@ -6,6 +6,7 @@ const productsRouter = Router();
 
 productsRouter.get('/',passport.authenticate('jwt-header',{session:false}), controller.getAll);
 productsRouter.get('/:pid',passport.authenticate('jwt-header',{session:false}), controller.getById);
+productsRouter.get('/mocks/mockingProducts',passport.authenticate('jwt-header',{session:false}), controller.mockingProducts);
 productsRouter.post('/',passport.authenticate('jwt-header',{session:false}),validateAdmin, controller.create);
 productsRouter.put('/:pid',passport.authenticate('jwt-header',{session:false}),validateAdmin, controller.update);
 productsRouter.delete('/:pid',passport.authenticate('jwt-header',{session:false}),validateAdmin, controller.remove);
