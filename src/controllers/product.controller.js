@@ -1,5 +1,8 @@
 import * as service from "../services/product.services.js";
-
+import { HttpResponse } from "../utils/http.response.js";
+const httpResponse = new HttpResponse(); 
+import errorsDic from '../utils/errors.dictionary.js'
+import generateProductErrorInfo from '../utils/info.js'
 
 export const getAll = async(req, res, next) => {
     try{
@@ -53,9 +56,13 @@ export const update = async(req, res, next) => {
 export const create = async(req, res, next) => {
     try{
         const prod = req.body
+        if (!prod.code||!prod.title||!prod.description||!prod.price||!prod.stock||!prod.status||!prod.category){
+            console.log(generateProductErrorInfo(prod))
+            return httpResponse.ServerError(res,errorsDic.PARAM_ERROR)
+        }
         const response = await service.create(prod);
-        if (!response.error) res.status(200).json({result:response.res})
-        else res.status(400).json({error:response.res})
+        if (!response.error) httpResponse.Ok(res,response.res) 
+        else httpResponse.ServerError(res,response.res)
     }catch(err){
         next(err);
     }

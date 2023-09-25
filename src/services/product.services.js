@@ -7,8 +7,7 @@ export const getAll = async(limit, page, sort, categoryF, statusF) => {
         const response =  await productRepository.dao.getProducts(limit, page, sort, categoryF, statusF)
         return {error:false, res:response}
     } catch (err) {
-        const error = `product.getAll service error: ${err.message}`;
-        return {error:true, res:error};
+        throw new Error(`product.getAll service error: ${err.message}`);
     }
 }
 
@@ -21,8 +20,7 @@ export const getById = async(id) => {
             return {error:true,res:response}
         }
     } catch (err) {
-        const error = `product.getById service error: ${err.message}`;
-        return {error:true,res:error};
+        throw new Error(`product.getById service error: ${err.message}`);
     }
 }
 
@@ -37,8 +35,7 @@ export const create = async(prod) => {
             return {error:true, res:response}
         }
     } catch (err) {
-        const error = `product.create service error: ${err.message}`;
-        return {error:true, res:error};
+        throw new Error(`product.create service error: ${err.message}`);
     }
 }
 
@@ -53,8 +50,7 @@ export const update = async(id,prod) => {
             return {error:true, res:response}
         }
     } catch (err) {
-        const error = `product.update service error: ${err.message}`;
-        return {error:true, res:error};
+        throw new Error(`product.update service error: ${err.message}`);
     }
 }
 
@@ -69,8 +65,7 @@ export const remove = async(id) => {
             return {error:true, res:response}
         }
     } catch (err) {
-        const error = `product.remove service error: ${err.message}`;
-        return {error:true, res:error};
+        throw new Error(`product.remove service error: ${err.message}`);
     }
 }
 
@@ -84,7 +79,6 @@ export const mockingProducts = async(quantity) => {
             return {error:false, res:response};
         }
     } catch (err) {
-        const error = `product.remove service error: ${err.message}`;
-        return {error:true, res:error};
+        throw new Error(`product.mockingProducts service error: ${err.message}`);
     }
 }

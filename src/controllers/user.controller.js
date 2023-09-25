@@ -1,6 +1,7 @@
 import * as service from "../services/user.services.js";
 import { generateToken } from "../middlewares/jwt.js"
 
+
 // export const register = async(req, res, next) => {
 //     try {
 //         if(req.session.passport.user) res.redirect('/login');
@@ -74,11 +75,17 @@ export const current = async(req, res) => {
     else res.status(404).send({error: 'Not logged in'});  
 };
 
-export const authenticate = async(req, res) => {
-    const {email, password} = req.body
-    if (!email || !password) res.status(400).send({error: 'Invalid email or password'}); 
-    const response = await service.login(req.body);
-    if (response.error) res.status(404).send({error: response.res});
-    const accessToken = generateToken(response.res)
-    res.json({token:accessToken});
+export const authenticate = async(req, res, next) => {
+   try {
+        const {email, password} = req.body
+        if (!email || !password) return res.status(400).send({error: 'Invalid email or password'}); 
+        const response = await service.login(req.body);
+        if (response.error) return res.status(404).send({error: response.res});
+        const accessToken = generateToken(response.res)
+        res.json({token:accessToken});
+   } catch (error) {
+        next(error) 
+   }
+        
+
 };
