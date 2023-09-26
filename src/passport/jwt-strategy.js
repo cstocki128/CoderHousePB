@@ -4,9 +4,11 @@ import * as service from "../services/user.services.js";
 import { PRIVATE_KEY } from '../middlewares/jwt.js';
 import UserRepository from '../persistence/repository/user/user.repository.js';
 const userRepository = new UserRepository();
+import { HttpResponse } from "../utils/http.response.js";
+const httpResponse = new HttpResponse(); 
 
 const strategyOptionsHeaders = {
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken({failmessage: 'missing token'}),
     secretOrKey: PRIVATE_KEY
 };
 

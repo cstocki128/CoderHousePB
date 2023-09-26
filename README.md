@@ -21,13 +21,14 @@
 ### Users
 
 - `GET /api/users/authenticate`: Genera y retorna token JWT. Debe recibir Form-encode `{email, password}`
-- `POST /api/users/current`: Retorna datos de usuario/sesión. Requiere Bearer Auth.
+- `POST /api/users/current`: Retorna datos de usuario/sesión.
 - `POST /api/users/addCart`: Agrega cart al usuario. Debe recibir Form-encode `{email, cid}`
 
 ### Products
 
 - `GET /api/products`: Retorna todos los productos paginados. Recibe parámetros opcionales: `limit`, `page`, `sort`, `category` y `status`
 - `GET /api/products/:id`: Retorna el producto por id.
+- `GET /api/products/mocks/mockingProducts`: Retorna mocks de productos. Por defecto devuelve 100. Parametros opcionales: `quantity`
 - `POST /api/products`: Crea un producto nuevo. `Solo user admin`
 - `PUT /api/products/:id`: Edita el producto. `Solo user admin`
 - `DELETE /api/products/:id`: Elimina el producto enviado. `Solo user admin`
