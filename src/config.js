@@ -1,6 +1,5 @@
 import dotenv from 'dotenv';
 const environment = process.argv.slice(2).at(0);
-environment === 'dev' ? console.log('Using .env.development') : console.log('Using .env.production');
 const persistence = process.argv.slice(2).at(1) ?? 'MONGO';
 
 dotenv.config({
@@ -8,6 +7,7 @@ dotenv.config({
 }); //Carga las variables presentes en el archivo
 
 export default {
+    env: environment,
     port: process.env.PORT,
     mongoUrl: process.env.MONGO_URL,
     adminEmail: process.env.ADMIN_EMAIL,

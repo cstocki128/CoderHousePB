@@ -86,6 +86,14 @@ export const authenticate = async(req, res, next) => {
    } catch (error) {
         next(error) 
    }
-        
+};
 
+export const loggerTest = async(req, res, next) => {
+    try {
+        response = await service.loggerTest()
+        if(response.error) res.status(400).json({error: response.res})
+        else res.json({result:response.res})
+    } catch (error) {
+        next(error) 
+    }
 };

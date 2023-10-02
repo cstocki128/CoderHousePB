@@ -80,3 +80,12 @@ export const current = async (user) => {
         return {error:true,res:error};
     }
 }
+
+export const loggerTest = async () => {
+    try {
+        ///
+    } catch (err) {
+        const error = `user.loggerTest service error: ${err.message}`;
+        return {error:true,res:error};
+    }
+}

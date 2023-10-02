@@ -19,6 +19,7 @@ import './passport/github-strategy.js';
 import "./passport/jwt-strategy.js";
 import config from './config.js';
 import compression from 'express-compression'
+import { logger } from './utils/logger.js'
 
 //Express
 const app = express();
@@ -48,10 +49,10 @@ app.use(compression({
 app.use(passport.initialize());
 // app.use(passport.session());
 
-console.log('Process arguments received: ',process.argv.slice(2));
+logger.debug('Process arguments received: ',process.argv.slice(2));
+config.env == 'dev' ? logger.debug('Using .env.development') : logger.debug('Using .env.production');
 //http Server
-const httpServer = app.listen(config.port, () => {console.log(`Listening on PORT ${config.port}`)});
-
+const httpServer = app.listen(config.port, () => {logger.info(`Listening on PORT ${config.port}`)});
 
 //socket Server
 const io = new Server(httpServer); //Se crea el servidor websocket
@@ -59,17 +60,17 @@ const io = new Server(httpServer); //Se crea el servidor websocket
 
 io.on('connection', async(socket) => { // conexion de websocket
 
-    console.log('Connection established id:',socket.id);
+    logger.debug('Connection established id:',socket.id);
 
     socket.on('disconnect', () =>{
-        console.log(socket.id, 'disconnect from server');
+        logger.debug(socket.id, 'disconnect from server');
     })
     
     //Chat
     const response =  await MsgService.getAll()
     io.emit('messages', response.res);
     socket.on('newUser', (user)=>{
-        console.log(`>${user} has logged in`);
+        logger.debug(`>${user} has logged in`);
     })
     socket.on('chat:message', async(msg) =>{
         await MsgService.create(msg)
@@ -118,7 +119,7 @@ io.on('connection', async(socket) => { // conexion de websocket
             }
             //io.emit('arrayProducts',products);
         }catch(err){
-            console.log(err);
+            logger.debug(err);
         }
     })
 })
