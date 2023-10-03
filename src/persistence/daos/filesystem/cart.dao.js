@@ -11,11 +11,9 @@ class CartManager {
                 if (fs.existsSync(path)) {
                     return JSON.parse(fs.readFileSync(path, 'utf8'))
                 }else{
-                    //console.log(`Could not find the specified path: ${path}`)
                     return []
                 }
             }catch(err) {
-                console.log("getCartFile Error: ",err)
                 return []
             }
         }
@@ -29,7 +27,6 @@ class CartManager {
             let cartJson = JSON.stringify(cart);
             await fs.promises.writeFile(this._path, cartJson);
         }catch(err) {
-            console.log("addCartFile Error: ",err);
         }
     }
 
@@ -50,7 +47,6 @@ class CartManager {
         
         try{
             const products = productsList.products;
-            console.log(products)
             const productsError = () => {
                 return  products.some((product) => (product.id == undefined || product.id == 0 || product.quantity == undefined || !productList.some(productL => productL.id == product.id)))
             }
@@ -73,12 +69,10 @@ class CartManager {
                 await this.#_addCartFile(carts);
                 return null;
             }else {
-                console.log("addCart Error");
                 return "Products information is incomplete or incorrect.";
             }
 
         }catch(err){
-            console.log("addCart Error: ",err);
             return err;
         }
     }
@@ -122,7 +116,6 @@ class CartManager {
                 return "Product ID not found."
             }
         }catch(err){
-            console.log("addProductToCart Error: ",err);
             return err; 
         }
     }

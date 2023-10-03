@@ -1,7 +1,10 @@
 import * as service from "../services/cart.services.js";
+import {logger} from "../utils/logger.js"
+
 
 export const getById = async(req, res, next) => {
     try{
+        logger.http('Cart.getById executed')
         const id = req.params.cid
         const response = await service.getById(id);
         if (!response.error) res.status(200).json({result:response.res})
@@ -13,6 +16,7 @@ export const getById = async(req, res, next) => {
 
 export const create = async(req, res, next) => {
     try{
+        logger.http('Cart.create executed')
         const cart = req.body
         const response = await service.create(cart);
         if (!response.error) res.status(200).json({result:response.res})
@@ -24,6 +28,7 @@ export const create = async(req, res, next) => {
 
 export const addProduct= async(req, res, next) => {
     try{
+        logger.http('Cart.addProduct executed')
         const cid = req.params.cid
         const pid = req.params.pid
         if (!req.user.cart) return res.status(403).json({error:'Unauthorized cart'})
@@ -39,6 +44,7 @@ export const addProduct= async(req, res, next) => {
 
 export const updProducts= async(req, res, next) => { 
     try{
+        logger.http('Cart.updProducts executed')
         const cid = req.params.cid
         const products = req.body
         const response = await service.updProducts(cid, products);
@@ -51,6 +57,7 @@ export const updProducts= async(req, res, next) => {
 
 export const updProduct= async(req, res, next) => {
     try{
+        logger.http('Cart.updProduct executed')
         const cid = req.params.cid
         const pid = req.params.pid
         const quantity = Number(req.body.quantity)
@@ -68,6 +75,7 @@ export const updProduct= async(req, res, next) => {
 
 export const deleteProduct= async(req, res, next) => {
     try{
+        logger.http('Cart.deleteProduct executed')
         const cid = req.params.cid
         const pid = req.params.pid
         const response = await service.deleteProduct(cid, pid);
@@ -80,6 +88,7 @@ export const deleteProduct= async(req, res, next) => {
 
 export const deleteProducts= async(req, res, next) => {
     try{
+        logger.http('Cart.deleteProducts executed')
         let cid = req.params.cid
         const response = await service.deleteProducts(cid);
         if (!response.error) res.status(200).json({result:response.res})
@@ -91,6 +100,7 @@ export const deleteProducts= async(req, res, next) => {
 
 export const purchase = async(req, res, next) => {
     try{
+        logger.http('Cart.purchase executed')
         const cid = req.params.cid
         const email = req.user.email
         const userCid = req.user.cart

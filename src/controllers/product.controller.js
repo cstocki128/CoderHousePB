@@ -3,9 +3,11 @@ import { HttpResponse } from "../utils/http.response.js";
 const httpResponse = new HttpResponse(); 
 import errorsDic from '../utils/errors.dictionary.js'
 import generateProductErrorInfo from '../utils/info.js'
+import {logger} from "../utils/logger.js"
 
 export const getAll = async(req, res, next) => {
     try{
+        logger.http('product.getAll executed')
         const limit = parseInt(req.query.limit)
         const page = parseInt(req.query.page ?? 1) 
         const categoryF = req.query.category
@@ -32,6 +34,7 @@ export const getAll = async(req, res, next) => {
 
 export const getById = async(req, res, next) => {
     try{
+        logger.http('product.getAll executed')
         const id = req.params.pid
         const response = await service.getById(id);
         if (!response.error) res.status(200).json({result:response.res})
@@ -43,6 +46,7 @@ export const getById = async(req, res, next) => {
 
 export const update = async(req, res, next) => {
     try{
+        logger.http('product.update executed')
         const id = req.params.pid
         const prod = req.body
         const response = await service.update(id,prod);
@@ -55,9 +59,10 @@ export const update = async(req, res, next) => {
 
 export const create = async(req, res, next) => {
     try{
+        logger.http('product.create executed')
         const prod = req.body
         if (!prod.code||!prod.title||!prod.description||!prod.price||!prod.stock||!prod.status||!prod.category){
-            console.log(generateProductErrorInfo(prod))
+            logger.error(generateProductErrorInfo(prod))
             return httpResponse.ServerError(res,errorsDic.PARAM_ERROR)
         }
         const response = await service.create(prod);
@@ -70,6 +75,7 @@ export const create = async(req, res, next) => {
 
 export const remove = async(req, res, next) => {
     try{
+        logger.http('product.remove executed')
         const id = req.params.pid
         const response = await service.remove(id);
         if (!response.error) res.status(200).json({result:response.res})
@@ -81,6 +87,7 @@ export const remove = async(req, res, next) => {
 
 export const mockingProducts = async(req, res, next) => {
     try{
+        logger.http('product.mockingProducts executed')
         const quantity = parseInt(req.query.quantity);
         const response = await service.mockingProducts(quantity);
         if (!response.error) res.status(200).json({result:response.res})

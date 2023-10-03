@@ -1,0 +1,8 @@
+{"level":"error", "timestamp": "2023-10-02 20:44:32", "message": "LOGGER "ERROR" TEST"}
+{"level":"fatal", "timestamp": "2023-10-02 20:44:32", "message": "LOGGER "FATAL" TEST"}
+{"level":"error", "timestamp": "2023-10-02 23:37:52", "message": "LOGGER "ERROR" TEST"}
+{"level":"fatal", "timestamp": "2023-10-02 23:37:52", "message": "LOGGER "FATAL" TEST"}
+{"level":"error", "timestamp": "2023-10-02 23:41:31", "message": "validateAdmin - Forbidden"}
+{"level":"error", "timestamp": "2023-10-02 23:43:53", "message": "LOGGER "ERROR" TEST"}
+{"level":"fatal", "timestamp": "2023-10-02 23:43:53", "message": "LOGGER "FATAL" TEST"}
+{"level":"error", "timestamp": "2023-10-02 23:44:46", "message": "validateAdmin - Forbidden"}

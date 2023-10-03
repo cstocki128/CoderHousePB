@@ -1,10 +1,12 @@
 import { getAll } from "../services/product.services.js";
 import { create,getById } from "../services/cart.services.js";
 import { generateToken } from "../middlewares/jwt.js"
+import {logger} from "../utils/logger.js"
 
 
 export const register = async(req, res, next) => {
     try {
+        logger.http('views.register executed')
         res.render('register')
     } catch (error) {
         next(error);
@@ -13,6 +15,7 @@ export const register = async(req, res, next) => {
 
 export const errorRegister = async(req, res, next) => {
     try {
+        logger.http('views.errorRegister executed')
         res.render('errorRegister',{})
     } catch (error) {
         next(error);
@@ -21,6 +24,7 @@ export const errorRegister = async(req, res, next) => {
 
 export const login = async(req, res, next) => {
     try {
+        logger.http('views.login executed')
         res.render('login')
     } catch (error) {
         next(error);
@@ -29,6 +33,7 @@ export const login = async(req, res, next) => {
 
 export const errorLogin = async(req, res, next) => {
     try {
+        logger.http('views.errorLogin executed')
         res.render('errorLogin')
     } catch (error) {
         next(error);
@@ -38,6 +43,7 @@ export const errorLogin = async(req, res, next) => {
 
 export const githubResponse = async (req, res, next) => {
     try {
+        logger.http('views.githubResponse executed')
     //   req.session.first_name = req.user.first_name;
     //   req.session.last_name =  req.user.last_name;
     //   req.session.role = req.user.role;
@@ -54,6 +60,7 @@ export const githubResponse = async (req, res, next) => {
 
 export const get = async(req, res, next) => {
     try{
+        logger.http('views.get executed')
         const response = await getAll()
         if (!response.error){
             let producList = response.res
@@ -71,6 +78,7 @@ export const get = async(req, res, next) => {
 
 export const getRealTimeProducts = async(req, res, next) => {
     try{
+        logger.http('views.getRealTimeProducts executed')
         res.render('realTimeProducts', {})
     }catch(err){
         next(err);
@@ -79,6 +87,7 @@ export const getRealTimeProducts = async(req, res, next) => {
 
 export const chat = async(req, res, next) => {
     try{
+        logger.http('views.chat executed')
         res.render('chat', {})
     }catch(err){
         next(err);
@@ -87,18 +96,7 @@ export const chat = async(req, res, next) => {
 
 export const products = async(req, res, next) => {
     try{
-        // let cart;
-        // let ResCookie;
-        // if (res.cookies){
-        //     console.log('res.cookies.cartId ',res.cookies.cartId)
-        //     ResCookie = await getById(res.cookies.cartId)
-        //     cart = ResCookie.res.id
-        // }else {
-        //     ResCookie = await create({});
-        //     cart = ResCookie.res.id
-        //     console.log('cart id',ResCookie.res.id)
-        // }
-        
+        logger.http('views.products executed')
         const page = req.query.page
         let limit,sort,categoryF,statusF;
         const response = await getAll(limit, page, sort, categoryF, statusF)
@@ -106,12 +104,6 @@ export const products = async(req, res, next) => {
             let producList = response.res
             const dataString = JSON.stringify(producList);
             producList = JSON.parse(dataString);
-
-            // const user = {
-            //     firstName: req.session.first_name,
-            //     lastName: req.session.last_name,
-            //     role: req.session.role
-            // }
             const user = {
                 firstName: req.user.first_name,
                 lastName: req.user.last_name,
@@ -128,6 +120,7 @@ export const products = async(req, res, next) => {
 
 export const cart = async(req, res, next) => {
     try{
+        logger.http('views.cart executed')
         const response = await getById(req.params.cid)
         if (!response.error){
             let cart = response.res

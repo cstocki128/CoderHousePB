@@ -1,8 +1,10 @@
 import * as service from "../services/mailing.services.js";
 import config from "../config.js";
+import {logger} from "../utils/logger.js"
 
 export const send = async(req, res) => {
     try {
+        logger.http('mailing.send executed')
         let result = await service.transport.sendMail({
             from: `Coder Tests ${config.user_Google}`,
             to: req.body.email,
@@ -17,6 +19,6 @@ export const send = async(req, res) => {
         });
         res.json(result);
     } catch (error) {
-        console.log(error);
+        next(err);
     }
 };

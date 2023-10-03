@@ -29,14 +29,25 @@ const logConfig = {
                 
                 winston.format.colorize({colors: customLevelsOptions.colors}),
                 winston.format.simple(),
+                winston.format.timestamp({
+                    format: 'YYYY-MM-DD HH:mm:ss',
+                }),
                 winston.format.printf(
-                    info => `[${info.level}] ${info.message}`
+                    info => `[${info.level}] - ${info.timestamp} - ${info.message}`
                 ),
             )        
         }),
         new winston.transports.File({
             filename: `./logs.log`,
-            level: 'error'
+            level: 'error',
+            format: winston.format.combine(
+                winston.format.timestamp({
+                    format: 'YYYY-MM-DD HH:mm:ss',
+                }),
+                winston.format.printf(
+                    info => `{"level":"${info.level}", "timestamp": "${info.timestamp}", "message": "${info.message}"}`
+                )
+            )        
         })
     ]
 };

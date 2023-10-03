@@ -1,82 +1,81 @@
 import * as service from "../services/user.services.js";
 import { generateToken } from "../middlewares/jwt.js"
+import {logger} from "../utils/logger.js"
 
-
-// export const register = async(req, res, next) => {
-//     try {
-//         if(req.session.passport.user) res.redirect('/login');
-//         else res.redirect('/error-register');
-//     } catch (error) {
-//         next(error);
-//     }
-// };
-
-// export const login = async(req, res, next) => {
-//     try {
-//         if (req){
-//             console.log('passport',req.session.passport.user)
-//             const user = await service.getByid(req.session.passport.user);
-//             console.log('user',user)
-//             if(!user.error){
-//                 req.session.first_name = user.res.first_name;
-//                 req.session.last_name =  user.res.last_name;
-//                 req.session.role = user.res.role;
-//                 delete req.session.password;
-//                 res.redirect('/products');
-//             }
-//             else res.redirect('/error-login');
-//         }else res.redirect('/error-login');
-//     } catch (error) {
-//         next(error);
-//     }
-// };
 
 export const register = async(req, res, next) => {
-    const response = await service.register(req.body);
-    if (response.error) res.redirect('/error-register')
-    else res.redirect('/login')
+    try {
+        logger.http('user.register executed')
+        const response = await service.register(req.body);
+        if (response.error) res.redirect('/error-register')
+        else res.redirect('/login')
+    } catch (error) {
+        next(error);
+    }
+    
 }
 
 export const login = async(req, res, next) => {
-    const response = await service.login(req.body);
-    if (response.error) res.redirect('/error-login')
-    else{
-        const accessToken = generateToken(response.res)
-        res
-            .cookie('token', accessToken, {httpOnly: true})
-            .redirect('/products');
-    };
+    try {
+        logger.http('user.login executed')
+        const response = await service.login(req.body);
+        if (response.error) res.redirect('/error-login')
+        else{
+            const accessToken = generateToken(response.res)
+            res
+                .cookie('token', accessToken, {httpOnly: true})
+                .redirect('/products');
+        };    
+    } catch (error) {
+        next(error);
+    }
+    
 
 }
  
 export const logout = async(req, res) => {
-    // req.session.destroy((err) => {
-    //     if(!err) res.redirect('/login');
-    //     else res.json({ msg: err });
-    // })
-    res 
-        .clearCookie('token')
-        .redirect('/login')
+    try {
+        logger.http('user.logout executed')
+        res 
+            .clearCookie('token')
+            .redirect('/login')
+    } catch (error) {
+        next(error);
+    }
+    
 };
 
 export const addCart = async(req, res) => {
-    const {email, cid} = req.body;
-    if (!email || !cid) res.status(400).json('Invalid email or CartId')
-    else {
-        const response = await service.addCart(email,cid);
-        if(response.error) res.status(400).json({error: response.res})
-        else res.json({result:response.res})
+    try {
+        logger.http('user.addCart executed')
+        const {email, cid} = req.body;
+        if (!email || !cid) res.status(400).json('Invalid email or CartId')
+        else {
+            const response = await service.addCart(email,cid);
+            if(response.error) res.status(400).json({error: response.res})
+            else res.json({result:response.res})
 
-    };  
+        };  
+    } catch (error) {
+        next(error);
+    }
+    
 };
 
 export const current = async(req, res) => {
-    if (req.user) { res.json(await service.current(req.user)) }
-    else res.status(404).send({error: 'Not logged in'});  
+    try {
+        logger.http('user.current executed')
+        if (req.user) { res.json(await service.current(req.user)) }
+        else res.status(404).send({error: 'Not logged in'});  
+    } catch (error) {
+        next(error);
+    }
+    
 };
 
 export const authenticate = async(req, res, next) => {
    try {
+        logger.http('user.authenticate executed')
         const {email, password} = req.body
         if (!email || !password) return res.status(400).send({error: 'Invalid email or password'}); 
         const response = await service.login(req.body);
@@ -90,8 +89,9 @@ export const authenticate = async(req, res, next) => {
 
 export const loggerTest = async(req, res, next) => {
     try {
-        response = await service.loggerTest()
-        if(response.error) res.status(400).json({error: response.res})
+        logger.http('user.loggerTest executed')
+        const response =  await service.loggerTest()
+        if(response.error) return res.status(400).json({error: response.res})
         else res.json({result:response.res})
     } catch (error) {
         next(error) 

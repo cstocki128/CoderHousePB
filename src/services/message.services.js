@@ -1,4 +1,5 @@
 import MessageRepository from "../persistence/repository/message/message.repository.js"
+import {logger} from "../utils/logger.js"
 const messageRepository = new MessageRepository();
 
 export const getAll = async() => {
@@ -17,6 +18,7 @@ export const getById = async(id) => {
         if ( typeof response === 'object') {
             return {error:false,res:response}
         }else {
+            logger.error(`message.getById ${response.res}`)
             return {error:true,res:response}
         }
     } catch (err) {
@@ -33,6 +35,7 @@ export const create = async(msg) => {
         }else if(typeof response === 'object'){
             return {error:false, res:response}
         }else{
+            logger.error(`message.create ${response.res}`)
             return {error:true, res:response}
         }
     } catch (err) {
@@ -49,6 +52,7 @@ export const update = async(id,msg) => {
         }else if(typeof response === 'object'){
             return {error:false, res:response}
         }else{
+            logger.error(`message.update ${response.res}`)
             return {error:true, res:response}
         }
     } catch (err) {
@@ -65,6 +69,7 @@ export const remove = async(id) => {
         }else if(typeof response === 'object'){
             return {error:false, res:response}
         }else{
+            logger.error(`message.remove ${response.res}`)
             return {error:true, res:response}
         }
     } catch (err) {
@@ -81,6 +86,7 @@ export const removeAll = async() => {
         }else if(typeof response === 'object'){
             return {error:false, res:response}
         }else{
+            logger.error(`message.removeAll ${response.res}`)
             return {error:true, res:response}
         }
     } catch (err) {

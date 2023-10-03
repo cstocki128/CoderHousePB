@@ -1,4 +1,5 @@
 import ProductRepository from "../persistence/repository/product/product.repository.js"
+import {logger} from "../utils/logger.js"
 import {mockProducts} from "../utils.js"
 const productRepository = new ProductRepository();
 
@@ -17,6 +18,7 @@ export const getById = async(id) => {
         if ( typeof response === 'object') {
             return {error:false,res:response}
         }else {
+            logger.error(`product.getById ${response.res}`)
             return {error:true,res:response}
         }
     } catch (err) {
@@ -32,6 +34,7 @@ export const create = async(prod) => {
         }else if(typeof response === 'object'){
             return {error:false, res:response}
         }else{
+            logger.error(`product.create ${response.res}`)
             return {error:true, res:response}
         }
     } catch (err) {
@@ -47,6 +50,7 @@ export const update = async(id,prod) => {
         }else if(typeof response === 'object'){
             return {error:false, res:response}
         }else{
+            logger.error(`product.update ${response.res}`)
             return {error:true, res:response}
         }
     } catch (err) {
@@ -62,6 +66,7 @@ export const remove = async(id) => {
         }else if(typeof response === 'object'){
             return {error:false, res:response}
         }else{
+            logger.error(`product.remove ${response.res}`)
             return {error:true, res:response}
         }
     } catch (err) {

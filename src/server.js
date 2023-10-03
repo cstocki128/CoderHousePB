@@ -49,7 +49,7 @@ app.use(compression({
 app.use(passport.initialize());
 // app.use(passport.session());
 
-logger.debug('Process arguments received: ',process.argv.slice(2));
+logger.debug(`Process arguments received: ${process.argv.slice(2)}`);
 config.env == 'dev' ? logger.debug('Using .env.development') : logger.debug('Using .env.production');
 //http Server
 const httpServer = app.listen(config.port, () => {logger.info(`Listening on PORT ${config.port}`)});

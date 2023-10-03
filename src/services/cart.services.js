@@ -1,4 +1,5 @@
 import CartRepository from "../persistence/repository/cart/cart.repository.js"
+import {logger} from "../utils/logger.js"
 const cartRepository = new CartRepository();
 
 export const getById = async(id) => {
@@ -7,6 +8,7 @@ export const getById = async(id) => {
         if (response != null){
             return {error:false, res:response};
         }else{
+            logger.error(`message.getById Cart not found'`)
             return {error:true, res:'Cart not found'}
         }
 
@@ -24,6 +26,7 @@ export const create = async(cart) => {
         }else if(typeof response === 'object'){
             return {error:false, res:response}
         }else {
+            logger.error(`cart.create ${response.res}`)
             return {error:true, res:response}
         }
     } catch (err) {
@@ -40,6 +43,7 @@ export const addProduct= async(cid,pid) => {
         }else if(typeof response === 'object'){
             return {error:false, res:response}
         }else {
+            logger.error(`cart.addProduct ${response.res}`)
             return {error:true, res:response}
         }
     } catch (err) {
@@ -56,6 +60,7 @@ export const updProducts = async(cid,products) => {
         }else if(typeof response === 'object'){
             return {error:false, res:response}
         }else {
+            logger.error(`cart.updProducts ${response.res}`)
             return {error:true, res:response}
         }  
     } catch (err) {
@@ -72,6 +77,7 @@ export const updProduct = async(cid,pid,quantity) => {
         }else if(typeof response === 'object'){
             return {error:false, res:response}
         }else {
+            logger.error(`cart.updProduct ${response.res}`)
             return {error:true, res:response}
         }  
     } catch (err) {
@@ -88,6 +94,7 @@ export const deleteProducts = async(cid) => {
         }else if(typeof response === 'object'){
             return {error:false, res:response}
         }else {
+            logger.error(`cart.deleteProducts ${response.res}`)
             return {error:true, res:response}
         }  
     } catch (err) {
@@ -104,6 +111,7 @@ export const deleteProduct = async(cid,pid) => {
         }else if(typeof response === 'object'){
             return {error:false, res:response}
         }else {
+            logger.error(`cart.deleteProduct ${response.res}`)
             return {error:true, res:response}
         }  
     } catch (err) {
@@ -121,6 +129,7 @@ export const purchase = async(cid,email) => {
             if (response.code) return {error:false, res:response}
             else return {error:true, res:response}
         }else {
+            logger.error(`cart.purchase ${response.res}`)
             return {error:true, res:response}
         }  
     } catch (err) {

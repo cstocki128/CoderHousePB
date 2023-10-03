@@ -1,3 +1,4 @@
+import {logger} from '../utils/logger.js';
 import UserRepository from "../persistence/repository/user/user.repository.js"
 const userRepository = new UserRepository();
 
@@ -7,6 +8,7 @@ export const login = async(user) => {
         if ( typeof response === 'object') {
             return {error:false,res:response}
         }else {
+            logger.error(`user.login ${response.res}`)
             return {error:true,res:response}
         }
     } catch (err) {
@@ -21,6 +23,7 @@ export const register = async(user) => {
         if ( typeof response === 'object') {
             return {error:false,res:response}
         }else {
+            logger.error(`user.register ${response.res}`)
             return {error:true,res:response}
         }
     } catch (err) {
@@ -35,6 +38,7 @@ export const getByid = async(id) => {
         if ( typeof response === 'object') {
             return {error:false,res:response}
         }else {
+            logger.error(`user.getByid ${response.res}`)
             return {error:true,res:response}
         }
     } catch (err) {
@@ -49,6 +53,7 @@ export const getByEmail = async(email) => {
         if ( typeof response === 'object') {
             return {error:false,res:response}
         }else {
+            logger.error(`user.getByEmail ${response.res}`)
             return {error:true,res:response}
         }
     } catch (err) {
@@ -63,6 +68,7 @@ export const addCart = async(email,cid) => {
         if ( typeof response === 'object') {
             return {error:false,res: await userRepository.currentDTO(response)}
         }else {
+            logger.error(`user.addCartaddCart ${response.res}`)
             return {error:true,res:response}
         }
     } catch (err) {
@@ -83,7 +89,14 @@ export const current = async (user) => {
 
 export const loggerTest = async () => {
     try {
-        ///
+        console.log('-----------------------------')
+        logger.debug('LOGGER "DEBUG" TEST');
+        logger.http('LOGGER "HTTP" TEST');
+        logger.info('LOGGER "INFO" TEST');
+        logger.warning('LOGGER "WARNING" TEST');
+        logger.error('LOGGER "ERROR" TEST');
+        logger.fatal('LOGGER "FATAL" TEST');
+        return {error:false,res:'Logger Test run successfully'};
     } catch (err) {
         const error = `user.loggerTest service error: ${err.message}`;
         return {error:true,res:error};

@@ -9,12 +9,10 @@ class ProductManager {
                 if (fs.existsSync(path)) {
                     return JSON.parse(fs.readFileSync(path,'utf-8'));
                 }else {
-                    //console.log(`Could not find the specified path: ${path}`)
                     return []
                 }
             }
-            catch(err) {
-                console.log(`getProductsFile Error: ${err.message}`) 
+            catch(err) { 
                 return []
             }
         }
@@ -28,7 +26,6 @@ class ProductManager {
             let productsJson = JSON.stringify(this._products,'utf-8')
             await fs.promises.writeFile(this._path,productsJson)
         }catch(err) {
-            console.log(`updProductFile Error: ${err.message}`)
         }
     }
 
@@ -89,7 +86,6 @@ class ProductManager {
         const idNumeric = parseInt(id)
         if (updProduct && idNumeric){
             let foundId=false
-            // console.log(this._products)
             this._products.map((prod) => {
                 
                 if (prod.id === idNumeric) {
@@ -137,65 +133,5 @@ class ProductManager {
 
 
 }
-
-
-// const pruebaAsync = async() => {
-//     try {
-//         //Prueba de agregar producto
-//         let productPrueba = 
-//         {
-//             title: 'producto prueba',
-//             description: 'Este es un producto prueba',
-//             price:200,
-//             thumbnail: 'Sin imagen',
-//             code: 'abc123',
-//             stock:25
-//         }
-//         console.log(await productList.addProduct(productPrueba))
-//         let productPrueba2 = 
-//         {
-//             title: 'producto prueba 2',
-//             description: 'Este es un producto prueba 2',
-//             price:200,
-//             thumbnail: 'Sin imagen',
-//             code: 'abc124'
-//         }
-//         console.log(await productList.addProduct(productPrueba2))
-
-//         //Prueba de Obtener producto
-//         let id = 1
-//         console.log('Product1: ',productList.getProductById(id))
-//         id = 4
-//         console.log('Product4: ',productList.getProductById(id)) //Deberia dar error
-//         ///
-
-//         //Prueba de modificacion
-//         id = 2
-//         let product = {
-//             title: "PRUEBA2",
-//             thumbnail: "PRUEBA2",
-//             stock: 0
-//         }
-//         console.log(await productList.updateProducts(id,product))
-//         console.log(productList.getProducts())
-//         ///
-
-//         //Prueba de eliminacion
-//         id = 3
-//         console.log(await productList.deleteProduct(id))
-//         console.log(productList.getProducts())
-//         id = 6
-//         console.log(await productList.deleteProduct(id)) //Deberia dar error
-//         ///
-
-//     } catch(err) {
-//         console.log("Prueba Async Error",err)
-//     }
-// }
-
-
-// const productList = new ProductManager("./productManager.json")
-// console.log(productList.getProducts()) 
-// pruebaAsync()
 
 export default ProductManager;
