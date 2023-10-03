@@ -8,19 +8,13 @@
   * Al usar npm start se usa ".env.production", al usar npm run dev se usa ".npm.development"
   * Se puede elegir la persistencia enviando como parametro 'MONGO' o 'FILE' en el comando de inicio (ej: npm start MONGO, en caso de no enviar parametro, por defecto se usa MONGO)
     *  Se aclara que DAO de FileSystem no esta actualizado y puede no funcionar correctamente.
-## Vistas
-
-- [localhost:8080/login](http://localhost:8080/login): Login
-- [localhost:8080/products](http://localhost:8080/products): Listado de productos.
-- `localhost:8080/carts/:cartId`: Listado de items del cart seleccionado.
-- [localhost:8080/realTimeProducts](http://localhost:8080/realTimeProducts): Listado de productos en tiempo real con WEBSOCKET
-- [localhost:8080/chat](http://localhost:8080/chat): Chat en tiempo real con WEBSOCKET
 
 ## Endpoints
 
 ### Users
 
-- `GET /api/users/authenticate`: Genera y retorna token JWT. Debe recibir Form-encode `{email, password}`
+- `GET /api/users/authenticate`: Genera y retorna token JWT. Debe recibir Form-encode `{email, password}` 
+- `GET /api/users/loggerTest`: Test de logger Winston
 - `POST /api/users/current`: Retorna datos de usuario/sesión.
 - `POST /api/users/addCart`: Agrega cart al usuario. Debe recibir Form-encode `{email, cid}`
 
@@ -61,3 +55,11 @@
   "nextLink": null
 }
 ```
+
+## Vistas
+
+- [localhost:8080/login](http://localhost:8080/login): Login
+- [localhost:8080/products](http://localhost:8080/products): Listado de productos.
+- `localhost:8080/carts/:cartId`: Listado de items del cart seleccionado.
+- [localhost:8080/realTimeProducts](http://localhost:8080/realTimeProducts): Listado de productos en tiempo real con WEBSOCKET
+- [localhost:8080/chat](http://localhost:8080/chat): Chat en tiempo real con WEBSOCKET
