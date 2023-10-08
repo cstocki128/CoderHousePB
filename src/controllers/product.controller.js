@@ -65,6 +65,7 @@ export const create = async(req, res, next) => {
             logger.error(generateProductErrorInfo(prod))
             return httpResponse.ServerError(res,errorsDic.PARAM_ERROR)
         }
+        prod.owner = req.user._id;
         const response = await service.create(prod);
         if (!response.error) httpResponse.Ok(res,response.res) 
         else httpResponse.ServerError(res,response.res)

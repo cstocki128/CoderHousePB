@@ -9,7 +9,8 @@ const productSchema = new mongoose.Schema({
     thumbnail: {type: Array},
     stock: {type: Number, required: true},
     status: {type: Boolean, required: true},
-    category: {type: String, required: true, index: true}
+    category: {type: String, required: true, index: true},
+    owner: {type: String, required: true}
 });
 
 productSchema.plugin(mongoosePaginate);
