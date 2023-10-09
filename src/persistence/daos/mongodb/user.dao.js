@@ -1,4 +1,5 @@
 import config from '../../../config.js';
+import errorsDic from '../../../utils/errors.dictionary.js'
 import { UserModel } from "./models/user.model.js";
 import {createHash, isValidPassword} from '../../../utils.js'
 import {CartModel} from "./models/cart.model.js";
@@ -79,4 +80,28 @@ export default class UserDaoMongoDb {
             return error.message;
         }
     }
+
+    async setPermissions(uid) {
+        try {
+            const user = await this.getByid(uid)
+            console.log(user)
+            if (typeof user == 'object')  {
+                switch (user.role) {
+                    case 'user': {
+                        user.role = 'premium';
+                        break;
+                    }
+                    case 'premium': {
+                        user.role = 'user';
+                        break; 
+                    }
+                }
+                user.save();
+                return;
+            }else return errorsDic.NO_USER 
+        }catch (error) {
+            return error.message;
+            } 
+    }
+        
 }

@@ -1,5 +1,6 @@
 import {logger} from '../utils/logger.js';
 import UserRepository from "../persistence/repository/user/user.repository.js"
+import errorsDic from '../utils/errors.dictionary.js'
 const userRepository = new UserRepository();
 
 export const login = async(user) => {
@@ -99,6 +100,20 @@ export const loggerTest = async () => {
         return {error:false,res:'Logger Test run successfully'};
     } catch (err) {
         const error = `user.loggerTest service error: ${err.message}`;
+        return {error:true,res:error};
+    }
+}
+
+export const setPermissions =  async (uid) => {
+    try {
+        const response = await userRepository.dao.setPermissions(uid);
+        if (response == null) return {error:false,res:'Set Permissions successfully'}; 
+        else {
+            logger.error(`user.setPermissions ${response}`)
+            return {error:true,res:response}
+        }
+    } catch (err) {
+        const error = `user.setPermissions service error: ${err.message}`;
         return {error:true,res:error};
     }
 }

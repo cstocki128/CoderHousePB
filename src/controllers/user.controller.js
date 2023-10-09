@@ -97,3 +97,15 @@ export const loggerTest = async(req, res, next) => {
         next(error) 
     }
 };
+
+export const setPermissions = async(req, res, next) => {
+    try {
+        logger.http('user.setPermissions executed')
+        const user = req.params.uid
+        const response =  await service.setPermissions(user)
+        if(response.error) return res.status(400).json({error: response.res})
+        else res.json({result:response.res})
+    } catch (error) {
+        next(error) 
+    }
+};

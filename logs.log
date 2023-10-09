@@ -6,3 +6,9 @@
 {"level":"error", "timestamp": "2023-10-02 23:43:53", "message": "LOGGER "ERROR" TEST"}
 {"level":"fatal", "timestamp": "2023-10-02 23:43:53", "message": "LOGGER "FATAL" TEST"}
 {"level":"error", "timestamp": "2023-10-02 23:44:46", "message": "validateAdmin - Forbidden"}
+{"level":"error", "timestamp": "2023-10-09 02:58:14", "message": "user.setPermissions undefined"}
+{"level":"error", "timestamp": "2023-10-09 03:00:45", "message": "user.setPermissions undefined"}
+{"level":"error", "timestamp": "2023-10-09 03:05:58", "message": "user.setPermissions undefined"}
+{"level":"error", "timestamp": "2023-10-09 03:07:10", "message": "user.setPermissions undefined"}
+{"level":"error", "timestamp": "2023-10-09 03:09:10", "message": "user.setPermissions undefined"}
+{"level":"error", "timestamp": "2023-10-09 03:10:59", "message": "user.setPermissions User is not registered"}
