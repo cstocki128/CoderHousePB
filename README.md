@@ -15,6 +15,7 @@
 
 - `GET /api/users/authenticate`: Genera y retorna token JWT. Debe recibir Form-encode `{email, password}` 
 - `GET /api/users/loggerTest`: Test de logger Winston
+- `PUT /api/users/premium/:uid`: Cambia el rol del usuario de "User" a "Premium" y viceversa.
 - `POST /api/users/current`: Retorna datos de usuario/sesión.
 - `POST /api/users/addCart`: Agrega cart al usuario. Debe recibir Form-encode `{email, cid}`
 
