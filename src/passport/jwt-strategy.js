@@ -24,7 +24,7 @@ const strategyOptionsCookie = {
 
 
 const cookieExtractorMail = (req) => {
-    const token = req.cookies.passtoken;
+    const token = req.cookies.tokenpass;
     return token;
 }
 
