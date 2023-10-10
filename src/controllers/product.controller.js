@@ -49,6 +49,13 @@ export const update = async(req, res, next) => {
         logger.http('product.update executed')
         const id = req.params.pid
         const prod = req.body
+        if (req.user.role == 'premium'){
+            const response = await service.getById(id)
+            if (!response.error) {
+                const product = response.res
+                if (product.owner != req.user._id) return httpResponse.Forbidden(res,errorsDic.USER_NOT_ALLOWED_MOD)
+            }
+         }
         const response = await service.update(id,prod);
         if (!response.error) res.status(200).json({result:response.res})
         else res.status(400).json({error:response.res})
@@ -78,6 +85,13 @@ export const remove = async(req, res, next) => {
     try{
         logger.http('product.remove executed')
         const id = req.params.pid
+        if (req.user.role == 'premium'){
+            const response = await service.getById(id)
+            if (!response.error) {
+                const product = response.res
+                if (product.owner != req.user._id) return httpResponse.Forbidden(res,errorsDic.USER_NOT_ALLOWED_DLT)
+            }
+         }
         const response = await service.remove(id);
         if (!response.error) res.status(200).json({result:response.res})
         else res.status(400).json({error:response.res})

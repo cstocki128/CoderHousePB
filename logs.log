@@ -12,3 +12,47 @@
 {"level":"error", "timestamp": "2023-10-09 03:07:10", "message": "user.setPermissions undefined"}
 {"level":"error", "timestamp": "2023-10-09 03:09:10", "message": "user.setPermissions undefined"}
 {"level":"error", "timestamp": "2023-10-09 03:10:59", "message": "user.setPermissions User is not registered"}
+{"level":"error", "timestamp": "2023-10-09 20:10:22", "message": "validate Admin or premium - Forbidden"}
+{"level":"error", "timestamp": "2023-10-09 20:18:11", "message": "user.setPermissions User is not registered"}
+{"level":"error", "timestamp": "2023-10-09 20:23:01", "message": "validate Admin or premium - Forbidden"}
+{"level":"error", "timestamp": "2023-10-09 20:23:23", "message": "validate Admin or premium - Forbidden"}
+{"level":"error", "timestamp": "2023-10-09 20:23:43", "message": "product.remove undefined"}
+{"level":"error", "timestamp": "2023-10-09 20:25:46", "message": "product.getById undefined"}
+{"level":"error", "timestamp": "2023-10-09 20:58:08", "message": "user.register undefined"}
+{"level":"error", "timestamp": "2023-10-09 22:00:18", "message": "LOGGER "ERROR" TEST"}
+{"level":"fatal", "timestamp": "2023-10-09 22:00:18", "message": "LOGGER "FATAL" TEST"}
+{"level":"error", "timestamp": "2023-10-09 22:00:42", "message": "validate Admin or premium - Forbidden"}
+{"level":"error", "timestamp": "2023-10-09 22:01:05", "message": "validate Admin or premium - Forbidden"}
+{"level":"error", "timestamp": "2023-10-09 22:05:17", "message": "product.getById undefined"}
+{"level":"error", "timestamp": "2023-10-09 22:05:17", "message": "product.update undefined"}
+{"level":"error", "timestamp": "2023-10-09 22:26:40", "message": "ErrorHandler - cart.some is not a function"}
+{"level":"error", "timestamp": "2023-10-09 22:29:03", "message": "ErrorHandler - Cannot read properties of undefined (reading 'id')"}
+{"level":"error", "timestamp": "2023-10-09 22:48:02", "message": "ErrorHandler - Cannot read properties of undefined (reading 'owner')"}
+{"level":"error", "timestamp": "2023-10-09 22:59:22", "message": "ErrorHandler - id is not defined"}
+{"level":"error", "timestamp": "2023-10-09 23:01:09", "message": "message.getById Cart not found'"}
+{"level":"error", "timestamp": "2023-10-09 23:02:10", "message": "message.getById Cart not found'"}
+{"level":"error", "timestamp": "2023-10-09 23:03:34", "message": "message.getById Cart not found'"}
+{"level":"error", "timestamp": "2023-10-09 23:03:34", "message": "ErrorHandler - product is not defined"}
+{"level":"error", "timestamp": "2023-10-09 23:04:26", "message": "ErrorHandler - product is not defined"}
+{"level":"error", "timestamp": "2023-10-09 23:25:28", "message": "product.update undefined"}
+{"level":"error", "timestamp": "2023-10-09 23:28:08", "message": "product.update undefined"}
+{"level":"error", "timestamp": "2023-10-09 23:29:51", "message": "product.update undefined"}
+{"level":"error", "timestamp": "2023-10-09 23:34:10", "message": "ErrorHandler - Cannot create property 'status' on string 'ProductModel.paginate(...).populate is not a function'"}
+{"level":"error", "timestamp": "2023-10-10 00:15:28", "message": "user.login undefined"}
+{"level":"error", "timestamp": "2023-10-10 01:59:39", "message": "ErrorHandler - Cannot read properties of undefined (reading 'email')"}
+{"level":"error", "timestamp": "2023-10-10 02:22:15", "message": "user.updatePass Password must be diferent from previous password"}
+{"level":"error", "timestamp": "2023-10-10 02:23:39", "message": "user.updatePass Password must be diferent from previous password"}
+{"level":"error", "timestamp": "2023-10-10 02:24:05", "message": "user.login undefined"}
+{"level":"error", "timestamp": "2023-10-10 02:24:12", "message": "user.login undefined"}
+{"level":"error", "timestamp": "2023-10-10 02:24:31", "message": "user.login undefined"}
+{"level":"error", "timestamp": "2023-10-10 02:26:26", "message": "user.updatePass Password must be diferent from previous password"}
+{"level":"fatal", "timestamp": "2023-10-10 02:31:35", "message": "undefined"}
+{"level":"fatal", "timestamp": "2023-10-10 02:33:42", "message": "undefined"}
+{"level":"fatal", "timestamp": "2023-10-10 02:35:34", "message": "undefined"}
+{"level":"fatal", "timestamp": "2023-10-10 02:35:43", "message": "undefined"}
+{"level":"fatal", "timestamp": "2023-10-10 02:36:44", "message": "undefined"}
+{"level":"fatal", "timestamp": "2023-10-10 02:38:22", "message": "undefined"}
+{"level":"fatal", "timestamp": "2023-10-10 02:38:24", "message": "undefined"}
+{"level":"fatal", "timestamp": "2023-10-10 02:39:18", "message": "undefined"}
+{"level":"fatal", "timestamp": "2023-10-10 02:39:22", "message": "undefined"}
+{"level":"fatal", "timestamp": "2023-10-10 02:39:52", "message": "querySrv EREFUSED _mongodb._tcp.clustermongo.anw8mjc.mongodb.net"}

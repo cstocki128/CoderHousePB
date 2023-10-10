@@ -109,3 +109,18 @@ export const setPermissions = async(req, res, next) => {
         next(error) 
     }
 };
+
+export const updatePass = async(req, res, next) => {
+    try {
+        logger.http('user.updatePass executed')
+        const {email, newPass} = req.body;
+        const response = await service.updatePass(email, newPass)
+        if (response.error) return res.redirect('/ErrorResetPassword')
+        res
+            .clearCookie('tokenpass')
+            .redirect('/login')
+       
+    } catch (error) {
+        next(error) 
+    }
+};

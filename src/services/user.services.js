@@ -97,7 +97,7 @@ export const loggerTest = async () => {
         logger.warning('LOGGER "WARNING" TEST');
         logger.error('LOGGER "ERROR" TEST');
         logger.fatal('LOGGER "FATAL" TEST');
-        return {error:false,res:'Logger Test run successfully'};
+        return {error:false,res:'Logger Test run successfull'};
     } catch (err) {
         const error = `user.loggerTest service error: ${err.message}`;
         return {error:true,res:error};
@@ -107,7 +107,7 @@ export const loggerTest = async () => {
 export const setPermissions =  async (uid) => {
     try {
         const response = await userRepository.dao.setPermissions(uid);
-        if (response == null) return {error:false,res:'Set Permissions successfully'}; 
+        if (response == null) return {error:false,res:'Set Permissions successfull'}; 
         else {
             logger.error(`user.setPermissions ${response}`)
             return {error:true,res:response}
@@ -115,5 +115,19 @@ export const setPermissions =  async (uid) => {
     } catch (err) {
         const error = `user.setPermissions service error: ${err.message}`;
         return {error:true,res:error};
+    }
+}
+
+export const updatePass =  async (email, newPass) => {
+    try {
+        const response = await userRepository.dao.updatePass(email, newPass);
+        if (response == null) return {error:false,res:'Password restablished successfull'}; 
+        else {
+            logger.error(`user.updatePass ${response}`)
+            return {error:true,res:response}
+        }
+    } catch (err) {
+        const error = `user.updatePass service error: ${err.message}`;
+        return {error:true,res:error}; 
     }
 }

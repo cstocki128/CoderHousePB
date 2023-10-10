@@ -84,7 +84,6 @@ export default class UserDaoMongoDb {
     async setPermissions(uid) {
         try {
             const user = await this.getByid(uid)
-            console.log(user)
             if (typeof user == 'object')  {
                 switch (user.role) {
                     case 'user': {
@@ -103,5 +102,19 @@ export default class UserDaoMongoDb {
             return error.message;
             } 
     }
-        
+
+    async updatePass(email, newPass){
+        try {
+            const user = await UserModel.findOne({email})
+            if (user){
+                if (!isValidPassword(newPass,user)) {
+                    user.password = createHash(newPass); //Hasheo
+                    user.save();
+                    return null;
+                }else return 'Password must be diferent from previous password';
+            }else return 'User do not exist'
+        } catch (error) {
+            return error.message; 
+        }
+    }   
 }

@@ -41,7 +41,6 @@ export default class ProductDaoMongoDb {
 
     async addProduct(product) {
         try {
-            if (!product.owner) product.owner = 'admin';
             const response = await ProductModel.create(product);
             return response;
         } catch (error) {
@@ -88,4 +87,6 @@ export default class ProductDaoMongoDb {
             return error.message; 
         }
     }
+
+    
 }

@@ -12,6 +12,9 @@ viewsRouter.get('/products',passport.authenticate('jwt-cookie',{ failureRedirect
 viewsRouter.get('/carts/:cid', controller.cart);
 viewsRouter.get('/login',controller.login);
 viewsRouter.get('/register', controller.register);
+viewsRouter.get('/resetPasswordMail', controller.resetPasswordMail);
+viewsRouter.get('/resetPassword',passport.authenticate('jwt-cookie-mail',{ failureRedirect: '/resetPasswordMail', session:false }), controller.resetPassword);
+viewsRouter.get('/errorResetPassword',passport.authenticate('jwt-cookie-mail',{ failureRedirect: '/resetPasswordMail', session:false }), controller.errorResetPassword);
 viewsRouter.get('/error-login', controller.errorLogin);
 viewsRouter.get('/error-register', controller.errorRegister);
 //primer llamado desde el front, pasara por el middleware de passport-github lo cual perdira autorizacion para acceder al perfil. 

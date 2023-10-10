@@ -1,6 +1,9 @@
 import * as service from "../services/cart.services.js";
+import { getById as getProduct } from "../services/product.services.js";
 import {logger} from "../utils/logger.js"
-
+import errorsDic from '../utils/errors.dictionary.js'
+import { HttpResponse } from "../utils/http.response.js";
+const httpResponse = new HttpResponse(); 
 
 export const getById = async(req, res, next) => {
     try{
@@ -33,6 +36,13 @@ export const addProduct= async(req, res, next) => {
         const pid = req.params.pid
         if (!req.user.cart) return res.status(403).json({error:'Unauthorized cart'})
         if (req.user.cart._id == cid) {
+            if (req.user.role == 'premium'){
+                const response = await getProduct(pid)
+                if (!response.error){
+                    const product = response.res 
+                    if (product.owner == req.user._id) return httpResponse.Forbidden(res,errorsDic.USER_PRODUCT_NOT_ALLOWED)
+                }
+             }
             const response = await service.addProduct(cid,pid);
             if (!response.error) res.status(200).json({result:response.res})
             else res.status(400).json({error:response.res})

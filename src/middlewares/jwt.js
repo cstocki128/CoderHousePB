@@ -21,3 +21,14 @@ export const generateToken = (user) => {
   });
   return token;
 };
+
+export const generateTokenMail = (email) => {
+  const payload = {
+    email: email
+  };
+
+  const token = jwt.sign(payload, PRIVATE_KEY, {
+    expiresIn: '60m',  
+  });
+  return token;
+};

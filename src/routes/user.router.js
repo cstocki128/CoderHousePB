@@ -1,5 +1,5 @@
 import {Router} from "express";
-import {login, register,logout,current,authenticate,addCart,loggerTest,setPermissions} from "../controllers/user.controller.js"
+import {login, register,logout,current,authenticate,addCart,loggerTest,setPermissions,updatePass} from "../controllers/user.controller.js"
 import passport from 'passport'
 const userRouter = Router();
 
@@ -10,6 +10,7 @@ userRouter.post('/register',register);
 userRouter.post('/addCart',passport.authenticate('jwt-header',{session:false}),addCart);
 userRouter.put('/premium/:uid',passport.authenticate('jwt-header',{session:false}),setPermissions);
 userRouter.get('/logout', logout);
+userRouter.post('/updatePass', updatePass);
 userRouter.post('/authenticate', authenticate);
 userRouter.get('/current',passport.authenticate('jwt-header',{session:false}), current);
 userRouter.get('/loggerTest',passport.authenticate('jwt-header',{session:false}), loggerTest);

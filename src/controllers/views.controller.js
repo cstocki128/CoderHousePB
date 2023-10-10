@@ -134,3 +134,30 @@ export const cart = async(req, res, next) => {
         next(err);
     }
 }
+
+export const resetPasswordMail = async (req, res, next) => {
+    try {
+        logger.http('views.resetPasswordMail executed')
+        res.render('resetPasswordMail')
+    } catch (error) {
+        next(error.message);  
+    }
+}
+
+export const resetPassword = async (req, res, next) => {
+    try {
+        logger.http('views.resetPassword executed')
+        res.render('resetPassword')
+    } catch (error) {
+        next(error.message);  
+    }
+}
+
+export const errorResetPassword = async (req, res, next) => {
+    try {
+        logger.http('views.errorResetPassword executed')
+        res.render('errorResetPassword')
+    } catch (error) {
+        next(error.message);  
+    }
+}

@@ -22,8 +22,25 @@ const strategyOptionsCookie = {
     secretOrKey: PRIVATE_KEY
 };
 
+
+const cookieExtractorMail = (req) => {
+    const token = req.cookies.passtoken;
+    return token;
+}
+
+const strategyOptionsCookieMail = {
+    jwtFromRequest: ExtractJwt.fromExtractors([cookieExtractorMail]),
+    secretOrKey: PRIVATE_KEY
+};
+
 const verifyToken = async(jwt_payload, done) => {
     const response = await service.getByid(jwt_payload.userId);
+    if (response.error) return done(response.res,false);
+    return done(null,response.res);
+};
+
+const verifyTokenMail = async(jwt_payload, done) => {
+    const response = await service.getByEmail(jwt_payload.email);
     if (response.error) return done(response.res,false);
     return done(null,response.res);
 };
@@ -31,6 +48,7 @@ const verifyToken = async(jwt_payload, done) => {
 
 passport.use('jwt-header', new jwtStrategy(strategyOptionsHeaders, verifyToken));
 passport.use('jwt-cookie', new jwtStrategy(strategyOptionsCookie, verifyToken));
+passport.use('jwt-cookie-mail', new jwtStrategy(strategyOptionsCookieMail, verifyTokenMail));
 
 //serialize y deserialize
 //Guarda el usuario en req.session.passport

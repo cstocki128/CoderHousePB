@@ -4,5 +4,6 @@ import passport from "passport"
 const mailingRouter = new Router();
 
 mailingRouter.post('/send', controller.send);
+mailingRouter.post('/resetPass', controller.resetPass);
 
 export default mailingRouter;
