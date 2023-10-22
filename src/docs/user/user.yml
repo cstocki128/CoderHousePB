@@ -1,0 +1,12 @@
+paths:
+  users/authenticate:
+    post:
+      tags:
+      - Authenticate
+      summary: Autentificacion de usuario. Genera Token.
+      # requestBody:
+      #   content:
+      #     application/json:
+      #       schema:
+      #         $ref: '#/components/parameters/schemas/BodyNewsPost'
+      #   required: true

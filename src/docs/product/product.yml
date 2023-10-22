@@ -1,0 +1,42 @@
+paths:
+  /products:
+    post:
+      tags:
+      - Products
+      summary: Registro de producto nuevo en base de datos.
+      # requestBody:
+      #   content:
+      #     application/json:
+      #       schema:
+      #         $ref: '#/components/parameters/schemas/BodyNewsPost'
+      #   required: true
+      responses:
+        200:
+          description: Se registó el producto correctamente.
+          # content:
+          #   application/json:
+          #     schema:
+          #       $ref: '#/components/schema/News/registerNew'
+        500:
+          description: Error de servidor
+          # content:
+          #   application/json:
+          #     schema:
+          #       $ref: '#/components/schema/News/notFound'
+        404:
+          description: Error de validacion del schema.
+          # content:
+          #   application/json:
+          #     schema:
+          #       $ref: '#/components/schema/News/validationError'
+    get:
+      tags:
+      - Products
+      summary: Lista de productos.
+      responses:
+        200: 
+          description: Lista de productos.
+          # content:
+          #   application/json:
+          #     schema:
+          #       $ref: '#/components/schema/News/getAllNews'
