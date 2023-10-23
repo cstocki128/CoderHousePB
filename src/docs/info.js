@@ -10,7 +10,17 @@ export const info = {
             {
                 url: 'http://localhost:8080/api'
             }
-        ]
+        ],
+        components: {        
+            securitySchemes: {
+              bearerAuth: {
+                type: "http",
+                scheme: "bearer",
+                bearerFormat: "JWT"
+              }
+            }
+          }  
     },
     apis: ['./src/docs/**/*.yml']
+    
 }

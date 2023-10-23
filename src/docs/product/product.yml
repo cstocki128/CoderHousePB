@@ -1,9 +1,11 @@
 paths:
   /products:
-    post:
+    get:
+      security:
+      - bearerAuth: []
       tags:
       - Products
-      summary: Registro de producto nuevo en base de datos.
+      summary: Lista de productos.
       # requestBody:
       #   content:
       #     application/json:
@@ -12,13 +14,13 @@ paths:
       #   required: true
       responses:
         200:
-          description: Se registó el producto correctamente.
+          description: Se genero listado de productos correctamente.
           # content:
           #   application/json:
           #     schema:
           #       $ref: '#/components/schema/News/registerNew'
         500:
-          description: Error de servidor
+          description: Error de servidor.
           # content:
           #   application/json:
           #     schema:
@@ -29,13 +31,86 @@ paths:
           #   application/json:
           #     schema:
           #       $ref: '#/components/schema/News/validationError'
-    get:
+    post:
+      security:
+      - bearerAuth: []
       tags:
       - Products
-      summary: Lista de productos.
+      summary: Registro de nuevo producto.
+      responses:
+        200:
+          description: Se registró producto correctamente.
+  /products/(pid):  
+    get:
+      security:
+      - bearerAuth: []
+      tags:
+      - Products
+      summary: Obtiene producto por Id.
+      parameters:
+        - in: path
+          name: pid
+          required: true
+          description: id de producto.
+          schema:
+            type: string
       responses:
         200: 
-          description: Lista de productos.
+          description: Producto obtenido correctamente.
+          # content:
+          #   application/json:
+          #     schema:
+          #       $ref: '#/components/schema/News/getAllNews'
+    put:
+      security:
+      - bearerAuth: []
+      tags:
+      - Products
+      summary: Actualiza producto por Id.
+      parameters:
+        - in: path
+          name: pid
+          required: true
+          description: id de producto.
+          schema:
+            type: string
+      responses:
+        200: 
+          description: Producto actualizado correctamente.
+          # content:
+          #   application/json:
+          #     schema:
+          #       $ref: '#/components/schema/News/getAllNews'
+    delete:
+      security:
+      - bearerAuth: []
+      tags:
+      - Products
+      summary: Elimina producto por Id.
+      parameters:
+        - in: path
+          name: pid
+          required: true
+          description: id de producto.
+          schema:
+            type: string
+      responses:
+        200: 
+          description: Producto eliminado correctamente.
+          # content:
+          #   application/json:
+          #     schema:
+          #       $ref: '#/components/schema/News/getAllNews'
+  /products/mocks/mockingProducts:  
+    get:
+      security:
+      - bearerAuth: []
+      tags:
+      - Products
+      summary: Obtiene mock de productos.
+      responses:
+        200: 
+          description: Listado de productos obtenido correctamente.
           # content:
           #   application/json:
           #     schema:

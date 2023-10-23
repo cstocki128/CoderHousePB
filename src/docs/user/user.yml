@@ -1,12 +1,26 @@
 paths:
-  users/authenticate:
+  /users/authenticate:
     post:
       tags:
       - Authenticate
       summary: Autentificacion de usuario. Genera Token.
-      # requestBody:
-      #   content:
-      #     application/json:
-      #       schema:
-      #         $ref: '#/components/parameters/schemas/BodyNewsPost'
-      #   required: true
+      requestBody:
+        content:
+          application/json:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                  description: Email
+                password:
+                  type: string
+                  description: Password
+              example:
+                email: prueba@gmail.com
+                password: "123456"
+      responses:
+        200:
+          description: Token generado correctamente.
