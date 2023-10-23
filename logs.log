@@ -58,3 +58,5 @@
 {"level":"fatal", "timestamp": "2023-10-10 02:39:52", "message": "querySrv EREFUSED _mongodb._tcp.clustermongo.anw8mjc.mongodb.net"}
 {"level":"error", "timestamp": "2023-10-10 08:52:34", "message": "ErrorHandler - Cannot read properties of undefined (reading 'email')"}
 {"level":"error", "timestamp": "2023-10-10 08:53:26", "message": "user.updatePass Password must be diferent from previous password"}
+{"level":"error", "timestamp": "2023-10-23 19:48:36", "message": "product.getById undefined"}
+{"level":"error", "timestamp": "2023-10-23 19:53:53", "message": "product.getById undefined"}
