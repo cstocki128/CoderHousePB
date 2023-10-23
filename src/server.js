@@ -18,8 +18,11 @@ import passport from 'passport';
 import './passport/github-strategy.js';
 import "./passport/jwt-strategy.js";
 import config from './config.js';
-import compression from 'express-compression'
-import { logger } from './utils/logger.js'
+import compression from 'express-compression';
+import { logger } from './utils/logger.js';
+import swaggerUI from 'swagger-ui-express';
+import swaggerJSDoc from 'swagger-jsdoc';
+import {info} from "./docs/info.js"
 
 //Express
 const app = express();
@@ -57,6 +60,9 @@ const httpServer = app.listen(config.port, () => {logger.info(`Listening on PORT
 //socket Server
 const io = new Server(httpServer); //Se crea el servidor websocket
 
+//Swagger
+const specs = swaggerJSDoc(info);
+app.use('/docs', swaggerUI.serve, swaggerUI.setup(specs));
 
 io.on('connection', async(socket) => { // conexion de websocket
 

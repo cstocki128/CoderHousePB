@@ -1,0 +1,194 @@
+paths:
+  /carts:
+    post:
+      security:
+      - bearerAuth: []
+      tags:
+      - Carts
+      summary: Registro de nuevo carrito.
+      # requestBody:
+      #   content:
+      #     application/json:
+      #       schema:
+      #         $ref: '#/components/parameters/schemas/BodyNewsPost'
+      #   required: true
+      responses:
+        200:
+          description: Se genero nuevo carrito correctamente.
+          # content:
+          #   application/json:
+          #     schema:
+          #       $ref: '#/components/schema/News/registerNew'
+        500:
+          description: Error de servidor.
+          # content:
+          #   application/json:
+          #     schema:
+          #       $ref: '#/components/schema/News/notFound'
+        404:
+          description: Error de validacion del schema.
+          # content:
+          #   application/json:
+          #     schema:
+          #       $ref: '#/components/schema/News/validationError'
+  /carts/(cid):  
+    get:
+      security:
+      - bearerAuth: []
+      tags:
+      - Carts
+      summary: Obtiene carrito por Id.
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          description: id de carrito.
+          schema:
+            type: string
+      responses:
+        200: 
+          description: Carrito obtenido correctamente.
+          # content:
+          #   application/json:
+          #     schema:
+          #       $ref: '#/components/schema/News/getAllNews'
+    put:
+      security:
+      - bearerAuth: []
+      tags:
+      - Carts
+      summary: Actualiza carrito por Id.
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          description: id de carrito.
+          schema:
+            type: string
+      responses:
+        200: 
+          description: Carrito actualizado correctamente.
+          # content:
+          #   application/json:
+          #     schema:
+          #       $ref: '#/components/schema/News/getAllNews'
+    delete:
+      security:
+      - bearerAuth: []
+      tags:
+      - Carts
+      summary: Elimina carrito por Id.
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          description: id de carrito.
+          schema:
+            type: string
+      responses:
+        200: 
+          description: Carrito eliminado correctamente.
+          # content:
+          #   application/json:
+          #     schema:
+          #       $ref: '#/components/schema/News/getAllNews'
+  /carts/(cid)/products/(pid):  
+    post:
+      security:
+      - bearerAuth: []
+      tags:
+      - Carts
+      summary: Agrega producto al carrito.
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          description: id de carrito.
+          schema:
+            type: string
+        - in: path
+          name: pid
+          required: true
+          description: id de producto.
+          schema:
+            type: string
+      responses:
+        200: 
+          description: Producto agregado en carrito correctamente.
+          # content:
+          #   application/json:
+          #     schema:
+          #       $ref: '#/components/schema/News/getAllNews'
+    put:
+      security:
+      - bearerAuth: []
+      tags:
+      - Carts
+      summary: Actualiza cantidad de producto en carrito.
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          description: id de carrito.
+          schema:
+            type: string
+        - in: path
+          name: pid
+          required: true
+          description: id de producto.
+          schema:
+            type: string
+      responses:
+        200: 
+          description: Cantidad de producto en el carrito actualizado correctamente.
+          # content:
+          #   application/json:
+          #     schema:
+          #       $ref: '#/components/schema/News/getAllNews'
+    delete:
+      security:
+      - bearerAuth: []
+      tags:
+      - Carts
+      summary: Elimina producto de carrito.
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          description: id de carrito.
+          schema:
+            type: string
+        - in: path
+          name: pid
+          required: true
+          description: id de producto.
+          schema:
+            type: string
+      responses:
+        200: 
+          description: Producto eliminado de carrito correctamente.
+          # content:
+          #   application/json:
+          #     schema:
+          #       $ref: '#/components/schema/News/getAllNews'
+/(cid)/purchase:  
+    post:
+      security:
+      - bearerAuth: []
+      tags:
+      - Carts
+      summary: Realiza compra de carrito.
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          description: id de carrito.
+          schema:
+            type: string
+      responses:
+        200: 
+          description: Carrito comprado correctamente.
+          # content:
+          #   application/json:
+          #     schema:
+          #       $ref: '#/components/schema/News/getAllNews'
