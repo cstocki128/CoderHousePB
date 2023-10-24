@@ -6,12 +6,22 @@ paths:
       tags:
       - Carts
       summary: Registro de nuevo carrito.
-      # requestBody:
-      #   content:
-      #     application/json:
-      #       schema:
-      #         $ref: '#/components/parameters/schemas/BodyNewsPost'
-      #   required: true
+      requestBody:
+        content:
+          application/json:
+              type: object
+              required:
+                - id
+                - quantity
+              properties:
+                id:
+                  type: integer
+                  description: Id de producto
+                quantity:
+                  type: string
+                  description: Cantidad de producto
+              example:
+                {products: [ {id: 6536fd96e5c16ba6b458004f, quantity: 10}, {id: 6536fd96e5c16ba6b458008f, quantity: 5 }]}        
       responses:
         200:
           description: Se genero nuevo carrito correctamente.
@@ -31,7 +41,7 @@ paths:
           #   application/json:
           #     schema:
           #       $ref: '#/components/schema/News/validationError'
-  /carts/(cid):  
+  /carts/{cid}:  
     get:
       security:
       - bearerAuth: []
@@ -92,7 +102,7 @@ paths:
           #   application/json:
           #     schema:
           #       $ref: '#/components/schema/News/getAllNews'
-  /carts/(cid)/products/(pid):  
+  /carts/{cid}/products/{pid}:  
     post:
       security:
       - bearerAuth: []
@@ -138,6 +148,18 @@ paths:
           description: id de producto.
           schema:
             type: string
+      requestBody:
+        content:
+          application/json:
+              type: object
+              required:
+                - quantity
+              properties:
+                quantity:
+                  type: number
+                  description: Codigo unico
+              example:
+                quantity: 50
       responses:
         200: 
           description: Cantidad de producto en el carrito actualizado correctamente.
@@ -171,7 +193,7 @@ paths:
           #   application/json:
           #     schema:
           #       $ref: '#/components/schema/News/getAllNews'
-/(cid)/purchase:  
+  /carts/{cid}/purchase:  
     post:
       security:
       - bearerAuth: []
