@@ -2,7 +2,7 @@ paths:
   /users/authenticate:
     post:
       tags:
-      - Authenticate
+      - Usuario/Autentificación
       summary: Autentificacion de usuario. Genera Token.
       requestBody:
         content:
@@ -24,3 +24,57 @@ paths:
       responses:
         200:
           description: Token generado correctamente.
+  /users/addCart:
+    post:
+      security:
+      - bearerAuth: []
+      tags:
+      - Usuario/Autentificación
+      summary: Agrega carrito al usuario.
+      requestBody:
+        content:
+          application/json:
+              type: object
+              required:
+                - email
+                - cid
+              properties:
+                email:
+                  type: string
+                  description: Email.
+                cid:
+                  type: string
+                  description: Id de carrito.
+              example:
+                email: prueba@gmail.com
+                cid: "6537056e4b5e28809b9ad639"
+      responses:
+        200:
+          description: Carrito añadido correctamente.
+  /users/premium/{uid}:
+    put:
+      security:
+      - bearerAuth: []
+      tags:
+      - Usuario/Autentificación
+      summary: Setea al usuario como premium.
+      parameters:
+        - in: path
+          name: uid
+          required: true
+          description: id de usuario.
+          schema:
+            type: string
+      responses:
+        200:
+          description: Usuario seteado como premium correctamente.
+  /users/current:
+    get:
+      security:
+      - bearerAuth: []
+      tags:
+      - Usuario/Autentificación
+      summary: Devuelve usuario actual (Token).
+      responses:
+        200:
+          description: Usuario obtenido correctamente.    
