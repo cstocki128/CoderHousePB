@@ -148,3 +148,4 @@ app.use('/mail',mailingRouter);
 
 app.use(errorHandler);
 
+export default app;

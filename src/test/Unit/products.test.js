@@ -58,7 +58,7 @@ describe('Products module unit tests ', () => {
         }
     })
 
-    it('Test product.deleteProduct', async ()=>{
+    it('Test products.deleteProduct', async ()=>{
         try {
             const products = await productDao.productDao.getProducts();
             const product = products.payloads[0]
