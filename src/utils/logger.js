@@ -19,11 +19,11 @@ const customLevelsOptions = {
         fatal: 'red'   
     }
 };
-
 const logConfig = {
     levels: customLevelsOptions.levels,
     transports: [
         new winston.transports.Console({
+            
             level: config.env == 'dev' ? 'debug' : 'info' ,
             format: winston.format.combine(
                 

@@ -6,13 +6,21 @@
   "type": "module",
   "scripts": {
     "start": "node ./src/server.js prod",
-    "dev": "nodemon ./src/server.js dev"
+    "dev": "nodemon ./src/server.js dev",
+    "unitTest:products": "mocha ./src/test/unit/products.test.js dev",
+    "unitTest:carts": "mocha ./src/test/unit/carts.test.js dev",
+    "intTest": "mocha --recursive",
+    "intTest:products": "set NODE_OPTIONS=--experimental-vm-modules && npx jest ./src/test/integral/products.test.js",
+    "intTest:carts": "set NODE_OPTIONS=--experimental-vm-modules && npx jest ./src/test/integral/carts.test.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "chai": "^4.3.10",
+    "mocha": "^10.2.0",
+    "nodemon": "^2.0.22",
+    "supertest": "^6.3.3"
   },
   "dependencies": {
     "@faker-js/faker": "^8.1.0",
@@ -25,6 +33,7 @@
     "express-compression": "^1.0.2",
     "express-handlebars": "^7.0.7",
     "express-session": "^1.17.3",
+    "jest": "^29.7.0",
     "jsonwebtoken": "^9.0.1",
     "mongoose": "^7.4.2",
     "mongoose-paginate-v2": "^1.7.31",

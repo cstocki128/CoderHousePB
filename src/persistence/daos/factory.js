@@ -34,6 +34,12 @@ switch (config.persistence) {
         userDao = new UserDaoMongoDb();
         initMongoDb();
         break;
+    default:
+        cartDao = new CartDaoMongoDb();
+        messageDao = new messageDaoMongoDb();
+        productDao = new ProductDaoMongoDb();
+        userDao = new UserDaoMongoDb();
+        break;
 }
 
 export default { cartDao, messageDao, productDao, userDao };

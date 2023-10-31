@@ -1,5 +1,7 @@
 import dotenv from 'dotenv';
-const environment = process.argv.slice(2).at(0);
+let env = process.argv.slice(2).at(0) ?? 'dev';
+if (env != 'dev' && env != 'prod') env = 'dev'; //Si viene cualquier otro valor por error, se setea en dev
+const environment = env;
 const persistence = process.argv.slice(2).at(1) ?? 'MONGO';
 
 dotenv.config({

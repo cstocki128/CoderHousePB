@@ -64,3 +64,80 @@
 {"level":"error", "timestamp": "2023-10-23 20:14:07", "message": "cart.deleteProducts undefined"}
 {"level":"error", "timestamp": "2023-10-23 20:44:32", "message": "cart.create undefined"}
 {"level":"error", "timestamp": "2023-10-23 21:29:25", "message": "ErrorHandler - Unexpected token ] in JSON at position 94"}
+{"level":"error", "timestamp": "2023-10-29 19:16:37", "message": "The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string."}
+{"level":"error", "timestamp": "2023-10-29 20:33:53", "message": "expected { Object () } to equal { Object () }"}
+{"level":"error", "timestamp": "2023-10-29 21:37:56", "message": "Cannot read properties of null (reading 'products')"}
+{"level":"error", "timestamp": "2023-10-29 21:38:31", "message": "Cannot read properties of null (reading 'products')"}
+{"level":"error", "timestamp": "2023-10-29 21:40:55", "message": "expected [ { _id: { …(11) }, quantity: 1 } ] to have a length of +0 but got 1"}
+{"level":"error", "timestamp": "2023-10-29 21:44:29", "message": "expected [ { _id: { …(11) }, quantity: 1 } ] to have a length of +0 but got 1"}
+{"level":"error", "timestamp": "2023-10-29 21:45:15", "message": "expected [ { _id: { …(11) }, quantity: 1 } ] to have a length of +0 but got 1"}
+{"level":"error", "timestamp": "2023-10-29 21:46:49", "message": "expected [ { _id: { …(11) }, quantity: 1 } ] to have a length of +0 but got 1"}
+{"level":"error", "timestamp": "2023-10-29 21:51:32", "message": "expected [ { _id: { …(11) }, quantity: 1 } ] to have a length of +0 but got 1"}
+{"level":"error", "timestamp": "2023-10-29 21:53:14", "message": "expected [ { _id: { …(11) }, quantity: 1 } ] to have a length of +0 but got 1"}
+{"level":"error", "timestamp": "2023-10-29 21:54:11", "message": "commit is not defined"}
+{"level":"error", "timestamp": "2023-10-29 21:55:59", "message": "expected 'cart 653eff1e4b2922bc353f87c7 does no…' to be null"}
+{"level":"error", "timestamp": "2023-10-29 21:56:28", "message": "expected 'cart 653eff3c946554ab18a569d2 does no…' to be null"}
+{"level":"error", "timestamp": "2023-10-29 21:56:51", "message": "expected [ { _id: { …(11) }, quantity: 1 } ] to have a length of +0 but got 1"}
+{"level":"error", "timestamp": "2023-10-29 21:58:19", "message": "expected [ { _id: { …(11) }, quantity: 1 } ] to have a length of +0 but got 1"}
+{"level":"error", "timestamp": "2023-10-29 21:59:36", "message": "expected [ { _id: { …(11) }, quantity: 1 } ] to have a length of +0 but got 1"}
+{"level":"error", "timestamp": "2023-10-29 22:05:51", "message": "expected 'cart 653f016ef651a962c2cc2f4a does no…' to be null"}
+{"level":"error", "timestamp": "2023-10-29 22:07:41", "message": "expected [ { _id: { …(11) }, quantity: 1 } ] to have a length of +0 but got 1"}
+{"level":"error", "timestamp": "2023-10-29 22:09:18", "message": "expected 'cart 653f023d78b7db4684ef900b does no…' to be null"}
+{"level":"error", "timestamp": "2023-10-29 22:13:09", "message": "expected [ { _id: { …(11) }, quantity: 1 } ] to have a length of +0 but got 1"}
+{"level":"error", "timestamp": "2023-10-29 22:13:32", "message": "expected [ { _id: { …(11) }, quantity: 1 } ] to have a length of +0 but got 1"}
+{"level":"error", "timestamp": "2023-10-29 22:23:58", "message": "ns not found"}
+{"level":"error", "timestamp": "2023-10-29 22:25:34", "message": "ns not found"}
+{"level":"error", "timestamp": "2023-10-29 22:28:04", "message": "ns not found"}
+{"level":"error", "timestamp": "2023-10-30 18:54:22", "message": "user.login undefined"}
+{"level":"error", "timestamp": "2023-10-30 18:56:20", "message": "user.login undefined"}
+{"level":"error", "timestamp": "2023-10-30 18:57:31", "message": "user.register undefined"}
+{"level":"error", "timestamp": "2023-10-30 18:57:38", "message": "user.register undefined"}
+{"level":"error", "timestamp": "2023-10-30 18:58:44", "message": "user.login undefined"}
+{"level":"error", "timestamp": "2023-10-30 18:59:55", "message": "user.login undefined"}
+{"level":"error", "timestamp": "2023-10-30 19:00:28", "message": "user.login undefined"}
+{"level":"error", "timestamp": "2023-10-30 19:03:45", "message": "user.login undefined"}
+{"level":"error", "timestamp": "2023-10-30 19:05:44", "message": "user.login undefined"}
+{"level":"error", "timestamp": "2023-10-30 19:10:53", "message": "user.login undefined"}
+{"level":"error", "timestamp": "2023-10-30 19:14:43", "message": "user.login undefined"}
+{"level":"error", "timestamp": "2023-10-30 19:15:13", "message": "user.login undefined"}
+{"level":"error", "timestamp": "2023-10-30 19:43:56", "message": "expected 401 to equal 200"}
+{"level":"error", "timestamp": "2023-10-30 19:45:28", "message": "Token is not defined"}
+{"level":"error", "timestamp": "2023-10-30 19:47:56", "message": "expected undefined to be an array"}
+{"level":"error", "timestamp": "2023-10-30 19:50:33", "message": "expected undefined to be an array"}
+{"level":"error", "timestamp": "2023-10-30 20:02:33", "message": "One or more properties were incomplete or not valid.
+    List of required properties:
+    * code: tipo String, received undefined
+    * title: tipo String, received undefined
+    * description: tipo String, received undefined
+    * price: tipo Number, received undefined
+    * stock: tipo Number, received undefined
+    * status: tipo Boolean, received undefined
+    * category: tipo String, received undefined
+    "}
+{"level":"error", "timestamp": "2023-10-30 20:02:33", "message": "expected 500 to equal 200"}
+{"level":"error", "timestamp": "2023-10-30 20:09:08", "message": "One or more properties were incomplete or not valid.
+    List of required properties:
+    * code: tipo String, received undefined
+    * title: tipo String, received undefined
+    * description: tipo String, received undefined
+    * price: tipo Number, received undefined
+    * stock: tipo Number, received undefined
+    * status: tipo Boolean, received undefined
+    * category: tipo String, received undefined
+    "}
+{"level":"error", "timestamp": "2023-10-30 20:09:08", "message": "expected 500 to equal 200"}
+{"level":"error", "timestamp": "2023-10-30 20:09:45", "message": "Target cannot be null or undefined."}
+{"level":"error", "timestamp": "2023-10-30 20:11:08", "message": "Target cannot be null or undefined."}
+{"level":"error", "timestamp": "2023-10-30 20:12:50", "message": "Target cannot be null or undefined."}
+{"level":"error", "timestamp": "2023-10-30 20:13:54", "message": "Target cannot be null or undefined."}
+{"level":"error", "timestamp": "2023-10-30 20:19:51", "message": "Target cannot be null or undefined."}
+{"level":"error", "timestamp": "2023-10-30 20:21:30", "message": "Target cannot be null or undefined."}
+{"level":"error", "timestamp": "2023-10-30 20:24:36", "message": "Target cannot be null or undefined."}
+{"level":"error", "timestamp": "2023-10-30 20:42:37", "message": "testProduct is not defined"}
+{"level":"error", "timestamp": "2023-10-30 20:43:34", "message": "expected { result: { products: [], …(2) } } to have property '_id'"}
+{"level":"error", "timestamp": "2023-10-30 20:44:28", "message": "(intermediate value).send is not a function"}
+{"level":"error", "timestamp": "2023-10-30 20:45:19", "message": "expected { result: { products: [], …(2) } } to have property '_id'"}
+{"level":"error", "timestamp": "2023-10-30 20:46:27", "message": "cart is not defined"}
+{"level":"error", "timestamp": "2023-10-30 21:20:32", "message": "Assignment to constant variable."}
+{"level":"error", "timestamp": "2023-10-30 21:38:17", "message": "ns not found"}
+{"level":"error", "timestamp": "2023-10-30 21:40:52", "message": "ns not found"}

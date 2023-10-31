@@ -34,7 +34,7 @@ export const getAll = async(req, res, next) => {
 
 export const getById = async(req, res, next) => {
     try{
-        logger.http('product.getAll executed')
+        logger.http('product.getById executed')
         const id = req.params.pid
         const response = await service.getById(id);
         if (!response.error) res.status(200).json({result:response.res})
