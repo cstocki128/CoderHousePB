@@ -9,7 +9,17 @@
   * Se puede elegir la persistencia enviando como parametro 'MONGO' o 'FILE' en el comando de inicio (ej: npm start MONGO, en caso de no enviar parametro, por defecto se usa MONGO)
     *  Se aclara que DAO de FileSystem no esta actualizado y puede no funcionar correctamente.
 
+## Testing
+  - `npm unitTest:products`: Testing unitario products
+  - `npm unitTest:carts`: Testing unitario carts
+  - `npm intTest:products`: Testing integral products
+  - `npm intTest:carts`: Testing integral carts
+
 ## Endpoints
+
+### SWAGGER
+
+- `http://localhost:8080/docs/`: Swagger endpoints
 
 ### Users
 
@@ -31,7 +41,6 @@
 ### Cart
 
 - `POST /api/carts/:id/purchase`: Realiza la compra del carrito. 
-- `GET /api/carts`: Retorna todos los carts.
 - `GET /api/carts/:id`: Retorna el cart por id.
 - `POST /api/carts`: Crea un cart nuevo. Con o sin productos
 - `POST /api/carts/:id/product/:productId`: Agrega un producto al cart. Si ya existe, aumenta su cantidad en uno.
