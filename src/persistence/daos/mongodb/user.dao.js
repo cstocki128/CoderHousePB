@@ -31,6 +31,8 @@ export default class UserDaoMongoDb {
             const userExist = await this.getByEmail(email)
             if (userExist) {
                 if (isValidPassword(password,userExist)) {
+                    userExist.last_connection = Date.now();
+                    userExist.save();
                     return userExist
                 }else return 'Incorrect Password';
             }

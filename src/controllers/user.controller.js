@@ -124,3 +124,15 @@ export const updatePass = async(req, res, next) => {
         next(error) 
     }
 };
+
+export const addDocuments = async (req, res, next) => {
+    try {
+        logger.http('user.addDocuments executed')  
+        const Uid = req.params.uid;
+        if (!Uid) return res.status(400).json({error: 'User id not provided'})
+        const {fileName, type} = req.body;
+        const files = req.files;
+    } catch (error) {
+        next(error) 
+    }
+};
