@@ -41,6 +41,7 @@ const userSchema = new mongoose.Schema({
     },
     documents: [
         {
+            _id: false,
             name: {type: String},
             reference: {type: String}
         }

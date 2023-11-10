@@ -130,8 +130,10 @@ export const addDocuments = async (req, res, next) => {
         logger.http('user.addDocuments executed')  
         const Uid = req.params.uid;
         if (!Uid) return res.status(400).json({error: 'User id not provided'})
-        const {fileName, type} = req.body;
         const files = req.files;
+        const response = await service.addDocuments(Uid, files)
+        if(response.error) return res.status(400).json({error: response.res})
+        else res.json({result:response.res})
     } catch (error) {
         next(error) 
     }

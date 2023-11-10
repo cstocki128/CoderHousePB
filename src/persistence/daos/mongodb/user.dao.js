@@ -3,6 +3,7 @@ import errorsDic from '../../../utils/errors.dictionary.js'
 import { UserModel } from "./models/user.model.js";
 import {createHash, isValidPassword} from '../../../utils.js'
 import {CartModel} from "./models/cart.model.js";
+import __dirname from '../../../utils.js';
 
 export default class UserDaoMongoDb {
     async registerUser(user) {
@@ -119,4 +120,38 @@ export default class UserDaoMongoDb {
             return error.message; 
         }
     }   
+
+    
+    async addDocuments(uid, files){
+        try {
+            const user = await this.getByid(uid)
+            let responseDocs =[]
+            const addDocToUser = (user,file) => {
+                const newDir = __dirname +"\\public"
+                let path = file.path.replace(newDir, "http://localhost:8080")
+                path = path.replaceAll("\\",'/');
+                const fileObj={name: file.filename , reference:path};
+                user.documents.push(fileObj)
+                responseDocs.push(fileObj)
+            };
+            if (typeof user == 'object')  {
+                if('products' in files) files.products.forEach(file => {
+                    addDocToUser(user,file);
+                    
+                });
+                if('profile' in files) files.profile.forEach(file => {
+                    addDocToUser(user,file);
+                    
+                });
+                if('documents' in files) files.documents.forEach(file => {
+                    addDocToUser(user,file);
+                    
+                });
+                user.save();
+                return responseDocs;
+            }else return errorsDic.NO_USER 
+        } catch (error) {
+            return error.message; 
+        }
+    }  
 }

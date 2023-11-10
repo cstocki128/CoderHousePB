@@ -141,3 +141,14 @@
 {"level":"error", "timestamp": "2023-10-30 21:20:32", "message": "Assignment to constant variable."}
 {"level":"error", "timestamp": "2023-10-30 21:38:17", "message": "ns not found"}
 {"level":"error", "timestamp": "2023-10-30 21:40:52", "message": "ns not found"}
+{"level":"error", "timestamp": "2023-11-09 23:56:33", "message": "ErrorHandler - ENOENT: no such file or directory, open 'C:\Users\cstoc\Documents\Cursos\Javascript\CoderHouse\Programacion_Backend\CoderHousePB\srcfiles\documents\documents-1699584993503-25917118'"}
+{"level":"error", "timestamp": "2023-11-10 00:09:38", "message": "ErrorHandler - The "cb" argument must be of type function. Received undefined"}
+{"level":"error", "timestamp": "2023-11-10 00:15:15", "message": "ErrorHandler - The "cb" argument must be of type function. Received undefined"}
+{"level":"error", "timestamp": "2023-11-10 00:15:57", "message": "The "cb" argument must be of type function. Received undefined"}
+{"level":"error", "timestamp": "2023-11-10 00:21:03", "message": "The "cb" argument must be of type function. Received undefined"}
+{"level":"error", "timestamp": "2023-11-10 00:22:43", "message": "ErrorHandler - ENOENT: no such file or directory, open 'C:\Users\cstoc\Documents\Cursos\Javascript\CoderHouse\Programacion_Backend\CoderHousePB\src\files\documents\documents-1699586563971-487295873'"}
+{"level":"error", "timestamp": "2023-11-10 00:23:02", "message": "ErrorHandler - user.addDocuments service error: Cannot read properties of undefined (reading 'getByid')"}
+{"level":"error", "timestamp": "2023-11-10 01:18:59", "message": "ErrorHandler - ENOENT: no such file or directory, open 'C:\Users\cstoc\Documents\Cursos\Javascript\CoderHouse\Programacion_Backend\CoderHousePB\srcpublic\files\documents\documents-1699589939816-77864553'"}
+{"level":"error", "timestamp": "2023-11-10 01:19:51", "message": "ErrorHandler - ENOENT: no such file or directory, open 'C:\Users\cstoc\Documents\Cursos\Javascript\CoderHouse\Programacion_Backend\CoderHousePB\src\public\files\documents\documents-1699589991801-630767955'"}
+{"level":"error", "timestamp": "2023-11-10 03:08:45", "message": "ErrorHandler - Unexpected field"}
+{"level":"error", "timestamp": "2023-11-10 03:21:57", "message": "ErrorHandler - Unexpected field"}
