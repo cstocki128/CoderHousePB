@@ -78,3 +78,42 @@ paths:
       responses:
         200:
           description: Usuario obtenido correctamente.    
+  /users/{uid}/documents:
+    post:
+      security:
+      - bearerAuth: []
+      consumes:
+      - multipart/form-data
+      tags:
+      - Usuario/Autentificación
+      summary: Carga de documentos para el usuario.
+      parameters:
+        - in: path
+          name: uid
+          required: true
+          description: id de usuario.
+          schema:
+            type: string
+        - in: formData
+          name: documentType
+          description: Tipo de documento
+          type: string
+          required: false
+        - in: formData
+          name: document
+          description: Documento
+          type: file
+          required: false
+        - in: formData
+          name: profile
+          description: Perfil
+          type: file
+          required: false
+        - in: formData
+          name: product
+          description: Producto
+          type: file
+          required: false
+      responses:
+        200:
+          description: Documento cargado correctamente.

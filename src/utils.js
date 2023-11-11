@@ -1,7 +1,7 @@
 import {fileURLToPath} from 'url';
 import {dirname} from 'path';
 import bcrypt from 'bcrypt';
-import {faker} from '@faker-js/faker' 
+import {faker} from '@faker-js/faker';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -48,3 +48,4 @@ export const mockProducts = quantity => {
     };
     return products;
 }
+

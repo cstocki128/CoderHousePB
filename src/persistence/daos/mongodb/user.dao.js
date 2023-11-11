@@ -3,6 +3,7 @@ import errorsDic from '../../../utils/errors.dictionary.js'
 import { UserModel } from "./models/user.model.js";
 import {createHash, isValidPassword} from '../../../utils.js'
 import {CartModel} from "./models/cart.model.js";
+import __dirname from '../../../utils.js';
 
 export default class UserDaoMongoDb {
     async registerUser(user) {
@@ -31,6 +32,8 @@ export default class UserDaoMongoDb {
             const userExist = await this.getByEmail(email)
             if (userExist) {
                 if (isValidPassword(password,userExist)) {
+                    userExist.last_connection = Date.now();
+                    userExist.save();
                     return userExist
                 }else return 'Incorrect Password';
             }
@@ -87,7 +90,27 @@ export default class UserDaoMongoDb {
             if (typeof user == 'object')  {
                 switch (user.role) {
                     case 'user': {
-                        user.role = 'premium';
+                        //Se busca en los documentos del usuario para chequear que tenga cargados los 3 tipos de documento.
+                        const files = user.documents;
+                        let ideOk,cddOk,cdcOk = false;
+                        files.forEach(file => {
+                            const docInfoArray = file.name.split('-')
+                            if(docInfoArray[0] == 'document') {
+                                switch (docInfoArray[1]) {
+                                    case 'ide':
+                                        ideOk = true;
+                                        break 
+                                    case 'cdd':
+                                        cddOk = true;
+                                        break
+                                    case 'cdc':
+                                        cdcOk = true;
+                                        break
+                                }
+                            }
+                        })
+                        if (ideOk && cddOk && cdcOk) user.role = 'premium';
+                        else return 'User must upload ide, cdd and cdc documents to became a premium user' 
                         break;
                     }
                     case 'premium': {
@@ -117,4 +140,38 @@ export default class UserDaoMongoDb {
             return error.message; 
         }
     }   
+
+    
+    async addDocuments(uid, files){
+        try {
+            const user = await this.getByid(uid)
+            let responseDocs =[]
+            const addDocToUser = (user,file) => {
+                const newDir = __dirname +"\\public"
+                let path = file.path.replace(newDir, "http://localhost:8080")
+                path = path.replaceAll("\\",'/');
+                const fileObj={name: file.filename , reference:path};
+                user.documents.push(fileObj)
+                responseDocs.push(fileObj)
+            };
+            if (typeof user == 'object')  {
+                if('product' in files) files.product.forEach(file => {
+                    addDocToUser(user,file);
+                    
+                });
+                if('profile' in files) files.profile.forEach(file => {
+                    addDocToUser(user,file);
+                    
+                });
+                if('document' in files)  files.document.forEach(file => {
+                    addDocToUser(user,file);
+                    
+                });
+                user.save();
+                return responseDocs;
+            }else return errorsDic.NO_USER 
+        } catch (error) {
+            return error.message; 
+        }
+    }  
 }

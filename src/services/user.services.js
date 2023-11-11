@@ -131,3 +131,19 @@ export const updatePass =  async (email, newPass) => {
         return {error:true,res:error}; 
     }
 }
+
+export const addDocuments = async(uid, files, ) => {
+    try {
+        const resUser =  await getByid(uid);
+        if (resUser.error) return resUser
+        const response = await userRepository.dao.addDocuments(uid, files);
+        if (( typeof response === 'object')) {
+            return {error:false, res:{description: 'The following files have been added to user', files:response}};
+        }else{
+            return {error:true, res:response};
+            
+        }
+    } catch (err) {
+        throw new Error(`user.addDocuments service error: ${err.message}`);
+    }
+}

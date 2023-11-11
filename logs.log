@@ -141,3 +141,86 @@
 {"level":"error", "timestamp": "2023-10-30 21:20:32", "message": "Assignment to constant variable."}
 {"level":"error", "timestamp": "2023-10-30 21:38:17", "message": "ns not found"}
 {"level":"error", "timestamp": "2023-10-30 21:40:52", "message": "ns not found"}
+{"level":"error", "timestamp": "2023-11-09 23:56:33", "message": "ErrorHandler - ENOENT: no such file or directory, open 'C:\Users\cstoc\Documents\Cursos\Javascript\CoderHouse\Programacion_Backend\CoderHousePB\srcfiles\documents\documents-1699584993503-25917118'"}
+{"level":"error", "timestamp": "2023-11-10 00:09:38", "message": "ErrorHandler - The "cb" argument must be of type function. Received undefined"}
+{"level":"error", "timestamp": "2023-11-10 00:15:15", "message": "ErrorHandler - The "cb" argument must be of type function. Received undefined"}
+{"level":"error", "timestamp": "2023-11-10 00:15:57", "message": "The "cb" argument must be of type function. Received undefined"}
+{"level":"error", "timestamp": "2023-11-10 00:21:03", "message": "The "cb" argument must be of type function. Received undefined"}
+{"level":"error", "timestamp": "2023-11-10 00:22:43", "message": "ErrorHandler - ENOENT: no such file or directory, open 'C:\Users\cstoc\Documents\Cursos\Javascript\CoderHouse\Programacion_Backend\CoderHousePB\src\files\documents\documents-1699586563971-487295873'"}
+{"level":"error", "timestamp": "2023-11-10 00:23:02", "message": "ErrorHandler - user.addDocuments service error: Cannot read properties of undefined (reading 'getByid')"}
+{"level":"error", "timestamp": "2023-11-10 01:18:59", "message": "ErrorHandler - ENOENT: no such file or directory, open 'C:\Users\cstoc\Documents\Cursos\Javascript\CoderHouse\Programacion_Backend\CoderHousePB\srcpublic\files\documents\documents-1699589939816-77864553'"}
+{"level":"error", "timestamp": "2023-11-10 01:19:51", "message": "ErrorHandler - ENOENT: no such file or directory, open 'C:\Users\cstoc\Documents\Cursos\Javascript\CoderHouse\Programacion_Backend\CoderHousePB\src\public\files\documents\documents-1699589991801-630767955'"}
+{"level":"error", "timestamp": "2023-11-10 03:08:45", "message": "ErrorHandler - Unexpected field"}
+{"level":"error", "timestamp": "2023-11-10 03:21:57", "message": "ErrorHandler - Unexpected field"}
+{"level":"error", "timestamp": "2023-11-11 02:10:50", "message": "ErrorHandler - Unexpected field"}
+{"level":"error", "timestamp": "2023-11-11 02:11:04", "message": "documentType must be send if you upload a document."}
+{"level":"error", "timestamp": "2023-11-11 02:16:49", "message": "trim is not defined"}
+{"level":"error", "timestamp": "2023-11-11 02:17:05", "message": "documentType is not defined"}
+{"level":"error", "timestamp": "2023-11-11 02:18:09", "message": "documentType is not defined"}
+{"level":"error", "timestamp": "2023-11-11 02:21:20", "message": "documentType is not defined"}
+{"level":"error", "timestamp": "2023-11-11 02:22:21", "message": "documentType is not defined"}
+{"level":"error", "timestamp": "2023-11-11 02:31:24", "message": "ErrorHandler - documentType must be send if you upload a document."}
+{"level":"error", "timestamp": "2023-11-11 02:33:36", "message": "ErrorHandler - documentType must be send if you upload a document."}
+{"level":"error", "timestamp": "2023-11-11 02:34:01", "message": "ErrorHandler - documentType must be send if you upload a document."}
+{"level":"error", "timestamp": "2023-11-11 02:35:55", "message": "ErrorHandler - documentType must be send if you upload a document."}
+{"level":"error", "timestamp": "2023-11-11 02:37:21", "message": "ErrorHandler - documentType must be send if you upload a document."}
+{"level":"error", "timestamp": "2023-11-11 02:37:22", "message": "ErrorHandler - documentType must be send if you upload a document."}
+{"level":"error", "timestamp": "2023-11-11 02:37:23", "message": "ErrorHandler - documentType must be send if you upload a document."}
+{"level":"error", "timestamp": "2023-11-11 02:37:24", "message": "ErrorHandler - documentType must be send if you upload a document."}
+{"level":"error", "timestamp": "2023-11-11 02:37:27", "message": "ErrorHandler - documentType must be send if you upload a document."}
+{"level":"error", "timestamp": "2023-11-11 02:37:28", "message": "ErrorHandler - documentType must be send if you upload a document."}
+{"level":"error", "timestamp": "2023-11-11 02:37:29", "message": "ErrorHandler - documentType must be send if you upload a document."}
+{"level":"error", "timestamp": "2023-11-11 02:37:30", "message": "ErrorHandler - documentType must be send if you upload a document."}
+{"level":"error", "timestamp": "2023-11-11 02:37:30", "message": "ErrorHandler - documentType must be send if you upload a document."}
+{"level":"error", "timestamp": "2023-11-11 02:37:33", "message": "ErrorHandler - documentType must be send if you upload a document."}
+{"level":"error", "timestamp": "2023-11-11 02:38:21", "message": "ErrorHandler - documentType must be send if you upload a document."}
+{"level":"error", "timestamp": "2023-11-11 02:39:03", "message": "ErrorHandler - documentType must be send if you upload a document."}
+{"level":"error", "timestamp": "2023-11-11 02:39:47", "message": "ErrorHandler - documentType must be send if you upload a document."}
+{"level":"error", "timestamp": "2023-11-11 02:41:12", "message": "ErrorHandler - documentType must be send if you upload a document."}
+{"level":"error", "timestamp": "2023-11-11 02:43:11", "message": "ErrorHandler - documentType must be send if you upload a document."}
+{"level":"error", "timestamp": "2023-11-11 02:45:20", "message": "ErrorHandler - documentType must be send if you upload a document."}
+{"level":"error", "timestamp": "2023-11-11 02:45:23", "message": "ErrorHandler - documentType must be send if you upload a document."}
+{"level":"error", "timestamp": "2023-11-11 02:45:54", "message": "ErrorHandler - documentType must be send if you upload a document."}
+{"level":"error", "timestamp": "2023-11-11 02:46:03", "message": "ErrorHandler - documentType must be send if you upload a document."}
+{"level":"error", "timestamp": "2023-11-11 02:46:32", "message": "ErrorHandler - documentType must be send if you upload a document."}
+{"level":"error", "timestamp": "2023-11-11 02:53:45", "message": "ErrorHandler - documentType must be send if you upload a document."}
+{"level":"error", "timestamp": "2023-11-11 02:58:15", "message": "ErrorHandler - req.body.toString is not a function"}
+{"level":"error", "timestamp": "2023-11-11 02:58:23", "message": "ErrorHandler - documentType must be send if you upload a document."}
+{"level":"error", "timestamp": "2023-11-11 03:02:58", "message": "ErrorHandler - documentType must be send if you upload a document."}
+{"level":"error", "timestamp": "2023-11-11 03:04:22", "message": "ErrorHandler - documentType must be send if you upload a document."}
+{"level":"error", "timestamp": "2023-11-11 03:04:30", "message": "ErrorHandler - documentType must be send if you upload a document."}
+{"level":"error", "timestamp": "2023-11-11 03:12:56", "message": "ErrorHandler - documentType must be send if you upload a document. This field must be the fisrt in body order. "}
+{"level":"error", "timestamp": "2023-11-11 03:13:04", "message": "ErrorHandler - document type must be 
+ -"ide" for identificacion 
+ -"cdd" for address receipt 
+ -"cde" for Account status receipt 
+ -"oth" for others"}
+{"level":"error", "timestamp": "2023-11-11 03:13:40", "message": "ErrorHandler - document type must be 
+ -"ide" for identificacion 
+ -"cdd" for address receipt 
+ -"cde" for Account status receipt 
+ -"oth" for others"}
+{"level":"error", "timestamp": "2023-11-11 03:14:41", "message": "ErrorHandler - document type must be 
+      -"ide" for identificacion 
+      -"cdd" for address receipt 
+      -"cde" for Account status receipt 
+      -"oth" for others"}
+{"level":"error", "timestamp": "2023-11-11 03:16:12", "message": "ErrorHandler - documentType must be 'ide' for identification, 'cdd' for address receipt, 'cde' for Account status receipt, '-"'oth' for others"}
+{"level":"error", "timestamp": "2023-11-11 03:17:56", "message": "ErrorHandler - Unexpected field"}
+{"level":"error", "timestamp": "2023-11-11 03:18:21", "message": "ErrorHandler - documentType must be send if you upload a document. This field must be the fisrt in body order. "}
+{"level":"error", "timestamp": "2023-11-11 03:18:37", "message": "ErrorHandler - documentType must be send if you upload a document. This field must be the fisrt in body order. "}
+{"level":"error", "timestamp": "2023-11-11 03:18:43", "message": "ErrorHandler - documentType must be send if you upload a document. This field must be the fisrt in body order. "}
+{"level":"error", "timestamp": "2023-11-11 03:18:52", "message": "ErrorHandler - documentType must be 'ide' for identification, 'cdd' for address receipt, 'cde' for Account status receipt, '-"'oth' for others"}
+{"level":"error", "timestamp": "2023-11-11 03:19:11", "message": "ErrorHandler - documentType must be 'ide' for identification, 'cdd' for address receipt, 'cde' for Account status receipt, 'oth' for others"}
+{"level":"error", "timestamp": "2023-11-11 03:19:31", "message": "ErrorHandler - documentType must be 'ide' for identification, 'cdd' for address receipt, 'cde' for Account status receipt, 'oth' for others"}
+{"level":"error", "timestamp": "2023-11-11 03:20:13", "message": "ErrorHandler - documentType must be 'ide' for identification, 'cdd' for address receipt, 'cde' for Account status receipt, 'oth' for others"}
+{"level":"error", "timestamp": "2023-11-11 03:20:32", "message": "ErrorHandler - documentType must be 'ide' for identification, 'cdd' for address receipt, 'cde' for Account status receipt, 'oth' for others"}
+{"level":"error", "timestamp": "2023-11-11 03:20:54", "message": "ErrorHandler - documentType must be 'ide' for identification, 'cdd' for address receipt, 'cde' for Account status receipt, 'oth' for others"}
+{"level":"error", "timestamp": "2023-11-11 03:20:58", "message": "ErrorHandler - documentType must be 'ide' for identification, 'cdd' for address receipt, 'cde' for Account status receipt, 'oth' for others"}
+{"level":"error", "timestamp": "2023-11-11 03:21:01", "message": "ErrorHandler - documentType must be 'ide' for identification, 'cdd' for address receipt, 'cde' for Account status receipt, 'oth' for others"}
+{"level":"error", "timestamp": "2023-11-11 03:21:31", "message": "ErrorHandler - documentType must be 'ide' for identification, 'cdd' for address receipt, 'cde' for Account status receipt, 'oth' for others"}
+{"level":"error", "timestamp": "2023-11-11 03:22:46", "message": "ErrorHandler - documentType must be 'ide' for identification, 'cdd' for address receipt, 'cde' for Account status receipt, 'oth' for others"}
+{"level":"error", "timestamp": "2023-11-11 03:24:37", "message": "ErrorHandler - documentType must be 'ide' for identification, 'cdd' for address receipt, 'cde' for Account status receipt, 'oth' for others"}
+{"level":"error", "timestamp": "2023-11-11 03:27:44", "message": "ErrorHandler - documentType must be send if you upload a document. This field must be the fisrt in body order. "}
+{"level":"error", "timestamp": "2023-11-11 03:57:55", "message": "user.setPermissions ideOk is not defined"}
+{"level":"error", "timestamp": "2023-11-11 03:59:02", "message": "user.setPermissions User must upload ide, cdd and cdc documents to became a premium user"}

@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { now } from 'mongoose';
 
 const userSchema = new mongoose.Schema({
     first_name: {
@@ -38,7 +38,20 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         required: true,
         default: false
+    },
+    documents: [
+        {
+            _id: false,
+            name: {type: String},
+            reference: {type: String}
+        }
+    ],
+    last_connection: {
+        type: Date,
+        required: true,
+        default: new Date(0)
     }
+
 });
 
 // userSchema.pre('find', function(){ 
