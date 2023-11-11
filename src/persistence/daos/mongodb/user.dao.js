@@ -90,7 +90,27 @@ export default class UserDaoMongoDb {
             if (typeof user == 'object')  {
                 switch (user.role) {
                     case 'user': {
-                        user.role = 'premium';
+                        //Se busca en los documentos del usuario para chequear que tenga cargados los 3 tipos de documento.
+                        const files = user.documents;
+                        let ideOk,cddOk,cdcOk = false;
+                        files.forEach(file => {
+                            const docInfoArray = file.name.split('-')
+                            if(docInfoArray[0] == 'document') {
+                                switch (docInfoArray[1]) {
+                                    case 'ide':
+                                        ideOk = true;
+                                        break 
+                                    case 'cdd':
+                                        cddOk = true;
+                                        break
+                                    case 'cdc':
+                                        cdcOk = true;
+                                        break
+                                }
+                            }
+                        })
+                        if (ideOk && cddOk && cdcOk) user.role = 'premium';
+                        else return 'User must upload ide, cdd and cdc documents to became a premium user' 
                         break;
                     }
                     case 'premium': {
@@ -135,7 +155,7 @@ export default class UserDaoMongoDb {
                 responseDocs.push(fileObj)
             };
             if (typeof user == 'object')  {
-                if('products' in files) files.products.forEach(file => {
+                if('product' in files) files.product.forEach(file => {
                     addDocToUser(user,file);
                     
                 });
@@ -143,7 +163,7 @@ export default class UserDaoMongoDb {
                     addDocToUser(user,file);
                     
                 });
-                if('documents' in files) files.documents.forEach(file => {
+                if('document' in files)  files.document.forEach(file => {
                     addDocToUser(user,file);
                     
                 });

@@ -132,7 +132,7 @@ export const updatePass =  async (email, newPass) => {
     }
 }
 
-export const addDocuments = async(uid, files) => {
+export const addDocuments = async(uid, files, ) => {
     try {
         const resUser =  await getByid(uid);
         if (resUser.error) return resUser

@@ -12,7 +12,7 @@ userRouter.post('/addCart',passport.authenticate('jwt-header',{session:false}),a
 userRouter.put('/premium/:uid',passport.authenticate('jwt-header',{session:false}),setPermissions);
 userRouter.get('/logout', logout);
 userRouter.post('/updatePass', updatePass);
-userRouter.post('/:uid/documents',passport.authenticate('jwt-header',{session:false}),uploader.fields([{ name: 'profile', maxCount: 1 }, { name: 'documents', maxCount: 3 }, { name: 'products', maxCount: 3 }]), addDocuments);
+userRouter.post('/:uid/documents',passport.authenticate('jwt-header',{session:false}),uploader.fields([{ name: 'profile', maxCount: 1 }, { name: 'document', maxCount: 1 }, { name: 'product', maxCount: 3 }]), addDocuments);
 userRouter.post('/authenticate', authenticate);
 userRouter.get('/current',passport.authenticate('jwt-header',{session:false}), current);
 userRouter.get('/loggerTest',passport.authenticate('jwt-header',{session:false}), loggerTest);
