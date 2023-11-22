@@ -81,7 +81,7 @@ export const addCart = async(email,cid) => {
 export const current = async (user) => {
     try {
         const userDTO = await userRepository.currentDTO(user)
-        return userDTO
+        return {error:true,res:userDTO};
     } catch (err) {
         const error = `user.currentDTO service error: ${err.message}`;
         return {error:true,res:error};
@@ -145,5 +145,37 @@ export const addDocuments = async(uid, files, ) => {
         }
     } catch (err) {
         throw new Error(`user.addDocuments service error: ${err.message}`);
+    }
+}
+
+export const getAll = async() => {
+    try {
+        const response =  await userRepository.getAllDTO()
+        if ( typeof response === 'object') {
+            console.log(response)
+            return {error:false,res: response}
+        }else {
+            logger.error(`user.getAll ${response}`)
+            return {error:true,res:response}
+        }
+    } catch (err) {
+        const error = `user.getAll service error: ${err.message}`;
+        return {error:true,res:error};
+    }
+}
+
+
+export const deleteAllOff = async() => {
+    try {
+        const response =  await userRepository.dao.deleteAllOff()
+        if (response) {
+            return {error:false,res: response}
+        }else {
+            logger.error(`user.deleteAllOff error`)
+            return {error:true,res:response}
+        }
+    } catch (err) {
+        const error = `user.deleteAllOff service error: ${err.message}`;
+        return {error:true,res:error};
     }
 }

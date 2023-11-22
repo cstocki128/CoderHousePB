@@ -10,7 +10,7 @@ export const register = async(req, res, next) => {
         if (response.error) res.redirect('/error-register')
         else res.redirect('/login')
     } catch (error) {
-        next(error);
+        next(error.message);
     }
     
 }
@@ -27,7 +27,7 @@ export const login = async(req, res, next) => {
                 .redirect('/products');
         };    
     } catch (error) {
-        next(error);
+        next(error.message);
     }
     
 
@@ -40,7 +40,7 @@ export const logout = async(req, res) => {
             .clearCookie('token')
             .redirect('/login')
     } catch (error) {
-        next(error);
+        next(error.message);
     }
     
 };
@@ -57,7 +57,7 @@ export const addCart = async(req, res) => {
 
         };  
     } catch (error) {
-        next(error);
+        next(error.message);
     }
     
 };
@@ -68,7 +68,7 @@ export const current = async(req, res) => {
         if (req.user) { res.json(await service.current(req.user)) }
         else res.status(404).send({error: 'Not logged in'});  
     } catch (error) {
-        next(error);
+        next(error.message);
     }
     
 };
@@ -83,7 +83,7 @@ export const authenticate = async(req, res, next) => {
         const accessToken = generateToken(response.res)
         res.json({token:accessToken});
    } catch (error) {
-        next(error) 
+        next(error.message) 
    }
 };
 
@@ -94,7 +94,7 @@ export const loggerTest = async(req, res, next) => {
         if(response.error) return res.status(400).json({error: response.res})
         else res.json({result:response.res})
     } catch (error) {
-        next(error) 
+        next(error.message) 
     }
 };
 
@@ -106,7 +106,7 @@ export const setPermissions = async(req, res, next) => {
         if(response.error) return res.status(400).json({error: response.res})
         else res.json({result:response.res})
     } catch (error) {
-        next(error) 
+        next(error.message) 
     }
 };
 
@@ -121,7 +121,7 @@ export const updatePass = async(req, res, next) => {
             .redirect('/login')
        
     } catch (error) {
-        next(error) 
+        next(error.message) 
     }
 };
 
@@ -135,6 +135,29 @@ export const addDocuments = async (req, res, next) => {
         if(response.error) return res.status(400).json({error: response.res})
         else res.json({result:response.res})
     } catch (error) {
-        next(error) 
+        next(error.message) 
+    }
+};
+
+export const getAll = async(req, res, next) => {
+    try {
+        logger.http('user.getAll executed')
+        const response =  await service.getAll()
+        if (!response.error) return res.status(200).json({result: response.res})
+        else res.status(404).send({error: response.res});  
+    } catch (error) {
+        next(error.message);
+    }
+};
+
+
+export const deleteAllOff = async(req, res, next) => {
+    try {
+        logger.http('user.deleteAllOff executed')
+        const response =  await service.deleteAllOff()
+        if (!response.error) return res.status(200).send({result: 'Users have been deleted'})
+        else res.status(404).send({error: response.res});  
+    } catch (error) {
+        next(error.message);
     }
 };

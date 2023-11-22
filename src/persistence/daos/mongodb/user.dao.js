@@ -173,5 +173,25 @@ export default class UserDaoMongoDb {
         } catch (error) {
             return error.message; 
         }
+    }
+
+    async getAll() {
+        try {
+            const response = await UserModel.find({});
+            return response
+        } catch (error) {
+            return error.message;
+        }
     }  
+
+    async deleteAllOff() {
+        try {
+            const twoDays = new Date() 
+            twoDays.setDate(twoDays.getDate() - 2);
+            const result =  await UserModel.deleteMany( { $or: [ {"last_connection": { $lt : twoDays }}, {"last_connection": null} ] });
+            return result.acknowledged 
+        }catch(error){
+            return error.message;
+        }
+    }
 }
