@@ -1,4 +1,7 @@
 import config from '../config.js';
+let url;
+if (config.host == 'localhost') url = `${config.protocol}://${config.host}:${config.port}/api`
+else url = `${config.protocol}://${config.host}/api`
 
 export const info = {
     definition: {
@@ -10,7 +13,7 @@ export const info = {
         },
         servers: [  
             {
-                url: `${config.protocol}://${config.host}:${config.port}/api`
+                url: url
             }
         ],
         components: {        

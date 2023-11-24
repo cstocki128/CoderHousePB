@@ -4,6 +4,8 @@ if (env != 'dev' && env != 'prod') env = 'dev'; //Si viene cualquier otro valor 
 const environment = env;
 const persistence = process.argv.slice(2).at(1) ?? 'MONGO';
 
+
+
 dotenv.config({
     path: environment === 'dev' ? './.env.development' : './.env.production',
 }); //Carga las variables presentes en el archivo

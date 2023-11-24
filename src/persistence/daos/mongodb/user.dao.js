@@ -4,6 +4,9 @@ import { UserModel } from "./models/user.model.js";
 import {createHash, isValidPassword} from '../../../utils.js'
 import {CartModel} from "./models/cart.model.js";
 import __dirname from '../../../utils.js';
+let url;
+if (config.host == 'localhost') url = `${config.protocol}://${config.host}:${config.port}`
+else url = `${config.protocol}://${config.host}`
 
 export default class UserDaoMongoDb {
     async registerUser(user) {
@@ -148,7 +151,7 @@ export default class UserDaoMongoDb {
             let responseDocs =[]
             const addDocToUser = (user,file) => {
                 const newDir = __dirname +"\\public"
-                let path = file.path.replace(newDir, `${config.protocol}://${config.host}:${config.port}`)
+                let path = file.path.replace(newDir, url)
                 path = path.replaceAll("\\",'/');
                 const fileObj={name: file.filename , reference:path};
                 user.documents.push(fileObj)
