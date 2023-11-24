@@ -153,7 +153,6 @@ export const getAll = async() => {
     try {
         const response =  await userRepository.getAllDTO()
         if ( typeof response === 'object') {
-            console.log(response)
             return {error:false,res: response}
         }else {
             logger.error(`user.getAll ${response}`)
@@ -177,6 +176,20 @@ export const deleteAllOff = async() => {
         }
     } catch (err) {
         const error = `user.deleteAllOff service error: ${err.message}`;
+        return {error:true,res:error};
+    }
+}
+
+export const deleteById = async(uid) => {
+    try {
+        const response =  await userRepository.dao.deleteById(uid)
+        if (!response) {
+            return {error:false,res: 'User has been deleted'}
+        }else {
+            return {error:true,res:response}
+        }
+    } catch (err) {
+        const error = `user.deleteById service error: ${err.message}`;
         return {error:true,res:error};
     }
 }

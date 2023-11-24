@@ -231,3 +231,5 @@
 {"level":"error", "timestamp": "2023-11-23 21:41:45", "message": "ErrorHandler - undefined"}
 {"level":"error", "timestamp": "2023-11-23 21:42:45", "message": "ErrorHandler - undefined"}
 {"level":"error", "timestamp": "2023-11-24 00:14:09", "message": "user.login undefined"}
+{"level":"error", "timestamp": "2023-11-24 02:54:40", "message": "user.setPermissions User must upload ide, cdd and cdc documents to became a premium user"}
+{"level":"error", "timestamp": "2023-11-24 02:55:46", "message": "product.create undefined"}

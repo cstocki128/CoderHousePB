@@ -197,7 +197,7 @@ export const deleteAllOff = async(req, res, next) => {
 export const deleteById = async(req, res, next) => {
     try {
         const {uid} =  req.params;
-        if (!uid) res.status(400).send({error: 'User must be specified'}); 
+        if (!uid) return res.status(400).send({error: 'User must be specified'}); 
         const response =  await service.deleteById(uid)
         if (!response.error) return res.status(200).json({result: response.res})
         else res.status(404).send({error: response.res});  

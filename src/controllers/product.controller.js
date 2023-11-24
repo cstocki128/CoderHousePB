@@ -1,4 +1,5 @@
 import * as service from "../services/product.services.js";
+import { getByid } from "../services/user.services.js";
 import { HttpResponse } from "../utils/http.response.js";
 const httpResponse = new HttpResponse(); 
 import errorsDic from '../utils/errors.dictionary.js'
@@ -90,17 +91,45 @@ export const create = async(req, res, next) => {
 export const remove = async(req, res, next) => {
     try{
         logger.http('product.remove executed')
+        const conData = {
+            protocol: req.protocol,
+            host: req.get('host'),
+            pathname: req.originalUrl
+          }
         const id = req.params.pid
-        if (req.user.role == 'premium'){
-            const response = await service.getById(id)
-            if (!response.error) {
-                const product = response.res
+        const responseGetById = await service.getById(id)
+        if (!responseGetById.error) {
+            const product = responseGetById.res
+            if (req.user.role == 'premium'){
                 if (product.owner != req.user._id) return httpResponse.Forbidden(res,errorsDic.USER_NOT_ALLOWED_DLT)
             }
-         }
-        const response = await service.remove(id);
-        if (!response.error) res.status(200).json({result:response.res})
-        else res.status(400).json({error:response.res})
+            const response = await service.remove(id);
+            if (!response.error) {
+                const responseUser =  await getByid(product.owner)
+                if (!responseUser.error){
+                    const user = responseUser.res
+                    if(user.role == 'premium'){
+                        const body ={
+                            email: user.email,
+                            subject: 'Product deleted',
+                            title: 'Product has been deleted',
+                            message: `Your product: ${product.title} 
+                            has been deleted.`
+                        }
+                        await fetch(`${config.protocol}://${conData.host}/mail/send`, {
+                            method: 'POST',
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json;charset=utf-8'
+                            },
+                            body: JSON.stringify(body)
+                        });         
+                    }
+                }
+                res.status(200).json({result:response.res})
+            }else res.status(400).json({error:response.res})
+        }else res.status(400).json({error:responseGetById.res})
+        
     }catch(err){
         next(err);
     }

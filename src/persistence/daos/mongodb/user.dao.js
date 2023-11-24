@@ -199,4 +199,17 @@ export default class UserDaoMongoDb {
             return error.message;
         }
     }
+
+    async deleteById(uid) {
+        try {
+            const response = await UserModel.findByIdAndDelete(uid)
+            if (response) {
+                return null;
+            }else {
+                return `User ${uid} not found`;
+            }
+        }catch(error){
+            return error.message;
+        }
+    }
 }
