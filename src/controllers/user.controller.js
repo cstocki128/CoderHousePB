@@ -76,6 +76,11 @@ export const current = async(req, res) => {
 export const authenticate = async(req, res, next) => {
    try {
         logger.http('user.authenticate executed')
+        console.log({
+            protocol: req.protocol,
+            host: req.get('host'),
+            pathname: req.originalUrl
+          })
         const {email, password} = req.body
         if (!email || !password) return res.status(400).send({error: 'Invalid email or password'}); 
         const response = await service.login(req.body);
@@ -155,7 +160,10 @@ export const deleteAllOff = async(req, res, next) => {
     try {
         logger.http('user.deleteAllOff executed')
         const response =  await service.deleteAllOff()
-        if (!response.error) return res.status(200).send({result: 'Users have been deleted'})
+        if (!response.error) {
+
+            return res.status(200).send({result: 'Users have been deleted'})
+        }
         else res.status(404).send({error: response.res});  
     } catch (error) {
         next(error.message);

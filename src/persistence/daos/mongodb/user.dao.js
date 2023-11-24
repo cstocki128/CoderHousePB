@@ -188,8 +188,10 @@ export default class UserDaoMongoDb {
         try {
             const twoDays = new Date() 
             twoDays.setDate(twoDays.getDate() - 2);
+            const usersDeleted =  await UserModel.find( { $or: [ {"last_connection": { $lt : twoDays }}, {"last_connection": null} ] })
             const result =  await UserModel.deleteMany( { $or: [ {"last_connection": { $lt : twoDays }}, {"last_connection": null} ] });
-            return result.acknowledged 
+            if (result.acknowledged) return usersDeleted 
+            else return false;
         }catch(error){
             return error.message;
         }
