@@ -163,6 +163,7 @@ export const deleteAllOff = async(req, res, next) => {
             host: req.get('host'),
             pathname: req.originalUrl
           }
+         console.log('conData:', conData) 
         const response =  await service.deleteAllOff()
         if (!response.error) {
             const usersDeleted = response.res
@@ -186,6 +187,19 @@ export const deleteAllOff = async(req, res, next) => {
             
             return res.status(200).send({result: 'Users have been deleted'})
         }
+        else res.status(404).send({error: response.res});  
+    } catch (error) {
+        next(error.message);
+    }
+  
+};
+
+export const deleteById = async(req, res, next) => {
+    try {
+        const {uid} =  req.params;
+        if (!uid) res.status(400).send({error: 'User must be specified'}); 
+        const response =  await service.deleteById(uid)
+        if (!response.error) return res.status(200).json({result: response.res})
         else res.status(404).send({error: response.res});  
     } catch (error) {
         next(error.message);
