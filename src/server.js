@@ -23,6 +23,7 @@ import { logger } from './utils/logger.js';
 import swaggerUI from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
 import {info} from "./docs/info.js"
+import os from 'os';
 
 //Express
 const app = express();
@@ -56,7 +57,8 @@ logger.debug(`Process arguments received: ${process.argv.slice(2)}`);
 config.env == 'dev' ? logger.debug('Using .env.development') : logger.debug('Using .env.production');
 //http Server
 const httpServer = app.listen(config.port, () => {logger.info(`Listening on PORT ${config.port}`)});
-
+console.log('server.address():',server.address())
+console.log('os.hostname():',os.hostname())
 //socket Server
 const io = new Server(httpServer); //Se crea el servidor websocket
 
