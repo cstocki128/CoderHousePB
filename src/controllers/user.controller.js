@@ -33,7 +33,7 @@ export const login = async(req, res, next) => {
 
 }
  
-export const logout = async(req, res) => {
+export const logout = async(req, res,next) => {
     try {
         logger.http('user.logout executed')
         res 
@@ -45,7 +45,7 @@ export const logout = async(req, res) => {
     
 };
 
-export const addCart = async(req, res) => {
+export const addCart = async(req, res,next) => {
     try {
         logger.http('user.addCart executed')
         const {email, cid} = req.body;
@@ -62,10 +62,14 @@ export const addCart = async(req, res) => {
     
 };
 
-export const current = async(req, res) => {
+export const current = async(req, res,next) => {
     try {
         logger.http('user.current executed')
-        if (req.user) { res.json(await service.current(req.user)) }
+        if (req.user) { 
+            const response = await service.current(req.user)
+            if (!response.error) res.json(response.res) 
+            else res.status(400).send(response.res)
+        }
         else res.status(404).send({error: 'Not logged in'});  
     } catch (error) {
         next(error.message);
@@ -154,9 +158,32 @@ export const getAll = async(req, res, next) => {
 export const deleteAllOff = async(req, res, next) => {
     try {
         logger.http('user.deleteAllOff executed')
+        const conData = {
+            protocol: req.protocol,
+            host: req.get('host'),
+            pathname: req.originalUrl
+          }
         const response =  await service.deleteAllOff()
         if (!response.error) {
-
+            const usersDeleted = response.res
+            usersDeleted.forEach(async user => {
+                const body ={
+                    email: user.email,
+                    subject: 'User deleted',
+                    title: 'User has been deleted due to inactivity',
+                    message: `- User ${user.email} deleted.
+                    - last connection: ${user.last_connection}`
+                }
+                await fetch(`${conData.protocol}://${conData.host}/mail/send`, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    body: JSON.stringify(body)
+                }); 
+            });
+            
             return res.status(200).send({result: 'Users have been deleted'})
         }
         else res.status(404).send({error: response.res});  
