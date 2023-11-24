@@ -3,6 +3,7 @@ import {generateTokenMail} from "../middlewares/jwt.js"
 import config from "../config.js";
 import {logger} from "../utils/logger.js"
 
+
 export const send = async(req, res) => {
     try {
         logger.http('mailing.send executed')
@@ -40,7 +41,7 @@ export const resetPass = async (req, res, next) => {
             html: `
             <div>
                 <h1>Hello ${req.body.email}, click here 
-                <a href='${conData.protocol}://${conData.host}/resetPassword'>LINK</a> 
+                <a href='${config.protocol}://${conData.host}/resetPassword'>LINK</a> 
                 to reset your password!</h1>
             </div>
             `,

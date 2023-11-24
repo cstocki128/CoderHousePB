@@ -3,6 +3,7 @@ import { getById as getProduct } from "../services/product.services.js";
 import {logger} from "../utils/logger.js"
 import errorsDic from '../utils/errors.dictionary.js'
 import { HttpResponse } from "../utils/http.response.js";
+import config from "../config.js";
 const httpResponse = new HttpResponse(); 
 
 export const getById = async(req, res, next) => {
@@ -133,7 +134,7 @@ export const purchase = async(req, res, next) => {
                         - Total: ${ticket.amount} <br>  
                         - Date: ${ticket.purchase_datetime.toDateString()}`
                     }
-                    await fetch(`${conData.protocol}://${conData.host}/mail/send`, {
+                    await fetch(`${config.protocol}://${conData.host}/mail/send`, {
                         method: 'POST',
                         headers: {
                             'Accept': 'application/json',

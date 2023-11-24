@@ -3,6 +3,7 @@ import { HttpResponse } from "../utils/http.response.js";
 const httpResponse = new HttpResponse(); 
 import errorsDic from '../utils/errors.dictionary.js'
 import generateProductErrorInfo from '../utils/info.js'
+import config from "../config.js";
 import {logger} from "../utils/logger.js"
 
 export const getAll = async(req, res, next) => {
@@ -23,7 +24,7 @@ export const getAll = async(req, res, next) => {
         if (!response.error) {
             const PaginatedResponse = response.res
             PaginatedResponse.status =  'Success'
-            let newLink = `${conData.protocol}://${conData.host}/api/products?`
+            let newLink = `${config.protocol}://${conData.host}/api/products?`
             if (limit) newLink += `limit=${limit}`
             if (sort) newLink += `&sort=${sort}`
             if (statusF != undefined) newLink += `&status=${statusF}`

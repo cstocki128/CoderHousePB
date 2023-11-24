@@ -1,6 +1,7 @@
 import * as service from "../services/user.services.js";
 import { generateToken } from "../middlewares/jwt.js"
 import {logger} from "../utils/logger.js"
+import config from "../config.js";
 
 
 export const register = async(req, res, next) => {
@@ -163,7 +164,6 @@ export const deleteAllOff = async(req, res, next) => {
             host: req.get('host'),
             pathname: req.originalUrl
           }
-         console.log('conData:', conData) 
         const response =  await service.deleteAllOff()
         if (!response.error) {
             const usersDeleted = response.res
@@ -175,7 +175,7 @@ export const deleteAllOff = async(req, res, next) => {
                     message: `- User ${user.email} deleted.
                     - last connection: ${user.last_connection}`
                 }
-                await fetch(`${conData.protocol}://${conData.host}/mail/send`, {
+                await fetch(`${config.protocol}://${conData.host}/mail/send`, {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',
