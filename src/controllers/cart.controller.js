@@ -114,6 +114,11 @@ export const purchase = async(req, res, next) => {
         const cid = req.params.cid
         const email = req.user.email
         const userCid = req.user.cart
+        const conData = {
+            protocol: req.protocol,
+            host: req.get('host'),
+            pathname: req.originalUrl
+          }
         if (userCid){
             if (userCid.id == cid) {
                 const response = await service.purchase(cid,email);
@@ -128,7 +133,7 @@ export const purchase = async(req, res, next) => {
                         - Total: ${ticket.amount} <br>  
                         - Date: ${ticket.purchase_datetime.toDateString()}`
                     }
-                    await fetch('http://localhost:8080/mail/send', {
+                    await fetch(`${conData.protocol}://${conData.host}/mail/send`, {
                         method: 'POST',
                         headers: {
                             'Accept': 'application/json',

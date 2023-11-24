@@ -8,6 +8,11 @@ import {logger} from "../utils/logger.js"
 export const getAll = async(req, res, next) => {
     try{
         logger.http('product.getAll executed')
+        const conData = {
+            protocol: req.protocol,
+            host: req.get('host'),
+            pathname: req.originalUrl
+          }
         const limit = parseInt(req.query.limit)
         const page = parseInt(req.query.page ?? 1) 
         const categoryF = req.query.category
@@ -18,7 +23,7 @@ export const getAll = async(req, res, next) => {
         if (!response.error) {
             const PaginatedResponse = response.res
             PaginatedResponse.status =  'Success'
-            let newLink = `http://localhost:8080/api/products?`
+            let newLink = `${conData.protocol}://${conData.host}/api/products?`
             if (limit) newLink += `limit=${limit}`
             if (sort) newLink += `&sort=${sort}`
             if (statusF != undefined) newLink += `&status=${statusF}`

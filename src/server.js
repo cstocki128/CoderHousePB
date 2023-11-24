@@ -107,7 +107,7 @@ io.on('connection', async(socket) => { // conexion de websocket
 
     socket.on('addProduct', async(product) => { //recibe "message" de cliente
         try{
-            let response = await fetch('http://localhost:8080/api/products', {
+            let response = await fetch(`${config.protocol}://${config.host}:${config.port}/api/products`, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

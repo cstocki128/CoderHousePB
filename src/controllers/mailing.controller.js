@@ -27,6 +27,12 @@ export const send = async(req, res) => {
 export const resetPass = async (req, res, next) => {
     try {
         logger.http('views.resetPasswordMail executed')
+        const conData = {
+            protocol: req.protocol,
+            host: req.get('host'),
+            pathname: req.originalUrl
+          }
+
         let result = await service.transport.sendMail({
             from: `Coder Tests ${config.user_Google}`,
             to: req.body.email,
@@ -34,7 +40,7 @@ export const resetPass = async (req, res, next) => {
             html: `
             <div>
                 <h1>Hello ${req.body.email}, click here 
-                <a href='http://localhost:8080/resetPassword'>LINK</a> 
+                <a href='${conData.protocol}://${conData.host}/resetPassword'>LINK</a> 
                 to reset your password!</h1>
             </div>
             `,

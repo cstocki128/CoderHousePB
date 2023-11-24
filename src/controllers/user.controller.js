@@ -76,11 +76,6 @@ export const current = async(req, res) => {
 export const authenticate = async(req, res, next) => {
    try {
         logger.http('user.authenticate executed')
-        console.log({
-            protocol: req.protocol,
-            host: req.get('host'),
-            pathname: req.originalUrl
-          })
         const {email, password} = req.body
         if (!email || !password) return res.status(400).send({error: 'Invalid email or password'}); 
         const response = await service.login(req.body);

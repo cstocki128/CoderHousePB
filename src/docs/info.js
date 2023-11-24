@@ -1,3 +1,5 @@
+import config from '../config.js';
+
 export const info = {
     definition: {
         openapi: '3.0.0',   
@@ -8,7 +10,7 @@ export const info = {
         },
         servers: [  
             {
-                url: 'http://localhost:8080/api'
+                url: `${config.protocol}://${config.host}:${config.port}/api`
             }
         ],
         components: {        

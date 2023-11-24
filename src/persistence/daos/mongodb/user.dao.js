@@ -148,7 +148,7 @@ export default class UserDaoMongoDb {
             let responseDocs =[]
             const addDocToUser = (user,file) => {
                 const newDir = __dirname +"\\public"
-                let path = file.path.replace(newDir, "http://localhost:8080")
+                let path = file.path.replace(newDir, `${config.protocol}://${config.host}:${config.port}`)
                 path = path.replaceAll("\\",'/');
                 const fileObj={name: file.filename , reference:path};
                 user.documents.push(fileObj)
