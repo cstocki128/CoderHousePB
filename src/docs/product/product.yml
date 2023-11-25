@@ -180,7 +180,7 @@ paths:
       - bearerAuth: []
       tags:
       - Products
-      summary: Elimina producto por Id.
+      summary: Elimina producto por Id. Envia email de aviso.
       parameters:
         - in: path
           name: pid

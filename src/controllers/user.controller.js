@@ -16,6 +16,18 @@ export const register = async(req, res, next) => {
     
 }
 
+export const create = async(req, res, next) => {
+    try {
+        logger.http('user.create executed')
+        const response = await service.register(req.body);
+        if (!response.error) res.status(200).json({result: response.res})
+        else res.status(400).json({result: response.res})
+    } catch (error) {
+        next(error.message);
+    }
+    
+}
+
 export const login = async(req, res, next) => {
     try {
         logger.http('user.login executed')
@@ -136,6 +148,8 @@ export const addDocuments = async (req, res, next) => {
         const Uid = req.params.uid;
         if (!Uid) return res.status(400).json({error: 'User id not provided'})
         const files = req.files;
+        console.log(files)
+        if (!files) return res.status(400).json({error: 'Files must be provided'})
         const response = await service.addDocuments(Uid, files)
         if(response.error) return res.status(400).json({error: response.res})
         else res.json({result:response.res})

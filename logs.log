@@ -233,3 +233,24 @@
 {"level":"error", "timestamp": "2023-11-24 00:14:09", "message": "user.login undefined"}
 {"level":"error", "timestamp": "2023-11-24 02:54:40", "message": "user.setPermissions User must upload ide, cdd and cdc documents to became a premium user"}
 {"level":"error", "timestamp": "2023-11-24 02:55:46", "message": "product.create undefined"}
+{"level":"error", "timestamp": "2023-11-25 15:15:09", "message": "user.login undefined"}
+{"level":"error", "timestamp": "2023-11-25 15:15:09", "message": "expected 404 to equal 200"}
+{"level":"error", "timestamp": "2023-11-25 15:21:10", "message": "user.login undefined"}
+{"level":"error", "timestamp": "2023-11-25 15:21:10", "message": "expected 404 to equal 200"}
+{"level":"error", "timestamp": "2023-11-25 15:25:00", "message": "user.login undefined"}
+{"level":"error", "timestamp": "2023-11-25 15:25:00", "message": "expected 404 to equal 200"}
+{"level":"error", "timestamp": "2023-11-25 15:27:21", "message": "user.login undefined"}
+{"level":"error", "timestamp": "2023-11-25 15:34:46", "message": "validate permissions - Admin or premium required"}
+{"level":"error", "timestamp": "2023-11-25 15:34:46", "message": "expected 403 to equal 200"}
+{"level":"error", "timestamp": "2023-11-25 15:34:46", "message": "product.getById undefined"}
+{"level":"error", "timestamp": "2023-11-25 15:34:46", "message": "expected 400 to equal 200"}
+{"level":"error", "timestamp": "2023-11-25 15:39:36", "message": "validate permissions - Admin required"}
+{"level":"error", "timestamp": "2023-11-25 15:58:24", "message": "user.register undefined"}
+{"level":"error", "timestamp": "2023-11-25 16:09:43", "message": "user.register undefined"}
+{"level":"error", "timestamp": "2023-11-25 16:12:46", "message": "user.register undefined"}
+{"level":"error", "timestamp": "2023-11-25 16:14:49", "message": "user.setPermissions User is not registered"}
+{"level":"error", "timestamp": "2023-11-25 16:15:35", "message": "user.setPermissions User must upload ide, cdd and cdc documents to became a premium user"}
+{"level":"error", "timestamp": "2023-11-25 16:48:02", "message": "ErrorHandler - Unsupported content type: multipart/mixed"}
+{"level":"error", "timestamp": "2023-11-25 16:55:05", "message": "ErrorHandler - documentType must be 'ide' for identification, 'cdd' for address receipt, 'cde' for Account status receipt, 'oth' for others"}
+{"level":"error", "timestamp": "2023-11-25 17:04:49", "message": "product.create undefined"}
+{"level":"error", "timestamp": "2023-11-25 17:04:59", "message": "product.create undefined"}

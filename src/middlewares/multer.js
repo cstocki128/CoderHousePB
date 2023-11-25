@@ -8,7 +8,7 @@ function uploadFilter (req, file, cb) {
     if (file.fieldname == 'document') {
       const {documentType} = req.body
       if (!documentType) return cb(new Error('documentType must be send if you upload a document. This field must be the first in body order. '),false);
-      if (!(req.body.documentType == 'ide' || req.body.documentType == 'cdd' || req.body.documentType == 'cdc' || req.body.documentType == 'oth')) return cb(new Error(`documentType must be 'ide' for identification, 'cdd' for address receipt, 'cde' for Account status receipt, 'oth' for others`),false); 
+      if (!(req.body.documentType == 'ide' || req.body.documentType == 'cdd' || req.body.documentType == 'cdc' || req.body.documentType == 'oth')) return cb(new Error(`documentType must be 'ide' for identification, 'cdd' for address receipt, 'cdc' for Account status receipt, 'oth' for others`),false); 
       
     }
     cb(null, true)

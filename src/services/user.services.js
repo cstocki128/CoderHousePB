@@ -81,7 +81,7 @@ export const addCart = async(email,cid) => {
 export const current = async (user) => {
     try {
         const userDTO = await userRepository.currentDTO(user)
-        return {error:true,res:userDTO};
+        return {error:false,res:userDTO};
     } catch (err) {
         const error = `user.currentDTO service error: ${err.message}`;
         return {error:true,res:error};

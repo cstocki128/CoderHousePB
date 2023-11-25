@@ -20,7 +20,6 @@ export default class UserRepository {
         try {
             let usersDTO;
             const users = await this.dao.getAll();
-            console.log(users)
             if (typeof users == 'object'){
                 usersDTO = users.map(user => {
                     return new UserResDTO(user);    

@@ -1,6 +1,6 @@
 import {Router} from 'express';
 import * as controller from "../controllers/product.controller.js"
-import validatePermissions from "../middlewares/validatePermissions.js"
+import {validatePermissions} from "../middlewares/validatePermissions.js"
 import passport from 'passport'
 import { HttpResponse } from "../utils/http.response.js";
 const httpResponse = new HttpResponse(); 

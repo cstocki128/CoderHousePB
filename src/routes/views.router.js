@@ -1,6 +1,5 @@
 import express from "express";
 import * as controller from "../controllers/views.controller.js"
-import validateLogin from "../middlewares/validateLogin.js"
 import passport from 'passport'
 const viewsRouter = express.Router();
 

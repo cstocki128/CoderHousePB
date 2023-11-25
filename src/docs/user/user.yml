@@ -1,4 +1,44 @@
 paths:
+  /users/create:
+    post:
+      tags:
+      - Usuario/Autentificación
+      summary: Creacion de usuario.
+      requestBody:
+        content:
+          application/json:
+              type: object
+              required:
+                - first_name
+                - last_name
+                - email
+                - age
+                - password
+              properties:
+                first_name:
+                  type: string
+                  description: Nombre
+                last_name:
+                  type: string
+                  description: Apellido
+                email:
+                  type: string
+                  description: Email
+                age:
+                  type: integer
+                  description: Edad
+                password:
+                  type: string
+                  description: Password
+              example:
+                first_name: Juan
+                last_name: Perez
+                email: prueba@gmail.com
+                age: 27
+                password: "123456"
+      responses:
+        200:
+          description: Token generado correctamente.
   /users/authenticate:
     post:
       tags:
@@ -78,6 +118,42 @@ paths:
       responses:
         200:
           description: Usuario obtenido correctamente.    
+  /users/:
+    get:
+      security:
+      - bearerAuth: []
+      tags:
+      - Usuario/Autentificación
+      summary: Devuelve todos los usuarios.
+      responses:
+        200:
+          description: Usuarios obtenidos correctamente.  
+    delete:
+      security:
+      - bearerAuth: []
+      tags:
+      - Usuario/Autentificación
+      summary: Borrar todos los usuarios que no hayan tenido conexion por dos dias. Se envia mail a cada usuario.
+      responses:
+        200:
+          description: Usuarios borrados correctamente.  
+  /users/{uid}:
+    delete:
+      security:
+      - bearerAuth: []
+      tags:
+      - Usuario/Autentificación
+      summary: Borrar usuario por Id.
+      parameters:
+        - in: path
+          name: uid
+          required: true
+          description: id de usuario.
+          schema:
+            type: string
+      responses:
+        200:
+          description: Usuario borrado correctamente.  
   /users/{uid}/documents:
     post:
       security:
@@ -94,26 +170,47 @@ paths:
           description: id de usuario.
           schema:
             type: string
-        - in: formData
-          name: documentType
-          description: Tipo de documento
-          type: string
-          required: false
-        - in: formData
-          name: document
-          description: Documento
-          type: file
-          required: false
-        - in: formData
-          name: profile
-          description: Perfil
-          type: file
-          required: false
-        - in: formData
-          name: product
-          description: Producto
-          type: file
-          required: false
+      requestBody:
+        content:
+           multipart/form-data:
+            schema:            # Request payload
+              type: object
+              properties:
+                documentType:
+                  type: string
+                  description: Tipo de documento = (ide) Identificacion, (cdd) Comprobante de domicilio, (cdc) Comprobante de estado de cuenta, (oth) Otros.
+                document:
+                  type: file
+                  description: Documento.
+                profile:
+                  type: file
+                  description: Perfil.
+                product:
+                  type: file
+                  description: Producto.
+              # - in: formData
+              #   name: documentType
+              #   description: Tipo de documento = (ide) Identificacion, (cdd) Comprobante de domicilio, (cde) Comprobante de estado de cuenta, (oth) Otros.
+              #   type: string
+              #   required: false
+              # - in: formData
+              #   name: document
+              #   description: Documento
+              #   schema:
+              #     type: file
+              #   required: false
+              # - in: formData
+              #   name: profile
+              #   description: Perfil
+              #   schema:
+              #     type: file
+              #   required: false
+              # - in: formData
+              #   name: product
+              #   description: Producto
+              #   schema:
+              #     type: file
+              #   required: false
       responses:
         200:
           description: Documento cargado correctamente.
