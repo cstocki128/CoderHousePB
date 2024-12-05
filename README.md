@@ -1,4 +1,4 @@
-# CoderHousePB
+# BACKEND NODE
 # Curso de programacion backend de Coderhouse
 
 ## Comandos de inicio
